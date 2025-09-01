@@ -17,11 +17,16 @@ const Header = () => {
       </div>
       
       {/* Main Header */}
-      <header className="bg-black text-white px-6 py-4">
+      <header className="bg-[var(--color-bg)] text-[var(--color-text)] px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold tracking-wider hover:text-gray-300 transition-colors">
+            <Link 
+              to="/" 
+              className={`text-2xl font-bold tracking-wider transition-colors duration-[var(--transition-base)] hover:text-[var(--color-accent)] ${
+                isReducedMotion ? 'transition-none' : ''
+              }`}
+            >
               AXM
             </Link>
           </div>
