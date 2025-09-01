@@ -1,15 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { ArrowRight } from 'lucide-react';
 import { mockCategories } from '../data/mock';
 
 const Categories = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-black text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {mockCategories.map((category, index) => (
-            <div key={index} className="relative group cursor-pointer">
+            <div 
+              key={index} 
+              className="relative group cursor-pointer"
+              onClick={() => navigate(`/shop/category/${category.name.toLowerCase()}`)}
+            >
               <div className="relative aspect-[4/5] bg-gray-900 overflow-hidden">
                 <img
                   src={category.image}
