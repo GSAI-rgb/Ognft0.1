@@ -2,6 +2,12 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
+// Theme Provider
+import { ThemeProvider } from './hooks/useTheme';
+
+// Performance Components
+import PageTransition from './components/PerformanceOptimized/PageTransition';
+
 // Import Pages
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -14,22 +20,26 @@ import Contact from './pages/Contact';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/category/:category" element={<Shop />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/journal" element={<Journal />} />
-          <Route path="/journal/:id" element={<Journal />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ThemeProvider>
+      <div className="App">
+        <BrowserRouter>
+          <PageTransition>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/category/:category" element={<Shop />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/journal" element={<Journal />} />
+              <Route path="/journal/:id" element={<Journal />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </PageTransition>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 
