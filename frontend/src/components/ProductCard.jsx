@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import LazyImage from './PerformanceOptimized/LazyImage';
+import { useTheme } from '../hooks/useTheme';
 
-const ProductCard = ({ product, className = "" }) => {
+const ProductCard = ({ product, className = "", priority = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
+  const { isReducedMotion } = useTheme();
 
   const handleMouseEnter = () => {
-    if (product.images.length > 1) {
+    if (product.images.length > 1 && !isReducedMotion) {
       setCurrentImageIndex(1);
     }
   };
 
   const handleMouseLeave = () => {
-    setCurrentImageIndex(0);
+    if (!isReducedMotion) {
+      setCurrentImageIndex(0);
+    }
   };
 
   const handleClick = () => {
@@ -21,17 +26,22 @@ const ProductCard = ({ product, className = "" }) => {
   };
 
   return (
-    <div className={`group cursor-pointer ${className}`} onClick={handleClick}>
+    <div className={`group cursor-pointer will-change-transform ${className}`} onClick={handleClick}>
       {/* Product Image */}
       <div 
-        className="relative aspect-[4/5] bg-gray-900 overflow-hidden mb-4"
+        className="relative mb-4 overflow-hidden"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <img
+        <LazyImage
           src={product.images[currentImageIndex]}
           alt={product.name}
-          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+          className={`transition-transform duration-500 ${
+            isReducedMotion ? '' : 'group-hover:scale-105'
+          }`}
+          aspectRatio="4/5"
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
         
         {/* Badges */}
