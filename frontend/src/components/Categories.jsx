@@ -32,7 +32,13 @@ const Categories = () => {
                   <h3 className="text-2xl font-bold uppercase tracking-wider mb-4">
                     {category.name}
                   </h3>
-                  <button className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors group">
+                  <button 
+                    className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/shop/category/${category.name.toLowerCase()}`);
+                    }}
+                  >
                     <span className="text-sm uppercase tracking-wider font-medium">Shop Now</span>
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
