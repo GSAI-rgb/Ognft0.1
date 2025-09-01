@@ -70,23 +70,30 @@ const Header = () => {
           </nav>
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 hover:bg-gray-800 rounded-full transition-colors">
+          <div className="flex items-center space-x-2">
+            <ThemeToggle />
+            <button className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] ${
+              isReducedMotion ? 'transition-none' : ''
+            }`}>
               <Search size={20} />
             </button>
             <button 
               onClick={() => navigate('/profile')}
-              className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+              className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] ${
+                isReducedMotion ? 'transition-none' : ''
+              }`}
             >
               <User size={20} />
             </button>
             <button 
               onClick={() => navigate('/cart')}
-              className="p-2 hover:bg-gray-800 rounded-full transition-colors relative"
+              className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] relative ${
+                isReducedMotion ? 'transition-none' : ''
+              }`}
             >
               <ShoppingBag size={20} />
               {/* Cart Badge */}
-              <span className="absolute -top-1 -right-1 bg-white text-black text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+              <span className="absolute -top-1 -right-1 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
                 2
               </span>
             </button>
