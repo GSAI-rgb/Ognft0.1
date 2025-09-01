@@ -33,16 +33,16 @@ const ProductCard = ({ product, className = "", priority = false }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <LazyImage
-          src={product.images[currentImageIndex]}
-          alt={product.name}
-          className={`transition-transform duration-500 ${
-            isReducedMotion ? '' : 'group-hover:scale-105'
-          }`}
-          aspectRatio="4/5"
-          priority={priority}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
+        <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
+          <img
+            src={product.images[currentImageIndex]}
+            alt={product.name}
+            className={`w-full h-full object-cover transition-transform duration-500 ${
+              isReducedMotion ? '' : 'group-hover:scale-105'
+            }`}
+            loading={priority ? 'eager' : 'lazy'}
+          />
+        </div>
         
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col space-y-2">
