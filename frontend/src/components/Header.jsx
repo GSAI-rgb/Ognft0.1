@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../hooks/useTheme';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { isReducedMotion } = useTheme();
 
   return (
     <div className="relative">
       {/* Shipping Banner */}
-      <div className="bg-white text-black text-center py-2 text-sm font-medium tracking-wider">
+      <div className="bg-[var(--color-accent)] text-[var(--color-bg)] text-center py-2 text-sm font-medium tracking-wider">
         FREE STANDARD SHIPPING ON ALL ORDERS
       </div>
       
