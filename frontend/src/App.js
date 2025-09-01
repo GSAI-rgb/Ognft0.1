@@ -1,33 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import NewArrivals from './components/NewArrivals';
-import BestSellers from './components/BestSellers';
-import Categories from './components/Categories';
-import Collections from './components/Collections';
-import Performance from './components/Performance';
-import InstagramFeed from './components/InstagramFeed';
-import Journal from './components/Journal';
-import Footer from './components/Footer';
 
-const Home = () => {
-  return (
-    <div className="min-h-screen bg-black">
-      <Header />
-      <HeroSection />
-      <NewArrivals />
-      <BestSellers />
-      <Categories />
-      <Collections />
-      <Performance />
-      <InstagramFeed />
-      <Journal />
-      <Footer />
-    </div>
-  );
-};
+// Import Pages
+import Home from './pages/Home';
+import Shop from './pages/Shop';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import Profile from './pages/Profile';
+import About from './pages/About';
+import Journal from './pages/Journal';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -35,6 +18,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/category/:category" element={<Shop />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/journal" element={<Journal />} />
+          <Route path="/journal/:id" element={<Journal />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </div>
