@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 const ProductCard = ({ product, className = "" }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     if (product.images.length > 1) {
@@ -14,8 +16,12 @@ const ProductCard = ({ product, className = "" }) => {
     setCurrentImageIndex(0);
   };
 
+  const handleClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <div className={`group cursor-pointer ${className}`}>
+    <div className={`group cursor-pointer ${className}`} onClick={handleClick}>
       {/* Product Image */}
       <div 
         className="relative aspect-[4/5] bg-gray-900 overflow-hidden mb-4"
