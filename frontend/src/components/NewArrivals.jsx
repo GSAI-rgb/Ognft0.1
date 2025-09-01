@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { mockProducts } from '../data/mock';
 import ProductCard from './ProductCard';
 
 const NewArrivals = () => {
+  const navigate = useNavigate();
   const newProducts = mockProducts.filter(product => product.badges.includes('NEW'));
 
   return (
@@ -14,7 +16,10 @@ const NewArrivals = () => {
           <h2 className="text-4xl lg:text-5xl font-bold uppercase tracking-wider">
             New Arrivals
           </h2>
-          <button className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors group">
+          <button 
+            onClick={() => navigate('/shop')}
+            className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors group"
+          >
             <span className="text-sm uppercase tracking-wider font-medium">Shop Now</span>
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </button>
