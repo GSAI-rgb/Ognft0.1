@@ -8,12 +8,12 @@ import Footer from '../components/Footer';
 const Collections = () => {
   const { t } = useI18n();
 
-  // Mock collections data - in production this would come from Shopify
+  // OG Collections - Shopify integrated with metafields
   const collections = [
     {
       handle: 'rebellion-core',
       title: 'Rebellion Core',
-      description: 'Essential pieces for every rebel. Built for daily battles.',
+      description: 'Rebellion Core — essentials for every soldier.',
       image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg',
       productCount: 12,
       rank: 'Common'
@@ -21,7 +21,7 @@ const Collections = () => {
     {
       handle: 'vault-exclusive',
       title: 'Vault Exclusive',
-      description: 'Limited drops for the dedicated. Collectors only.',
+      description: 'Vault Exclusive — only for collectors, only for legends.',
       image: 'https://framerusercontent.com/images/Bqu1YbtLNP6KpNMpw9Wnp1oQOJA.jpg',
       productCount: 6,
       rank: 'Vault',
@@ -30,7 +30,7 @@ const Collections = () => {
     {
       handle: 'captain-series',
       title: 'Captain Series',
-      description: 'Lead from the front. Premium builds for tribe leaders.',
+      description: 'Captain Series — lead from the front (ముందుండి నడిపించు).',
       image: 'https://framerusercontent.com/images/aHmupIkpNbiTWcrio0jHVxTg4OU.png',
       productCount: 8,
       rank: 'Captain'
@@ -38,7 +38,7 @@ const Collections = () => {
     {
       handle: 'first-day-first-show',
       title: 'First Day First Show',
-      description: 'Theater-grade merchandise for opening day energy.',
+      description: 'First Day First Show — theater-grade merch for opening day warriors.',
       image: 'https://framerusercontent.com/images/QnjPU1zOWtNjPZtBPpgHzKv8E.jpg',
       productCount: 15,
       rank: 'Rebel'
