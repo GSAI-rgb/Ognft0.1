@@ -78,10 +78,17 @@ const Shop = () => {
     }
   };
 
-  // Get current page title
+  // Get current page title with OG subtitle
   const getCurrentTitle = () => {
     const activeTabConfig = tabs.find(tab => tab.id === activeTab);
-    return activeTabConfig ? activeTabConfig.label : 'ALL PRODUCTS';
+    return activeTabConfig ? activeTabConfig.label : 'ARMORY';
+  };
+  
+  const getCurrentSubtitle = () => {
+    if (activeTab === 'all') {
+      return 'Browse the arsenal. Every piece forged for the OG tribe.';
+    }
+    return 'Curated drops for the battlefield.';
   };
 
   return (
