@@ -229,7 +229,7 @@ const ProductDetail = () => {
                 </button>
                 {expandedSections.shipping && (
                   <div className="pb-4 text-gray-300 text-sm">
-                    <p>{product.shipping}</p>
+                    <p>Ships worldwide. OG never stops.</p>
                   </div>
                 )}
               </div>
