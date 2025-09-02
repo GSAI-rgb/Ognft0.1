@@ -14,8 +14,8 @@ import base64
 
 class ShopifyOGAutomation:
     def __init__(self):
-        self.store_domain = "r1s7fa-eb.myshopify.com"
-        self.admin_api_key = "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"
+        self.store_domain = "40fg1q-ju.myshopify.com"
+        self.admin_api_key = "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"
         self.api_secret = "61c8a6e596648536c90ee664e6a255b2"
         self.base_url = f"https://{self.store_domain}/admin/api/2024-01"
         
