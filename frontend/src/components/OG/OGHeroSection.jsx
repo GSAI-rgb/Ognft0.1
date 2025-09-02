@@ -29,14 +29,8 @@ const OGHeroSection = () => {
   //   }
   // }, [products]);
 
-  // Get rebel drop products (equivalent to new arrivals) - Fixed for safety
-  const rebelDrops = products.filter(product => 
-    product && product.badges && (
-      product.badges.includes('NEW') || 
-      product.badges.includes('REBEL DROP') ||
-      product.rank === 'Rebel'
-    )
-  ).slice(0, 3);
+  // Get rebel drop products (equivalent to new arrivals) - Simplified for debugging
+  const rebelDrops = Array.isArray(products) ? products.slice(0, 3) : [];
 
   return (
     <div className="bg-[var(--color-bg)] text-[var(--color-text)]">
