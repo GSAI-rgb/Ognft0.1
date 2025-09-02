@@ -16,12 +16,59 @@
   },
   "home": {
     "hero": {
+      "eyebrow": "OFFICIAL DVV STORE",
       "title": "OG ISN'T MERCH. IT'S A CALLSIGN.",
-      "subtitle": "Official DVV drops. Theater-grade prints. Built for the tribe.",
+      "subtitle": "Cinematic drops. Theater-grade prints. Built for the tribe.",
       "cta_primary": "Arm Up",
       "cta_secondary": "Join Restock Alerts",
+      "timer_prefix": "Rebel Drop detonates in",
       "te_line": "నీ రక్తం OG కోసం"
     },
+    "rails": {
+      "affordable_title": "Under ₹{ceiling} — For Every Rebel",
+      "new_arrivals_title": "Rebel Drops",
+      "best_sellers_title": "Fan Arsenal",
+      "categories_title": "Choose Your Arsenal",
+      "ugc_title": "Fan Army Wall",
+      "journal_title": "From the Firestorm"
+    },
+    "badges": {
+      "limited": "Limited",
+      "vault": "Vault",
+      "rebel_drop": "Rebel Drop",
+      "rank_common": "Common",
+      "rank_rebel": "Rebel",
+      "rank_vault": "Vault"
+    },
+    "microcopy": {
+      "scarcity": "Only {count} left — vaulting soon.",
+      "official": "Official DVV Entertainment",
+      "telugu_line": "నీ రక్తం OG కోసం"
+    },
+    "categories": [
+      {"title": "Hoodies",   "href": "/collections/hoodies"},
+      {"title": "T-Shirts",  "href": "/collections/t-shirts"},
+      {"title": "Chains",    "href": "/collections/chains"},
+      {"title": "Accessories","href": "/collections/accessories"},
+      {"title": "Posters",   "href": "/collections/posters"}
+    ],
+    "journal": [
+      {
+        "title": "Hungry Cheetah Unleashed",
+        "deck": "The roar behind the drop.",
+        "href": "#"
+      },
+      {
+        "title": "Firestorm Is Coming",
+        "deck": "Why this wave can't be stopped.",
+        "href": "#"
+      },
+      {
+        "title": "They Call Him OG",
+        "deck": "Iconography of a revolution.",
+        "href": "#"
+      }
+    ],
     "affordable_rail": {
       "title": "Under ₹{ceiling} — For Every Rebel"
     },
