@@ -38,32 +38,28 @@ const Shop = () => {
     { id: 'sale', label: 'SALE', filter: 'SALE' }
   ];
 
-  const filteredProducts = useMemo(() => {
-    let products = mockProducts;
-
-    // Filter based on active tab
+  // Get filtered products using the new hook
+  const getFilterForTab = () => {
     const activeTabConfig = tabs.find(tab => tab.id === activeTab);
-    if (activeTabConfig && activeTabConfig.filter) {
-      if (['NEW ARRIVALS', 'BEST SELLERS', 'SALE'].includes(activeTabConfig.label)) {
-        // Filter by badge
-        const badgeMap = {
-          'NEW ARRIVALS': 'NEW',
-          'BEST SELLERS': 'BEST SELLER',
-          'SALE': 'SALE'
-        };
-        products = products.filter(p => 
-          p.badges.includes(badgeMap[activeTabConfig.label])
-        );
-      } else {
-        // Filter by category
-        products = products.filter(p => 
-          p.category.toLowerCase() === activeTabConfig.filter.toLowerCase()
-        );
-      }
+    if (!activeTabConfig) return null;
+    
+    if (['new-arrivals', 'best-sellers', 'sale'].includes(activeTab)) {
+      return activeTab;
     }
+    return null;
+  };
 
-    return products;
-  }, [activeTab]);
+  const getCategoryForTab = () => {
+    if (['tops', 'bottoms', 'outerwear', 'accessories'].includes(activeTab)) {
+      return activeTab;
+    }
+    return 'all';
+  };
+
+  const { products: filteredProducts, loading, error } = useFilteredProducts(
+    getCategoryForTab(),
+    getFilterForTab()
+  );
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
