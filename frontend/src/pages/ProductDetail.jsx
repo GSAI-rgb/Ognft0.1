@@ -66,8 +66,8 @@ const ProductDetail = () => {
     
     if (result.success) {
       console.log('✅ Added to cart successfully');
-      // Redirect to cart page after successful addition
-      navigate('/cart');
+      // Show cart sidebar instead of redirecting
+      setCartSidebarOpen(true);
     } else {
       console.error('❌ Failed to add to cart:', result.error);
       // Optional: Show error feedback to user
