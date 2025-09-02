@@ -264,8 +264,19 @@ const ProductDetail = () => {
                 </Link> calculated at checkout
               </p>
               
-              <button className="w-full bg-white text-black py-4 px-8 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors">
-                Add to Bag
+              <button 
+                onClick={handleAddToCart}
+                disabled={cartLoading}
+                className="w-full bg-white text-black py-4 px-8 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                {cartLoading ? (
+                  <>
+                    <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full mr-2"></div>
+                    Adding...
+                  </>
+                ) : (
+                  'Add to Bag'
+                )}
               </button>
             </div>
           </div>
