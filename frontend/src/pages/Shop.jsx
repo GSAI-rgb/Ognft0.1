@@ -50,10 +50,13 @@ const Shop = () => {
   };
 
   const getCategoryForTab = () => {
-    if (['tops', 'bottoms', 'outerwear', 'accessories'].includes(activeTab)) {
-      return activeTab;
-    }
-    return 'all';
+    if (activeTab === 'teeshirts') return 'Teeshirt';
+    if (activeTab === 'hoodies') return 'Hoodies';
+    if (activeTab === 'posters') return 'Posters';
+    if (activeTab === 'sweatshirts') return 'Sweatshirts';
+    if (activeTab === 'shirts') return 'Full Shirts';
+    if (activeTab === 'accessories') return 'accessories'; // This will match Hats, Wallet, Slippers
+    return null;
   };
 
   const { products: filteredProducts, loading, error } = useFilteredProducts(
