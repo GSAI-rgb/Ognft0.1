@@ -118,3 +118,10 @@
    ✅ Created: OG Product16 Battle Hoodie
 
 📁 Creating product: Product11 (hoodies)
+   ✅ Created: OG Product11 Battle Hoodie
+
+📁 Creating product: product20 (hoodies)
+   ✅ Created: OG Product20 Battle Hoodie
+
+📁 Creating product: product8 (hoodies)
+   ✅ Created: OG Product8 Battle Hoodie
