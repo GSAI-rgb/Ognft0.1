@@ -128,7 +128,7 @@ const Header = () => {
               <User size={20} />
             </button>
             <button 
-              onClick={() => navigate('/cart')}
+              onClick={() => setIsCartOpen(true)}
               className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] relative ${
                 isReducedMotion ? 'transition-none' : ''
               }`}
