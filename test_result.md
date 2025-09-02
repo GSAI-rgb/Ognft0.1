@@ -101,3 +101,112 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: Transform the existing AXM homepage into "OG film official merch homepage" with specific OG theme content, copy, and fan-first features while preserving the AXM layout structure.
+
+frontend:
+  - task: "Update EN/TE content files with new OG copy pack"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/content/en.json, /app/frontend/src/content/te.json"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Updated both EN and TE content files with new hero copy, rails, badges, categories, journal articles, and footer branding. Added DVV Entertainment branding and tagline."
+
+  - task: "Create ArsenalCategories component replacing Explore Our Collections"  
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/OG/ArsenalCategories.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Created ArsenalCategories component with 6 category cards (Hoodies, T-Shirts, Chains, Accessories, Posters, Limited Collection) using curated dark cinematic images. Includes proper hover effects, red keyline borders, and gold glow effects as per OG theme specs."
+
+  - task: "Create FanArmyWall component replacing Instagram Feed"
+    implemented: true
+    working: true  
+    file: "/app/frontend/src/components/OG/FanArmyWall.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Created FanArmyWall component with 10 curated fan posts in masonry grid layout. Includes feature flag to hide if less than 6 posts. Added hover overlays with Instagram handles, captions, and like counts. Includes proper OG theme styling."
+
+  - task: "Create FromFirestorm component replacing Journal section"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/OG/FromFirestorm.jsx"  
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Created FromFirestorm component with 3 curated articles from content pack (Hungry Cheetah Unleashed, Firestorm Is Coming, They Call Him OG). Includes article images, read time badges, hover effects, and proper OG styling."
+
+  - task: "Update Footer with DVV Entertainment branding"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Footer.jsx"
+    stuck_count: 0
+    priority: "high" 
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Updated Footer component to detect OG theme and display DVV Entertainment branding with tagline 'Every product is a weapon. Every fan is a soldier.' Maintains AXM branding for non-OG theme."
+
+  - task: "Update Home.jsx to integrate new OG components"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Home.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main" 
+        - comment: "Updated Home component to import and render new OG components (ArsenalCategories, FanArmyWall, FromFirestorm) in proper order when OG theme is active. Cleaned up non-existing component imports."
+
+backend:
+  - task: "Maintain existing Shopify integration"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "No backend changes required - keeping existing Shopify read integration as per user specifications."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "ArsenalCategories component display and functionality"
+    - "FanArmyWall component display and grid layout"  
+    - "FromFirestorm component display and article cards"
+    - "Footer DVV branding in OG theme"
+    - "Overall OG theme styling and layout preservation"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+    - message: "Completed Phase 1 OG homepage transformation: Created ArsenalCategories, FanArmyWall, FromFirestorm components with proper OG theme styling. Updated content files with new copy pack. Updated Footer with DVV branding. Ready for frontend testing to verify visual layout and functionality."
