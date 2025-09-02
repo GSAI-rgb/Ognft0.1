@@ -129,7 +129,7 @@ const ProductDetail = () => {
         {/* Main Product Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Product Images - Shows FIRST on mobile, right side on desktop */}
-          <div className="order-2 lg:order-2 space-y-6">
+          <div className="order-1 lg:order-2 space-y-6">
             {/* Main Image */}
             <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
               <img
@@ -160,7 +160,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Details - Shows SECOND on mobile, left side on desktop */}
-          <div className="order-1 lg:order-1 space-y-8">
+          <div className="order-2 lg:order-1 space-y-8">
             {/* Product Title */}
             <div>
               <h1 className="text-5xl lg:text-6xl font-bold uppercase tracking-wider leading-none mb-6">
