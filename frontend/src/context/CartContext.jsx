@@ -96,22 +96,18 @@ export const CartProvider = ({ children }) => {
     
     try {
       const cartItem = {
-        id: `${product.id}-${variant.size}-${variant.color}`,
-        product,
-        variant,
+        id: `${product.id}-${variant?.size || 'default'}-${variant?.color || 'default'}`,
+        name: product.name,
+        images: product.images,
+        selectedVariant: variant,
         quantity,
         price: product.price
       };
 
-      // Add to Shopify cart (or simulate in demo mode)
-      const result = await addToShopifyCart(variant.id, quantity);
-      
-      if (result.success) {
-        dispatch({ type: 'ADD_ITEM', payload: cartItem });
-        return { success: true };
-      }
-      
-      throw new Error(result.error || 'Failed to add to cart');
+      // For now, add directly to local cart (can integrate with Shopify later)
+      dispatch({ type: 'ADD_ITEM', payload: cartItem });
+      console.log('✅ Added to cart:', cartItem);
+      return { success: true };
       
     } catch (error) {
       console.error('Add to cart failed:', error);
