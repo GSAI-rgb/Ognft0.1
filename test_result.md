@@ -231,11 +231,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "ArsenalCategories component display and functionality"
-    - "FanArmyWall component display and grid layout"  
-    - "FromFirestorm component display and article cards"
-    - "Footer DVV branding in OG theme"
-    - "Overall OG theme styling and layout preservation"
+    - "Backend Shopify Admin API integration with new products"
+    - "Frontend product display with new premium OG names"
+    - "Product images display (front/back) in ProductDetail page"
+    - "Search functionality with new OG products"
+    - "Overall store functionality with 52 new products"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
