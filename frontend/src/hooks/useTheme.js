@@ -49,7 +49,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   const toggleTheme = () => {
-    setCurrentTheme(prev => prev === 'axiom' ? 'og' : 'axiom');
+    // Theme switching disabled - OG is permanent
   };
 
   return (
