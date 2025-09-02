@@ -240,19 +240,19 @@ class OGProductCreator:
                 ],
                 "metafields": [
                     {
-                        "namespace": "og",
+                        "namespace": "ogfilm",
                         "key": "rank",
                         "value": "rebel_drop",
                         "type": "single_line_text_field"
                     },
                     {
-                        "namespace": "og",
+                        "namespace": "ogfilm",
                         "key": "is_limited",
                         "value": "true", 
                         "type": "boolean"
                     },
                     {
-                        "namespace": "og",
+                        "namespace": "ogfilm",
                         "key": "category",
                         "value": category,
                         "type": "single_line_text_field"
