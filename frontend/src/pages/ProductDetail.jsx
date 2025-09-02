@@ -63,10 +63,12 @@ const ProductDetail = () => {
     const result = await addToCart(product, selectedVariant, 1);
     
     if (result.success) {
-      // Show success feedback (you could add a toast notification here)
       console.log('✅ Added to cart successfully');
+      // Redirect to cart page after successful addition
+      navigate('/cart');
     } else {
       console.error('❌ Failed to add to cart:', result.error);
+      // Optional: Show error feedback to user
     }
   };
 
