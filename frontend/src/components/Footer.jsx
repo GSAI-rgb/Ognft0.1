@@ -5,6 +5,10 @@ import { useTheme } from '../hooks/useTheme';
 import { useI18n } from '../hooks/useI18n';
 
 const Footer = () => {
+  const { currentTheme } = useTheme();
+  const { t } = useI18n();
+  const isOGTheme = currentTheme === 'og';
+
   return (
     <footer className="bg-[var(--color-bg)] text-[var(--color-text)] py-20 px-6 border-t border-gray-800">
       <div className="max-w-7xl mx-auto">
@@ -12,11 +16,20 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold tracking-wider">AXM</h3>
+            <h3 className="text-2xl font-bold tracking-wider">
+              {isOGTheme ? 'OG' : 'AXM'}
+            </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Premium streetwear designed for the modern individual. 
-              Crafted with attention to detail and built to last.
+              {isOGTheme 
+                ? t('footer.official') 
+                : 'Premium streetwear designed for the modern individual. Crafted with attention to detail and built to last.'
+              }
             </p>
+            {isOGTheme && (
+              <p className="text-[var(--color-red)] text-sm font-bold tracking-wide">
+                {t('footer.tagline')}
+              </p>
+            )}
             <div className="flex space-x-4">
               <a href="https://instagram.com" className="text-gray-400 hover:text-white transition-colors">
                 <Instagram size={20} />
