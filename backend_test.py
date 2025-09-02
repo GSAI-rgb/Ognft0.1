@@ -569,8 +569,8 @@ class BackendTester:
         return all_accessible
     
     def run_all_tests(self):
-        """Run all backend tests"""
-        print("🚀 Starting Backend API Tests...")
+        """Run all backend tests including Shopify integration"""
+        print("🚀 Starting Comprehensive Backend API Tests with Shopify Integration...")
         print()
         
         # Test 1: Server Health
@@ -608,16 +608,37 @@ class BackendTester:
         self.test_mongodb_integration()
         print()
         
+        # Test 8: Shopify Environment Variables
+        print("8. Testing Shopify Environment Variables...")
+        self.test_shopify_environment_variables()
+        print()
+        
+        # Test 9: Shopify Storefront API Connectivity
+        print("9. Testing Shopify Storefront API Connectivity...")
+        self.test_shopify_storefront_api_connectivity()
+        print()
+        
+        # Test 10: OG Products Availability
+        print("10. Testing OG Products Availability...")
+        self.test_og_products_availability()
+        print()
+        
+        # Test 11: Backend Shopify Integration Health
+        print("11. Testing Backend Shopify Integration Health...")
+        self.test_backend_shopify_integration_health()
+        print()
+        
         # Summary
-        print("=" * 60)
-        print("🏁 TEST SUMMARY")
-        print("=" * 60)
+        print("=" * 80)
+        print("🏁 COMPREHENSIVE TEST SUMMARY - BACKEND + SHOPIFY INTEGRATION")
+        print("=" * 80)
         print(f"✅ Passed: {self.passed_tests}")
         print(f"❌ Failed: {self.failed_tests}")
         print(f"📊 Total: {self.passed_tests + self.failed_tests}")
         
         if self.failed_tests == 0:
-            print("\n🎉 ALL TESTS PASSED! Backend is working correctly.")
+            print("\n🎉 ALL TESTS PASSED! Backend and Shopify integration working correctly.")
+            print("🛍️ Store: 40fg1q-ju.myshopify.com is fully integrated and operational.")
             return True
         else:
             print(f"\n⚠️  {self.failed_tests} test(s) failed. Please check the issues above.")
