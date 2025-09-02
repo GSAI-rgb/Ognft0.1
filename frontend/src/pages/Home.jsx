@@ -22,14 +22,26 @@ const Home = () => {
   // OG theme is permanent - no theme checking needed
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="py-20 px-6 text-center">
-        <h1 className="text-6xl font-bold mb-4 text-red-500">OG STORE - TESTING</h1>
-        <p className="text-xl mb-8">React is working! Components loading...</p>
-        <div className="bg-red-500 p-4 rounded">
-          <p>If you see this, the basic React app is functional</p>
+    <div className="min-h-screen bg-[var(--color-bg)]">
+      <Header />
+      
+      {/* Simplified OG Hero */}
+      <div className="bg-black text-white py-20 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-7xl lg:text-9xl font-bold uppercase tracking-wider leading-tight mb-8">
+            OG ISN'T MERCH.<br />
+            <span className="text-red-500">IT'S A CALLSIGN.</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Cinematic drops. Theater-grade prints. Built for the tribe.
+          </p>
         </div>
       </div>
+      
+      <RebelDrops />
+      <FanArsenal />
+      <ArsenalCategories />
+      <Footer />
     </div>
   );
 };
