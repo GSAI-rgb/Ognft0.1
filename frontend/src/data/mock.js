@@ -96,6 +96,55 @@ export const mockProducts = [
       "https://framerusercontent.com/images/aZ9zcbzKhpZu7InzdF7nT63ymJc.jpg",
       "https://framerusercontent.com/images/ZSQvjNr4VOfw2bgQdjwy77ojoM.jpg"
     ]
+  },
+  // Additional Bottoms Products from the original page
+  {
+    id: 9,
+    name: "Essential Trouser",
+    category: "Bottoms",
+    price: 165,
+    originalPrice: 198,
+    badges: ["SALE"],
+    images: [
+      "https://framerusercontent.com/images/7MoTftCVkfC6VCAMiAFjQacSue8.jpg",
+      "https://framerusercontent.com/images/DcB1uuYYSBd5LNqMItuHsTpRGyU.jpg"
+    ]
+  },
+  {
+    id: 10,
+    name: "Motion Performance Pants",
+    category: "Bottoms",
+    price: 185,
+    originalPrice: null,
+    badges: [],
+    images: [
+      "https://framerusercontent.com/images/xfdYoICn1jlVy8Jo8Kmfx4AKcQ.jpg",
+      "https://framerusercontent.com/images/i2nUXULTniLDEzEgzGtg6Q0F5Y.jpg"
+    ]
+  },
+  {
+    id: 11,
+    name: "Elements Weather Pants",
+    category: "Bottoms",
+    price: 225,
+    originalPrice: null,
+    badges: [],
+    images: [
+      "https://framerusercontent.com/images/pE4Mtoyrx0CaIl0MhItIARKbxrA.jpg",
+      "https://framerusercontent.com/images/eNkG1RnVcOjJx0wb5nqhb25PY.jpg"
+    ]
+  },
+  {
+    id: 12,
+    name: "Elements Cargo Pants",
+    category: "Bottoms",
+    price: 215,
+    originalPrice: null,
+    badges: [],
+    images: [
+      "https://framerusercontent.com/images/ljOYOSZd9SFReEqYsGPBboQn4bE.jpg",
+      "https://framerusercontent.com/images/oj6I57sfFpHC2gpyD7sVVc8jakU.jpg"
+    ]
   }
 ];
 
