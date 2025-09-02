@@ -377,7 +377,7 @@ class BackendTester:
             
             query = """
             {
-                products(first: 20, query: "tag:OG OR title:*OG* OR title:*Death* OR title:*War* OR title:*Rebel*") {
+                products(first: 50, query: "tag:OG OR title:*OG* OR title:*Death* OR title:*War* OR title:*Rebel*") {
                     edges {
                         node {
                             id
@@ -389,15 +389,6 @@ class BackendTester:
                                 minVariantPrice {
                                     amount
                                     currencyCode
-                                }
-                            }
-                            metafields(first: 5) {
-                                edges {
-                                    node {
-                                        namespace
-                                        key
-                                        value
-                                    }
                                 }
                             }
                         }
