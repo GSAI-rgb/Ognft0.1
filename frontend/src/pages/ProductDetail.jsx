@@ -276,38 +276,7 @@ const ProductDetail = () => {
               </button>
             </div>
 
-            {/* Price and Add to Bag */}
-            <div className="space-y-6">
-              <div className="flex items-baseline space-x-4">
-                <span className="text-3xl font-bold">${product.price}</span>
-                {product.originalPrice && (
-                  <span className="text-lg text-gray-400 line-through">
-                    ${product.originalPrice}
-                  </span>
-                )}
-              </div>
-              
-              <p className="text-sm text-gray-400">
-                <Link to="/shipping" className="underline hover:text-white transition-colors">
-                  shipping
-                </Link> calculated at checkout
-              </p>
-              
-              <button 
-                onClick={handleAddToCart}
-                disabled={cartLoading}
-                className="w-full bg-[var(--color-red)] text-white py-4 px-8 font-bold uppercase tracking-wider hover:bg-opacity-90 hover:shadow-[0_0_20px_rgba(193,18,31,0.6)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                {cartLoading ? (
-                  <>
-                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                    Adding to Arsenal...
-                  </>
-                ) : (
-                  'Add to Arsenal'
-                )}
-              </button>
-            </div>
+
           </div>
         </div>
 
