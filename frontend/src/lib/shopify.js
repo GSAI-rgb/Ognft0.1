@@ -8,7 +8,7 @@ const SHOPIFY_ENDPOINT = `https://${SHOPIFY_DOMAIN}/api/${SHOPIFY_API_VERSION}/g
 // Demo mode flag - disabled now that real Shopify is configured
 const DEMO_MODE = false;
 
-// GraphQL queries
+// GraphQL queries with OG metafields support
 const PRODUCTS_QUERY = `
   query GetProducts($first: Int!) {
     products(first: $first) {
@@ -49,6 +49,17 @@ const PRODUCTS_QUERY = `
           }
           tags
           productType
+          metafields(identifiers: [
+            {namespace: "og", key: "rank"},
+            {namespace: "og", key: "drop_end"},
+            {namespace: "og", key: "is_limited"},
+            {namespace: "og", key: "scene_code"}
+          ]) {
+            key
+            value
+            type
+            namespace
+          }
         }
       }
     }
