@@ -209,7 +209,7 @@ class ShopifyOGAutomation:
         
         return base_tags + og_tags
 
-    def create_product_from_image(self, image_path: str, category: str, index: int) -> Optional[Dict]:
+    def create_product_from_folder(self, image_path: str, category: str, product_name: str, index: int) -> Optional[Dict]:
         """Create a product from image file"""
         filename = os.path.basename(image_path)
         
