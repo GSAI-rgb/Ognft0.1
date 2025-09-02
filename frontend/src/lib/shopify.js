@@ -50,10 +50,10 @@ const PRODUCTS_QUERY = `
           tags
           productType
           metafields(identifiers: [
-            {namespace: "og", key: "rank"},
-            {namespace: "og", key: "drop_end"},
-            {namespace: "og", key: "is_limited"},
-            {namespace: "og", key: "scene_code"}
+            {namespace: "ogfilm", key: "rank"},
+            {namespace: "ogfilm", key: "drop_end"},
+            {namespace: "ogfilm", key: "is_limited"},
+            {namespace: "ogfilm", key: "scene_code"}
           ]) {
             key
             value
