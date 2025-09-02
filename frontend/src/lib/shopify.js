@@ -1,5 +1,5 @@
 // Shopify Storefront API client - Real Shopify Store
-const SHOPIFY_DOMAIN = process.env.REACT_APP_SHOPIFY_STORE_DOMAIN || 'r1s7fa-eb.myshopify.com';
+const SHOPIFY_DOMAIN = process.env.REACT_APP_SHOPIFY_STORE_DOMAIN || '40fg1q-ju.myshopify.com';
 const SHOPIFY_STOREFRONT_TOKEN = process.env.REACT_APP_SHOPIFY_STOREFRONT_API_TOKEN || 'bab636f906ac3a48b7ff915141b55e21';
 
 const SHOPIFY_API_VERSION = process.env.REACT_APP_SHOPIFY_STOREFRONT_API_VERSION || '2024-01';
