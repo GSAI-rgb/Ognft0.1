@@ -11,3 +11,21 @@
 
 📁 Creating product: product2 (wallet)
    ✅ Created: OG Product2 Tactical Wallet
+
+📁 Creating product: product1 (wallet)
+   ✅ Created: OG Product1 Tactical Wallet
+
+📁 Creating product: Tropical Paradise (teeshirt)
+   ✅ Created: OG Tropical Paradise Rebel Tee
+
+📁 Creating product: Tropical Paradise (teeshirt)
+   ✅ Created: OG Tropical Paradise Rebel Tee
+
+📁 Creating product: Nature Photography (teeshirt)
+   ✅ Created: OG Nature Photography Rebel Tee
+
+📁 Creating product: Urban Street Art (teeshirt)
+   ✅ Created: OG Urban Street Art Rebel Tee
+
+📁 Creating product: Mountain Adventure (teeshirt)
+   ✅ Created: OG Mountain Adventure Rebel Tee
