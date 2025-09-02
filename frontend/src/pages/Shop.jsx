@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import { Filter, SlidersHorizontal } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { mockProducts } from '../data/mock';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,144 +7,99 @@ import ProductCard from '../components/ProductCard';
 
 const Shop = () => {
   const { category } = useParams();
-  const [sortBy, setSortBy] = useState('newest');
-  const [showFilters, setShowFilters] = useState(false);
-  const [selectedBadges, setSelectedBadges] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 500]);
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(category || 'all');
+
+  // Tab configuration matching the original exactly
+  const tabs = [
+    { id: 'all', label: 'ALL', filter: null },
+    { id: 'tops', label: 'TOPS', filter: 'Tops' },
+    { id: 'bottoms', label: 'BOTTOMS', filter: 'Bottoms' },
+    { id: 'outerwear', label: 'OUTERWEAR', filter: 'Outerwear' },
+    { id: 'accessories', label: 'ACCESSORIES', filter: 'Accessories' },
+    { id: 'new-arrivals', label: 'NEW ARRIVALS', filter: 'NEW' },
+    { id: 'best-sellers', label: 'BEST SELLERS', filter: 'BEST SELLER' },
+    { id: 'sale', label: 'SALE', filter: 'SALE' }
+  ];
 
   const filteredProducts = useMemo(() => {
     let products = mockProducts;
 
-    // Filter by category
-    if (category) {
-      products = products.filter(p => 
-        p.category.toLowerCase() === category.toLowerCase()
-      );
-    }
-
-    // Filter by badges
-    if (selectedBadges.length > 0) {
-      products = products.filter(p => 
-        p.badges.some(badge => selectedBadges.includes(badge))
-      );
-    }
-
-    // Filter by price range
-    products = products.filter(p => 
-      p.price >= priceRange[0] && p.price <= priceRange[1]
-    );
-
-    // Sort products
-    switch (sortBy) {
-      case 'price-low':
-        return products.sort((a, b) => a.price - b.price);
-      case 'price-high':
-        return products.sort((a, b) => b.price - a.price);
-      case 'name':
-        return products.sort((a, b) => a.name.localeCompare(b.name));
-      case 'newest':
-      default:
-        return products.filter(p => p.badges.includes('NEW')).concat(
-          products.filter(p => !p.badges.includes('NEW'))
+    // Filter based on active tab
+    const activeTabConfig = tabs.find(tab => tab.id === activeTab);
+    if (activeTabConfig && activeTabConfig.filter) {
+      if (['NEW ARRIVALS', 'BEST SELLERS', 'SALE'].includes(activeTabConfig.label)) {
+        // Filter by badge
+        const badgeMap = {
+          'NEW ARRIVALS': 'NEW',
+          'BEST SELLERS': 'BEST SELLER',
+          'SALE': 'SALE'
+        };
+        products = products.filter(p => 
+          p.badges.includes(badgeMap[activeTabConfig.label])
         );
+      } else {
+        // Filter by category
+        products = products.filter(p => 
+          p.category.toLowerCase() === activeTabConfig.filter.toLowerCase()
+        );
+      }
     }
-  }, [category, sortBy, selectedBadges, priceRange]);
 
-  const toggleBadge = (badge) => {
-    setSelectedBadges(prev => 
-      prev.includes(badge) 
-        ? prev.filter(b => b !== badge)
-        : [...prev, badge]
-    );
+    return products;
+  }, [activeTab]);
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    // Update URL based on tab
+    if (tabId === 'all') {
+      navigate('/shop');
+    } else if (['tops', 'bottoms', 'outerwear', 'accessories'].includes(tabId)) {
+      navigate(`/shop/category/${tabId}`);
+    } else {
+      navigate(`/shop?filter=${tabId}`);
+    }
+  };
+
+  // Get current page title
+  const getCurrentTitle = () => {
+    const activeTabConfig = tabs.find(tab => tab.id === activeTab);
+    return activeTabConfig ? activeTabConfig.label : 'ALL PRODUCTS';
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
       <Header />
       
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Page Header */}
+        {/* Page Title */}
         <div className="mb-8">
-          <h1 className="text-5xl font-bold uppercase tracking-wider mb-4">
-            {category ? category : 'All Products'}
+          <h1 className="text-6xl lg:text-8xl font-bold uppercase tracking-wider leading-none">
+            {getCurrentTitle()}
           </h1>
-          <p className="text-gray-400">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
-          </p>
         </div>
 
-        {/* Filter and Sort Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 space-y-4 md:space-y-0">
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors"
-          >
-            <SlidersHorizontal size={20} />
-            <span className="text-sm uppercase tracking-wider">Filters</span>
-          </button>
-
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-400">Sort by:</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-black border border-gray-600 text-white px-4 py-2 text-sm focus:outline-none focus:border-white"
-            >
-              <option value="newest">Newest</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="name">Name</option>
-            </select>
+        {/* Tab Navigation */}
+        <div className="mb-8">
+          <div className="flex flex-wrap items-center gap-4 md:gap-8 border-b border-gray-800 pb-4">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                className={`text-sm md:text-base font-medium uppercase tracking-wider transition-colors duration-200 ${
+                  activeTab === tab.id
+                    ? 'text-[var(--color-text)] border-b-2 border-[var(--color-text)] pb-2'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
-
-        {/* Filters Panel */}
-        {showFilters && (
-          <div className="bg-gray-900 p-6 mb-8 space-y-6">
-            <h3 className="text-lg font-semibold">Filters</h3>
-            
-            {/* Badge Filters */}
-            <div>
-              <h4 className="text-sm font-medium mb-3 text-gray-300">Collection</h4>
-              <div className="flex flex-wrap gap-2">
-                {['NEW', 'BEST SELLER', 'SALE'].map(badge => (
-                  <button
-                    key={badge}
-                    onClick={() => toggleBadge(badge)}
-                    className={`px-3 py-1 text-xs font-semibold tracking-wider uppercase border transition-colors ${
-                      selectedBadges.includes(badge)
-                        ? 'bg-white text-black border-white'
-                        : 'border-gray-600 hover:border-white'
-                    }`}
-                  >
-                    {badge}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Price Range */}
-            <div>
-              <h4 className="text-sm font-medium mb-3 text-gray-300">Price Range</h4>
-              <div className="flex items-center space-x-4">
-                <input
-                  type="range"
-                  min="0"
-                  max="500"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                  className="flex-1"
-                />
-                <span className="text-sm text-gray-400">
-                  ${priceRange[0]} - ${priceRange[1]}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -155,18 +109,61 @@ const Shop = () => {
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
             <h3 className="text-2xl font-bold mb-4">No products found</h3>
-            <p className="text-gray-400 mb-8">Try adjusting your filters or search criteria</p>
+            <p className="text-gray-400 mb-8">No products available in this category</p>
             <button
-              onClick={() => {
-                setSelectedBadges([]);
-                setPriceRange([0, 500]);
-              }}
-              className="text-white hover:text-gray-300 underline"
+              onClick={() => handleTabClick('all')}
+              className="text-[var(--color-text)] hover:text-gray-300 underline"
             >
-              Clear all filters
+              View all products
             </button>
           </div>
         )}
+
+        {/* Newsletter Section - Replacing the Framer promotion */}
+        <div className="border-t border-gray-800 pt-16 mt-16">
+          <div className="text-center space-y-8">
+            <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-wider">
+              Stay Updated
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Be the first to know about new arrivals, exclusive collections, and special offers.
+            </p>
+            <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-4">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 bg-[var(--color-bg)] border border-gray-600 px-4 py-3 focus:outline-none focus:border-white transition-colors"
+              />
+              <button className="bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-3 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* About Section */}
+        <div className="border-t border-gray-800 pt-16 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Free Shipping</h3>
+              <p className="text-gray-400 text-sm">
+                Complimentary shipping on all orders worldwide
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Easy Returns</h3>
+              <p className="text-gray-400 text-sm">
+                30-day return policy for unworn items
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Premium Quality</h3>
+              <p className="text-gray-400 text-sm">
+                Crafted with attention to detail and built to last
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />
