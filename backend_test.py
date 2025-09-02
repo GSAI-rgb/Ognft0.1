@@ -226,6 +226,314 @@ class BackendTester:
             self.log_result("MongoDB Integration", False, f"Error: {str(e)}")
             return False
     
+    def test_shopify_environment_variables(self):
+        """Test that Shopify environment variables are properly configured"""
+        try:
+            # Load backend .env file to check Shopify credentials
+            load_dotenv('/app/backend/.env')
+            
+            required_shopify_vars = [
+                'SHOPIFY_STORE_DOMAIN',
+                'SHOPIFY_STOREFRONT_API_TOKEN',
+                'SHOPIFY_STOREFRONT_API_VERSION',
+                'SHOPIFY_ADMIN_API_KEY',
+                'SHOPIFY_ADMIN_API_SECRET'
+            ]
+            
+            missing_vars = []
+            configured_vars = []
+            
+            for var in required_shopify_vars:
+                value = os.getenv(var)
+                if not value:
+                    missing_vars.append(var)
+                else:
+                    # Mask sensitive tokens for logging
+                    if 'TOKEN' in var or 'KEY' in var or 'SECRET' in var:
+                        masked_value = f"{value[:8]}...{value[-4:]}" if len(value) > 12 else "***"
+                        configured_vars.append(f"{var}={masked_value}")
+                    else:
+                        configured_vars.append(f"{var}={value}")
+            
+            if missing_vars:
+                self.log_result("Shopify Environment Variables", False, f"Missing variables: {', '.join(missing_vars)}")
+                return False
+            else:
+                self.log_result("Shopify Environment Variables", True, f"All Shopify vars configured: {', '.join(configured_vars)}")
+                return True
+                
+        except Exception as e:
+            self.log_result("Shopify Environment Variables", False, f"Error: {str(e)}")
+            return False
+    
+    def test_shopify_storefront_api_connectivity(self):
+        """Test direct connectivity to Shopify Storefront API"""
+        try:
+            # Load Shopify credentials
+            load_dotenv('/app/backend/.env')
+            
+            store_domain = os.getenv('SHOPIFY_STORE_DOMAIN')
+            access_token = os.getenv('SHOPIFY_STOREFRONT_API_TOKEN')
+            api_version = os.getenv('SHOPIFY_STOREFRONT_API_VERSION')
+            
+            if not all([store_domain, access_token, api_version]):
+                self.log_result("Shopify Storefront API Connectivity", False, "Missing Shopify credentials")
+                return False
+            
+            # Test GraphQL query to fetch shop info and products
+            graphql_url = f"https://{store_domain}/api/{api_version}/graphql.json"
+            
+            query = """
+            {
+                shop {
+                    name
+                    description
+                }
+                products(first: 5) {
+                    edges {
+                        node {
+                            id
+                            title
+                            handle
+                            priceRange {
+                                minVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            """
+            
+            headers = {
+                'Content-Type': 'application/json',
+                'X-Shopify-Storefront-Access-Token': access_token
+            }
+            
+            response = requests.post(
+                graphql_url,
+                json={'query': query},
+                headers=headers,
+                timeout=15
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if 'errors' in data:
+                    self.log_result("Shopify Storefront API Connectivity", False, f"GraphQL errors: {data['errors']}")
+                    return False
+                
+                shop_data = data.get('data', {}).get('shop', {})
+                products_data = data.get('data', {}).get('products', {}).get('edges', [])
+                
+                shop_name = shop_data.get('name', 'Unknown')
+                product_count = len(products_data)
+                
+                # Get first product details for verification
+                first_product = None
+                if products_data:
+                    first_product = products_data[0]['node']
+                    product_title = first_product.get('title', 'Unknown')
+                    product_price = first_product.get('priceRange', {}).get('minVariantPrice', {}).get('amount', '0')
+                    currency = first_product.get('priceRange', {}).get('minVariantPrice', {}).get('currencyCode', 'INR')
+                
+                if shop_name and product_count > 0:
+                    message = f"Connected to '{shop_name}' store, found {product_count} products"
+                    if first_product:
+                        message += f". Sample: '{product_title}' - {product_price} {currency}"
+                    self.log_result("Shopify Storefront API Connectivity", True, message)
+                    return True
+                else:
+                    self.log_result("Shopify Storefront API Connectivity", False, "No shop data or products found")
+                    return False
+            else:
+                self.log_result("Shopify Storefront API Connectivity", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_result("Shopify Storefront API Connectivity", False, f"Error: {str(e)}")
+            return False
+    
+    def test_og_products_availability(self):
+        """Test that OG products are available through Shopify API"""
+        try:
+            # Load Shopify credentials
+            load_dotenv('/app/backend/.env')
+            
+            store_domain = os.getenv('SHOPIFY_STORE_DOMAIN')
+            access_token = os.getenv('SHOPIFY_STOREFRONT_API_TOKEN')
+            api_version = os.getenv('SHOPIFY_STOREFRONT_API_VERSION')
+            
+            if not all([store_domain, access_token, api_version]):
+                self.log_result("OG Products Availability", False, "Missing Shopify credentials")
+                return False
+            
+            # Query for OG-themed products
+            graphql_url = f"https://{store_domain}/api/{api_version}/graphql.json"
+            
+            query = """
+            {
+                products(first: 20, query: "tag:OG OR title:*OG* OR title:*Death* OR title:*War* OR title:*Rebel*") {
+                    edges {
+                        node {
+                            id
+                            title
+                            handle
+                            tags
+                            availableForSale
+                            priceRange {
+                                minVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                            }
+                            metafields(first: 5) {
+                                edges {
+                                    node {
+                                        namespace
+                                        key
+                                        value
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            """
+            
+            headers = {
+                'Content-Type': 'application/json',
+                'X-Shopify-Storefront-Access-Token': access_token
+            }
+            
+            response = requests.post(
+                graphql_url,
+                json={'query': query},
+                headers=headers,
+                timeout=15
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if 'errors' in data:
+                    self.log_result("OG Products Availability", False, f"GraphQL errors: {data['errors']}")
+                    return False
+                
+                products = data.get('data', {}).get('products', {}).get('edges', [])
+                
+                og_products = []
+                og_metafields_count = 0
+                
+                for product_edge in products:
+                    product = product_edge['node']
+                    title = product.get('title', '')
+                    tags = product.get('tags', [])
+                    available = product.get('availableForSale', False)
+                    metafields = product.get('metafields', {}).get('edges', [])
+                    
+                    # Check for OG-related content
+                    is_og_product = (
+                        'OG' in title or 
+                        'Death' in title or 
+                        'War' in title or 
+                        'Rebel' in title or
+                        any('og' in tag.lower() for tag in tags)
+                    )
+                    
+                    if is_og_product:
+                        og_products.append({
+                            'title': title,
+                            'available': available,
+                            'tags': tags,
+                            'metafields_count': len(metafields)
+                        })
+                        
+                        # Count OG metafields
+                        for mf_edge in metafields:
+                            mf = mf_edge['node']
+                            if mf.get('namespace') == 'ogfilm':
+                                og_metafields_count += 1
+                
+                if len(og_products) >= 10:  # Expecting at least 10 OG products out of 52
+                    available_count = sum(1 for p in og_products if p['available'])
+                    message = f"Found {len(og_products)} OG products, {available_count} available for sale"
+                    if og_metafields_count > 0:
+                        message += f", {og_metafields_count} OG metafields"
+                    
+                    # Show sample products
+                    sample_titles = [p['title'] for p in og_products[:3]]
+                    message += f". Samples: {', '.join(sample_titles)}"
+                    
+                    self.log_result("OG Products Availability", True, message)
+                    return True
+                else:
+                    self.log_result("OG Products Availability", False, f"Only found {len(og_products)} OG products, expected at least 10")
+                    return False
+            else:
+                self.log_result("OG Products Availability", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_result("OG Products Availability", False, f"Error: {str(e)}")
+            return False
+    
+    def test_backend_shopify_integration_health(self):
+        """Test overall backend health with Shopify integration context"""
+        try:
+            # Check if backend can handle requests while Shopify integration is configured
+            test_requests = [
+                ("GET", "/", "Root endpoint with Shopify context"),
+                ("GET", "/status", "Status endpoint with Shopify context"),
+            ]
+            
+            all_healthy = True
+            
+            for method, path, description in test_requests:
+                try:
+                    url = f"{API_BASE_URL}{path}"
+                    response = requests.get(url, timeout=10)
+                    
+                    if response.status_code == 200:
+                        print(f"  ✅ {description}")
+                    else:
+                        print(f"  ❌ {description} (HTTP {response.status_code})")
+                        all_healthy = False
+                        
+                except Exception as e:
+                    print(f"  ❌ {description} (Error: {str(e)})")
+                    all_healthy = False
+            
+            # Test that backend can create records while Shopify is configured
+            test_data = {"client_name": f"Shopify_Integration_Test_{int(time.time())}"}
+            response = requests.post(
+                f"{API_BASE_URL}/status",
+                json=test_data,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                print(f"  ✅ Database operations with Shopify integration")
+            else:
+                print(f"  ❌ Database operations with Shopify integration (HTTP {response.status_code})")
+                all_healthy = False
+            
+            if all_healthy:
+                self.log_result("Backend Shopify Integration Health", True, "Backend stable with Shopify integration")
+                return True
+            else:
+                self.log_result("Backend Shopify Integration Health", False, "Backend issues detected with Shopify integration")
+                return False
+                
+        except Exception as e:
+            self.log_result("Backend Shopify Integration Health", False, f"Error: {str(e)}")
+            return False
+    
     def test_api_routes_accessibility(self):
         """Test that all defined API routes are accessible"""
         routes_to_test = [
