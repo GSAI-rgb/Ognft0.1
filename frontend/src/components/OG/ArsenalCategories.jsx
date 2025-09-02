@@ -63,10 +63,10 @@ const ArsenalCategories = () => {
   return (
     <div className="bg-[var(--color-bg)] text-[var(--color-text)] py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header - Same layout as AXM "Explore Our Collections" */}
+        {/* Section Header - Brutal Typography */}
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold font-headline uppercase tracking-wider">
-            Choose Your Arsenal
+          <h2 className="text-5xl lg:text-7xl font-brutalist font-ultra uppercase tracking-extreme text-white drop-shadow-[0_4px_8px_rgba(193,18,31,0.6)]">
+            CHOOSE YOUR ARSENAL
           </h2>
           <Link 
             to="/collections"
