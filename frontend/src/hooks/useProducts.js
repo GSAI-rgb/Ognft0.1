@@ -14,49 +14,53 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const loadProducts = async () => {
+  const loadProducts = useCallback(async () => {
+    // Check cache first
+    const now = Date.now();
+    if (cachedProducts && (now - lastFetchTime) < CACHE_DURATION) {
+      setProducts(cachedProducts);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      
+      // Try direct JSON first (fastest)
       try {
-        setLoading(true);
-        
-        // Try Shopify Storefront API first
-        let productData = await useMockDataIfShopifyUnavailable(
-          () => shopify.getProducts(50),
-          []
-        );
-        
-        // If no products from Storefront API, try direct JSON fallback
-        if (!productData || productData.length === 0) {
-          try {
-            console.log('🔄 Loading products from direct integration...');
-            const response = await fetch('/products.json');
-            if (response.ok) {
-              const directProducts = await response.json();
-              console.log(`✅ Loaded ${directProducts.length} products from direct integration`);
-              productData = directProducts;
-            } else {
-              throw new Error('Failed to load direct products');
-            }
-          } catch (directError) {
-            console.warn('⚠️ Direct integration failed, using mock data:', directError.message);
-            productData = mockProducts;
+        const response = await fetch('/products.json');
+        if (response.ok) {
+          const directProducts = await response.json();
+          if (directProducts && directProducts.length > 0) {
+            cachedProducts = directProducts;
+            lastFetchTime = now;
+            setProducts(directProducts);
+            setError(null);
+            return;
           }
         }
-        
-        setProducts(productData);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        console.error('Failed to load products:', err);
-        // Final fallback to mock data
-        setProducts(mockProducts);
-      } finally {
-        setLoading(false);
+      } catch (directError) {
+        console.warn('Direct integration failed:', directError.message);
       }
-    };
-
-    loadProducts();
+      
+      // Fallback to mock data
+      cachedProducts = mockProducts;
+      lastFetchTime = now;
+      setProducts(mockProducts);
+      setError(null);
+      
+    } catch (err) {
+      setError(err.message);
+      console.error('Failed to load products:', err);
+      setProducts(mockProducts);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
 
   return { products, loading, error, refetch: () => window.location.reload() };
 };
