@@ -107,4 +107,4 @@ const ProductCard = ({ product, className = "", priority = false }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);
