@@ -26,30 +26,14 @@ const Home = () => {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
       
-      {/* Conditional rendering based on theme while preserving layout */}
-      {isOGTheme ? (
-        <>
-          <OGHeroSection />
-          <RebelDrops />
-          <FanArsenal />
-          <ArsenalCategories />
-          <FanArmyWall />
-          <FromFirestorm />
-          <Footer />
-        </>
-      ) : (
-        <>
-          <HeroSection />
-          <NewArrivals />
-          <BestSellers />
-          <Categories />
-          <Collections />
-          <Performance />
-          <InstagramFeed />
-          <Journal />
-          <Footer />
-        </>
-      )}
+      {/* OG Theme Components - Production Ready */}
+      <OGHeroSection />
+      <RebelDrops />
+      <FanArsenal />
+      <ArsenalCategories />
+      <FanArmyWall />
+      <FromFirestorm />
+      <Footer />
     </div>
   );
 };
