@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Facebook } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
+import { useI18n } from '../hooks/useI18n';
 
 const Footer = () => {
   return (
