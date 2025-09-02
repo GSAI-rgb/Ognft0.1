@@ -3,27 +3,26 @@
 export const mockProducts = [
   {
     id: 1,
-    name: "Freedom Graphic Tee",
-    category: "Tops",
-    price: 85,
+    name: "OG Rebel Tee",
+    category: "Teeshirt",
+    price: 1299,
     originalPrice: null,
-    badges: ["NEW"],
+    badges: ["NEW", "REBEL DROP"],
     images: [
       "https://framerusercontent.com/images/TITuLcYSx53fInKnsoSGfE8Xuw.jpg",
-      "https://framerusercontent.com/images/rO3nueqqdzWMFmQMfScFEHQKDK8.jpg",
-      "https://framerusercontent.com/images/Lob4Ke8wWWs4mRnpIc1nR5otRQ.jpg",
-      "https://framerusercontent.com/images/BVM804ckLux0BNzhhthMfZjDC4.jpg"
+      "https://framerusercontent.com/images/rO3nueqqdzWMFmQMfScFEHQKDK8.jpg"
     ],
-    description: "Bold expression through minimal design. Our Freedom Graphic Tee Series 1 features architectural prints on premium cotton.",
-    materials: "100% Premium Cotton",
-    care: "Machine wash cold with like colors. Tumble dry low. Do not bleach.",
-    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description: "Premium OG T-shirt designed for true rebels. Crafted with precision and designed for warriors. Every product is a weapon. Every fan is a soldier.",
+    materials: "100% Premium Cotton, Screen Printed Graphics",
+    care: "Machine wash cold with like colors. Tumble dry low. Do not bleach. Handle with respect.",
+    shipping: "Free shipping on orders above ₹1000. Express delivery available.",
+    sizes: ["S", "M", "L", "XL", "XXL"],
     colors: [
-      { name: "White", value: "#FFFFFF" },
-      { name: "Black", value: "#000000" }
+      { name: "Black", value: "#000000" },
+      { name: "Red", value: "#dc2626" }
     ],
-    collection: "Freedom"
+    vendor: "DVV Entertainment",
+    collection: "OG Arsenal"
   },
   {
     id: 2,
