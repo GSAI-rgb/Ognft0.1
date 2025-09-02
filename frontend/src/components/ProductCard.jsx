@@ -35,7 +35,7 @@ const ProductCard = ({ product, className = "", priority = false }) => {
         onMouseLeave={handleMouseLeave}
       >
         <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
-          <img
+          <OptimizedImage
             src={product.images[currentImageIndex]}
             alt={product.name}
             className={`w-full h-full object-cover transition-transform duration-500 ${
