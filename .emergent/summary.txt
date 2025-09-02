@@ -1,0 +1,64 @@
+<analysis>
+The AI engineer successfully progressed from cloning a basic homepage to building a full-fledged e-commerce application. Initially, a pixel-perfect clone of the AXM homepage was created using mock data, followed by expanding it into a multi-page e-commerce site with product, shop, cart, and profile pages, including functional routing. A major pivot occurred with the Make It OG master prompt, shifting focus to performance optimization, a token-based theme system, and comprehensive Shopify Storefront API integration, while preserving the AXM layout. Key improvements included fixing navigation flashing, implementing a robust search feature, and setting up internationalization. The current work involves re-skinning the homepage with the specific OG theme content, copying, and features as detailed in the master prompt, building out new components for the OG aesthetic. The trajectory shows a systematic, iterative approach to meeting complex requirements and refining the application's architecture and user experience.
+</analysis>
+
+<product_requirements>
+The user initially requested a pixel-perfect clone of , replicating all styles, layouts, designs, interactive elements, and responsive behavior. This evolved into a request for a complete e-commerce website, including product pages, cart, profile, about, journal, and contact pages, all with accurate styling and functional links. Subsequently, a comprehensive Make It OG mandate was issued, demanding a re-skin of the AXM layout with a specific OG film theme (colors, typography, motion via tokens), performance budgets (LCP < 2.5s, CLS < 0.05, TTI < 3.0s), full Shopify Storefront GraphQL integration (products, collections, cart, metafields), India-first UX (UPI/COD, EN/TE toggle, Lite Mode), and fan-first features (rank-based drops, countdowns, scene codes, Fan Army Wall). The navigation flashing issue was reported and fixed, followed by a request for a search feature with autocomplete. The most recent explicit request is to transform the existing homepage into the OG film official merch homepage, preserving AXM's section structure and spacing, but applying the OG theme, specific content, copy, and fan-first elements for hero, Rebel Drops, Fan Arsenal, Choose Your Arsenal, Fan Army Wall, and From the Firestorm sections, and updating the footer.
+</product_requirements>
+
+<key_technical_concepts>
+-   **React.js**: Frontend framework for building UI components.
+-   **FastAPI**: Python backend for API services.
+-   **MongoDB**: Database for data storage.
+-   **Tailwind CSS & Shadcn UI**: Styling and component library.
+-   **React Router DOM**: Client-side routing for seamless navigation.
+-   **Axios**: HTTP client for API requests.
+-   **Shopify Storefront GraphQL API**: Primary backend for e-commerce data.
+-   **React Context API**: Global state management (e.g., CartContext, ThemeContext, I18nContext).
+-   **Local Storage**: Client-side data persistence (e.g., search history, cart state).
+-   **Performance Optimizations**: Lazy image loading, page transitions, code splitting.
+-   **Internationalization (i18n)**: Multi-language support (EN/TE).
+</key_technical_concepts>
+
+<code_architecture>
+The application is a full-stack MERN-like stack: React frontend, FastAPI backend, and MongoDB database.
+
+
+
+-   : Main application entry point, sets up React Router, , , and . It orchestrates the rendering of different pages. Modified to use client-side routing for smooth transitions and integrate various contexts.
+-   : Centralized mock data for products, categories, collections. Essential for initial frontend-only development and for demonstrating features before full backend integration. Continuously updated to include more product details and data points needed for new features (e.g., bottoms products, detailed product properties).
+-   : Defines the main pages of the application (Home, Shop, ProductDetail, Cart, Profile, About, Journal, Contact, Collections, CollectionDetail, SearchResults). These files contain the layout and logic specific to each view.
+-   : Reusable UI components.
+    -   , : Global components for navigation and boilerplate. Updated to include search, theme toggle, language toggle, and eventually DVV branding.
+    -   : Displays individual product information. Modified to use  and have functional links.
+    -   , : Components for the search feature.
+    -   , , : New components being created to re-skin the homepage with specific OG theme content and features.
+-   : Provides a global state for the shopping cart. Critical for managing cart items across the application without prop drilling.
+-   : Custom React hooks for encapsulating reusable logic.
+    -   , : Hooks for interacting with (mock or Shopify) product and cart data.
+    -   : Manages search logic, history, and filtering.
+    -   : Provides internationalization utilities.
+-   : Client for Shopify Storefront GraphQL API. Centralizes all Shopify-related API calls.
+-   : Contains logic for fetching and interpreting Shopify metafields, crucial for the Make It OG theme.
+-   : Defines theme tokens (colors, typography, etc.) for the OG theme, allowing for styling changes without altering layout.
+-   , : Store English and Telugu translations, enabling the internationalization feature.
+</code_architecture>
+
+<pending_tasks>
+-   Create  component.
+-   Create Fan Army Wall and From the Firestorm sections for the homepage.
+-   Update the Footer to replace AXM with DVV Entertainment and add the tagline.
+-   Complete full Shopify Storefront API integration (currently in demo mode with mock data).
+-   Implement India-First UX features (UPI/COD rules, Lite Mode, Under-₹{ceiling} rail, WhatsApp/Email restock notify).
+-   Implement remaining Fan-First Features (Fan Battle Drops, Drops as Time-Bombs, OG Tribe ID, Scene Codes, Restock Vote).
+-   Implement client-side Personalization heuristics.
+-   Set up Playwright pixel-diff visual regression tests and Lighthouse CI performance tests.
+</pending_tasks>
+
+<current_work>
+The AI engineer is currently in the process of transforming the homepage () into the OG film official merch homepage as per the detailed MASTER PROMPT. This involves re-skinning existing sections and creating new, OG-themed components. So far, the  has been updated to use new OG-specific components. The  (replacing the original NEW ARRIVALS banner),  (replacing New Arrivals), and  (replacing Best Sellers) components have been created. The AI engineer has just started creating the  component, which will replace the original Explore Our Collections section. This work is focused on applying the new color palette, typography, content, copy, and specific fan-first features defined for the OG theme while maintaining the original AXM layout, spacing, and grid structure.
+</current_work>
+
+<optional_next_step>
+Create the  component (replacing Explore Our Collections) for the homepage as part of the OG theme re-skin.
+</optional_next_step>
