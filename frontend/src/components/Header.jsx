@@ -76,9 +76,13 @@ const Header = () => {
           {/* Right Icons */}
           <div className="flex items-center space-x-2">
             <ThemeToggle />
-            <button className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] ${
-              isReducedMotion ? 'transition-none' : ''
-            }`}>
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] ${
+                isReducedMotion ? 'transition-none' : ''
+              }`}
+              title="Search products"
+            >
               <Search size={20} />
             </button>
             <button 
