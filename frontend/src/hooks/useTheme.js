@@ -35,12 +35,9 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem('theme-preference', currentTheme);
   }, [currentTheme]);
 
-  // Load saved theme preference
+  // Theme preference loading removed - OG is permanent
   useEffect(() => {
-    const saved = localStorage.getItem('theme-preference');
-    if (saved && (saved === 'axiom' || saved === 'og')) {
-      setCurrentTheme(saved);
-    }
+    // OG theme is hardcoded - no need to load preferences
   }, []);
 
   // Theme switching removed - OG is permanent
