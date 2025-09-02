@@ -70,3 +70,16 @@
    ✅ Created: OG Product1 Scene Poster
 
 📁 Creating product: product10 (posters)
+   ✅ Created: OG Product10 Scene Poster
+
+📁 Creating product: product6 (posters)
+   ✅ Created: OG Product6 Scene Poster
+
+📁 Creating product: product9 (posters)
+   ✅ Created: OG Product9 Scene Poster
+
+📁 Creating product: product7 (posters)
+   ✅ Created: OG Product7 Scene Poster
+
+📁 Creating product: product2 (sweatshirts)
+   ✅ Created: OG Product2 War Sweatshirt
