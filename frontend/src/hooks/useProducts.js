@@ -103,10 +103,15 @@ export const useFilteredProducts = (category, filter) => {
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
 
-    // Category filtering
-    if (category && category !== 'all') {
+    // Category filtering - Enhanced for our product structure
+    if (category && category !== 'all' && category !== 'accessories') {
       filtered = filtered.filter(p => 
-        p.category.toLowerCase() === category.toLowerCase()
+        p.category && p.category.toLowerCase() === category.toLowerCase()
+      );
+    } else if (category === 'accessories') {
+      // Special handling for accessories - include Hats, Wallet, Slippers
+      filtered = filtered.filter(p => 
+        p.category && ['hats', 'wallet', 'slippers'].includes(p.category.toLowerCase())
       );
     }
 
