@@ -12,6 +12,7 @@ import { useCart } from '../context/CartContext';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
   const { isReducedMotion, currentTheme } = useTheme();
   const { t } = useI18n();
