@@ -57,13 +57,18 @@ const Shop = () => {
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
-    // Update URL based on tab
+    // Update URL without page refresh using replace instead of navigate
+    const newUrl = getUrlForTab(tabId);
+    window.history.replaceState(null, '', newUrl);
+  };
+
+  const getUrlForTab = (tabId) => {
     if (tabId === 'all') {
-      navigate('/shop');
+      return '/shop';
     } else if (['tops', 'bottoms', 'outerwear', 'accessories'].includes(tabId)) {
-      navigate(`/shop/category/${tabId}`);
+      return `/shop/category/${tabId}`;
     } else {
-      navigate(`/shop?filter=${tabId}`);
+      return `/shop?filter=${tabId}`;
     }
   };
 
