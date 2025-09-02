@@ -143,10 +143,10 @@ const OGHeroSection = () => {
               
               <Link 
                 to="/collections"
-                className="flex items-center space-x-2 text-[var(--color-text)] hover:text-[var(--color-red)] transition-colors group mt-8"
+                className="inline-flex items-center space-x-3 bg-[var(--color-red)] text-white px-8 py-4 font-brutalist font-ultra uppercase tracking-brutal hover:bg-opacity-90 hover:shadow-[0_0_20px_rgba(193,18,31,0.8)] transition-all duration-300 group mt-8"
               >
-                <span className="text-sm uppercase tracking-wider font-medium">Arm Up</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <span>ARM UP</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
