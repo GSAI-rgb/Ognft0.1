@@ -69,8 +69,9 @@ const OGHeroSection = () => {
 
           {/* Hero Title - Same typography scale as AXM */}
           <div className="mb-12">
-            <h1 className="text-6xl lg:text-8xl font-bold font-headline uppercase tracking-wider leading-none">
-              {t('home.hero.title')}
+            <h1 className="text-7xl lg:text-9xl xl:text-[12rem] font-brutalist font-ultra uppercase tracking-extreme leading-[0.85] mb-8 text-center drop-shadow-[0_8px_16px_rgba(193,18,31,0.8)]">
+              OG ISN'T MERCH.<br />
+              <span className="text-[var(--color-red)] animate-pulse">IT'S A CALLSIGN.</span>
             </h1>
             <p className="text-xl text-[var(--color-text-muted)] mt-6 max-w-2xl leading-relaxed">
               {t('home.hero.subtitle')}
