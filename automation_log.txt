@@ -197,3 +197,26 @@
 
 📁 Creating product: product2 (full shirts)
    ✅ Created: OG Product2 Combat Shirt
+
+📁 Creating product: product3 (full shirts)
+   ✅ Created: OG Product3 Combat Shirt
+
+📁 Creating product: product1 (full shirts)
+   ✅ Created: OG Product1 Combat Shirt
+
+📁 Creating product: product2 (slippers)
+   ✅ Created: OG Product2 Rest Slippers
+
+📁 Creating product: product1 (slippers)
+   ✅ Created: OG Product1 Rest Slippers
+
+📁 Creating product: product1 (slippers)
+   ✅ Created: OG Product1 Rest Slippers
+
+📁 Creating product: product2 (hats)
+   ✅ Created: OG Product2 Tactical Cap
+
+📁 Creating product: product2 (hats)
+   ✅ Created: OG Product2 Tactical Cap
+
+📁 Creating product: product1 (hats)
