@@ -129,7 +129,7 @@ const SHOP_QUERY = `
       }
       currencyCode
       metafields(identifiers: [
-        {namespace: "og", key: "affordable_price_ceiling"}
+        {namespace: "ogfilm", key: "affordable_price_ceiling"}
       ]) {
         key
         value
