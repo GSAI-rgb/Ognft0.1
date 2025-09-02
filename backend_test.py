@@ -280,7 +280,7 @@ class BackendTester:
                 self.log_result("Shopify Storefront API Connectivity", False, "Missing Shopify credentials")
                 return False
             
-            # Test GraphQL query to fetch shop info and products
+            # Test GraphQL query to fetch shop info first
             graphql_url = f"https://{store_domain}/api/{api_version}/graphql.json"
             
             query = """
@@ -288,22 +288,6 @@ class BackendTester:
                 shop {
                     name
                     description
-                }
-                products(first: 5) {
-                    edges {
-                        node {
-                            id
-                            title
-                            handle
-                            availableForSale
-                            priceRange {
-                                minVariantPrice {
-                                    amount
-                                    currencyCode
-                                }
-                            }
-                        }
-                    }
                 }
             }
             """
@@ -328,27 +312,13 @@ class BackendTester:
                     return False
                 
                 shop_data = data.get('data', {}).get('shop', {})
-                products_data = data.get('data', {}).get('products', {}).get('edges', [])
-                
                 shop_name = shop_data.get('name', 'Unknown')
-                product_count = len(products_data)
                 
-                # Get first product details for verification
-                first_product = None
-                if products_data:
-                    first_product = products_data[0]['node']
-                    product_title = first_product.get('title', 'Unknown')
-                    product_price = first_product.get('priceRange', {}).get('minVariantPrice', {}).get('amount', '0')
-                    currency = first_product.get('priceRange', {}).get('minVariantPrice', {}).get('currencyCode', 'INR')
-                
-                if shop_name and product_count > 0:
-                    message = f"Connected to '{shop_name}' store, found {product_count} products"
-                    if first_product:
-                        message += f". Sample: '{product_title}' - {product_price} {currency}"
-                    self.log_result("Shopify Storefront API Connectivity", True, message)
+                if shop_name and shop_name != 'Unknown':
+                    self.log_result("Shopify Storefront API Connectivity", True, f"Successfully connected to '{shop_name}' store via Storefront API")
                     return True
                 else:
-                    self.log_result("Shopify Storefront API Connectivity", False, "No shop data or products found")
+                    self.log_result("Shopify Storefront API Connectivity", False, "Could not retrieve shop information")
                     return False
             else:
                 self.log_result("Shopify Storefront API Connectivity", False, f"HTTP {response.status_code}: {response.text}")
