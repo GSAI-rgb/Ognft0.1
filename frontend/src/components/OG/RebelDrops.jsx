@@ -18,13 +18,7 @@ const RebelDrops = () => {
     )
   );
 
-  // Debug logging
-  console.log('RebelDrops Debug:', {
-    totalProducts: products.length,
-    rebelProducts: rebelProducts.length,
-    sampleProduct: products[0],
-    sampleBadges: products[0]?.badges
-  });
+  // Removed debug logging to prevent memory leaks
 
   return (
     <div className="bg-[var(--color-bg)] text-[var(--color-text)] py-20 px-6">
