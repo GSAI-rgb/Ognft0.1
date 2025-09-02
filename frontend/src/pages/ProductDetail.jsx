@@ -210,7 +210,7 @@ const ProductDetail = () => {
                 </button>
                 {expandedSections.care && (
                   <div className="pb-4 text-gray-300 text-sm">
-                    <p>{product.care}</p>
+                    <p>Wash cold, keep the blood stains alive.</p>
                   </div>
                 )}
               </div>
