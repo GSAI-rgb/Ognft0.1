@@ -43,10 +43,9 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  const switchTheme = (theme) => {
-    if (theme === 'axiom' || theme === 'og') {
-      setCurrentTheme(theme);
-    }
+  // Theme switching removed - OG is permanent
+  const switchTheme = () => {
+    // Theme switching disabled - OG is the only theme
   };
 
   const toggleTheme = () => {
