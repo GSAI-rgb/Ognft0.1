@@ -33,7 +33,6 @@ def test_storefront_api():
             id
             title
             handle
-            status
             publishedAt
             tags
             productType
