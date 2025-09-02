@@ -358,24 +358,29 @@ const ProductDetail = () => {
           </div>
         )}
 
-        {/* Instagram Feed */}
-        <div className="mt-20 border-t border-gray-800 pt-20">
+        {/* Fan Army Wall Preview */}
+        <div className="mt-20 border-t border-[var(--color-steel)] pt-20">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold uppercase tracking-wider mb-4">Follow Axiom</h2>
-            <p className="text-gray-400 mb-6">Wear it your way. Tag us on Instagram for your chance to be featured.</p>
-            <a 
-              href="https://instagram.com" 
-              className="text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors"
+            <h2 className="text-3xl font-bold font-headline uppercase tracking-wider mb-4">Fan Army Wall</h2>
+            <p className="text-[var(--color-text-muted)] mb-6">
+              Wear it. Tag #OGTribe → Join the wall.
+            </p>
+            <p className="text-[var(--color-gold)] font-medium mb-6">
+              Every fit tells a story. Every story builds the legend (ప్రతి కథ ఒక పురాణం నిర్మిస్తుంది).
+            </p>
+            <Link 
+              to="/fan-wall" 
+              className="text-sm uppercase tracking-wider text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors"
             >
-              Follow Us
-            </a>
+              Join the Wall
+            </Link>
           </div>
           <div className="grid grid-cols-5 md:grid-cols-10 gap-4">
             {mockInstagramPosts.slice(0, 20).map((image, index) => (
-              <div key={index} className="aspect-square bg-gray-900 overflow-hidden group cursor-pointer">
+              <div key={index} className="aspect-square bg-[var(--color-steel)] overflow-hidden group cursor-pointer border border-[var(--color-steel)] hover:border-[var(--color-red)] transition-colors">
                 <img
                   src={image}
-                  alt={`Instagram post ${index + 1}`}
+                  alt={`Fan Army post ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
