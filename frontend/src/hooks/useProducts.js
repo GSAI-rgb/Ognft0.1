@@ -42,11 +42,8 @@ export const useProducts = () => {
       } catch (err) {
         setError(err.message);
         console.error('Failed to load products:', err);
-        // Final fallback to enhanced mock data
-        setProducts(mockProducts.map(product => ({
-          ...product,
-          badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
-        })));
+        // Final fallback to mock data
+        setProducts(mockProducts);
       } finally {
         setLoading(false);
       }
