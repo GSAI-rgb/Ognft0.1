@@ -17,12 +17,13 @@ const ProductDetail = () => {
   
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('M');
-  const [selectedColor, setSelectedColor] = useState('White');
+  const [selectedColor, setSelectedColor] = useState('Black');
   const [expandedSections, setExpandedSections] = useState({
     materials: false,
     care: false,
     shipping: false
   });
+  const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (product) {
