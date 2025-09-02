@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 
 const PageTransition = ({ children }) => {
   const { isReducedMotion } = useTheme();
+  const location = useLocation();
 
-  // Simplified - no page flashing, just smooth content transitions
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: isReducedMotion ? 'auto' : 'smooth' });
+  }, [location.pathname, isReducedMotion]);
+
+  // Simplified - no page flashing, just smooth content transitions with scroll-to-top
   return (
     <div className="min-h-screen">
       <div 
