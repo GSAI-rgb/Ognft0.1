@@ -86,3 +86,12 @@
 
 📁 Creating product: product4 (sweatshirts)
    ✅ Created: OG Product4 War Sweatshirt
+
+📁 Creating product: product1 (sweatshirts)
+   ✅ Created: OG Product1 War Sweatshirt
+
+📁 Creating product: product14 (hoodies)
+   ✅ Created: OG Product14 Battle Hoodie
+
+📁 Creating product: product2 (hoodies)
+   ✅ Created: OG Product2 Battle Hoodie
