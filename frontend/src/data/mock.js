@@ -101,7 +101,18 @@ export const mockProducts = [
     images: [
       "https://framerusercontent.com/images/JLuOpABriYGXchTXxdkShIj4.jpg",
       "https://framerusercontent.com/images/CCsJVhIWqk5Kd4IoA0guLflP7hg.jpg"
-    ]
+    ],
+    description: "Essential wardrobe staple with perfect fit and premium materials. A timeless piece for everyday wear.",
+    materials: "100% Organic Cotton",
+    care: "Machine wash cold. Tumble dry low. Iron on low heat.",
+    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "White", value: "#FFFFFF" },
+      { name: "Black", value: "#000000" },
+      { name: "Gray", value: "#808080" }
+    ],
+    collection: "Essential"
   },
   {
     id: 6,
