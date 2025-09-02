@@ -119,7 +119,8 @@ export const useFilteredProducts = (category, filter) => {
   const { products, loading, error } = useProducts();
 
   const filteredProducts = useMemo(() => {
-    let filtered = [...products];
+    // CRITICAL FIX: Avoid array copying for billion-user scale
+    let filtered = products;
 
     // Category filtering - Enhanced for our product structure
     if (category && category !== 'all' && category !== 'accessories') {
