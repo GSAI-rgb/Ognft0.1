@@ -181,3 +181,19 @@
    ✅ Created: OG Product12 Battle Hoodie
 
 📁 Creating product: product21 (hoodies)
+   ✅ Created: OG Product21 Battle Hoodie
+
+📁 Creating product: product7 (hoodies)
+   ✅ Created: OG Product7 Battle Hoodie
+
+📁 Creating product: product7 (hoodies)
+   ✅ Created: OG Product7 Battle Hoodie
+
+📁 Creating product: Product13 (hoodies)
+   ✅ Created: OG Product13 Battle Hoodie
+
+📁 Creating product: Product13 (hoodies)
+   ✅ Created: OG Product13 Battle Hoodie
+
+📁 Creating product: product2 (full shirts)
+   ✅ Created: OG Product2 Combat Shirt
