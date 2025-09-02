@@ -10,8 +10,11 @@ const ProductCard = ({ product, className = "", priority = false }) => {
   const { isReducedMotion } = useTheme();
 
   const handleMouseEnter = () => {
-    if (product.images.length > 1 && !isReducedMotion) {
-      setCurrentImageIndex(1);
+    if (product.images && product.images.length > 1 && !isReducedMotion) {
+      // For T-shirts, prefer showing back image on hover (index 1)
+      // For other products, cycle through available images
+      const nextIndex = product.category === 'Teeshirt' ? 1 : (currentImageIndex + 1) % product.images.length;
+      setCurrentImageIndex(nextIndex);
     }
   };
 
