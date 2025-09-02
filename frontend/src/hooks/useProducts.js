@@ -33,10 +33,7 @@ export const useProducts = () => {
             }
           } catch (directError) {
             console.warn('⚠️ Direct integration failed, using mock data:', directError.message);
-            productData = mockProducts.map(product => ({
-              ...product,
-              badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
-            }));
+            productData = mockProducts;
           }
         }
         
