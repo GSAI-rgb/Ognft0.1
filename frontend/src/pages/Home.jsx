@@ -3,6 +3,7 @@ import { useTheme } from '../hooks/useTheme';
 import Header from '../components/Header';
 import OGHeroSection from '../components/OG/OGHeroSection';
 import RebelDrops from '../components/OG/RebelDrops';
+import FeaturedTees from '../components/OG/FeaturedTees';
 import FanArsenal from '../components/OG/FanArsenal';
 import ArsenalCategories from '../components/OG/ArsenalCategories';
 import FanArmyWall from '../components/OG/FanArmyWall';
