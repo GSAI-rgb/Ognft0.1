@@ -158,11 +158,10 @@ class ShopifyOGAutomation:
                 
         return created_collections
 
-    def generate_product_title(self, filename: str, category: str) -> str:
-        """Generate OG-themed product title from filename"""
-        # Remove file extension and clean up
-        name = Path(filename).stem
-        name = name.replace("_", " ").replace("-", " ").title()
+    def generate_product_title(self, product_name: str, category: str) -> str:
+        """Generate OG-themed product title from product name"""
+        # Clean up product name
+        name = product_name.replace("_", " ").replace("-", " ").title()
         
         # Add OG prefix based on category
         if category in ["teeshirt"]:
@@ -173,6 +172,16 @@ class ShopifyOGAutomation:
             return f"OG {name} Tactical Cap"
         elif category in ["posters"]:
             return f"OG {name} Scene Poster"
+        elif category in ["sweatshirts"]:
+            return f"OG {name} War Sweatshirt"
+        elif category in ["full shirts", "fullshirts"]:
+            return f"OG {name} Combat Shirt"
+        elif category in ["slippers"]:
+            return f"OG {name} Rest Slippers"
+        elif category in ["wallet"]:
+            return f"OG {name} Tactical Wallet"
+        elif category in ["headband"]:
+            return f"OG {name} Battle Band"
         else:
             return f"OG {name}"
 
