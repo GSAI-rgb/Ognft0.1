@@ -338,14 +338,14 @@ const ProductDetail = () => {
           </div>
         )}
 
-        {/* You May Also Like */}
+        {/* You May Also Arm With */}
         {relatedProducts.length > 0 && (
-          <div className="mt-20 border-t border-gray-800 pt-20">
+          <div className="mt-20 border-t border-[var(--color-steel)] pt-20">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold uppercase tracking-wider">You may also like</h2>
+              <h2 className="text-3xl font-bold font-headline uppercase tracking-wider">You May Also Arm With</h2>
               <Link 
                 to={`/shop/category/${product.category.toLowerCase()}`}
-                className="text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors"
+                className="text-sm uppercase tracking-wider text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors"
               >
                 {product.category}
               </Link>
