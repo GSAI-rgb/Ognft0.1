@@ -12,22 +12,22 @@ const OGHeroSection = () => {
   const { products } = useProducts();
   const [activeCountdown, setActiveCountdown] = useState(null);
 
-  // Get products with active countdowns - Fixed for safety
-  useEffect(() => {
-    try {
-      const productsWithCountdown = products.filter(product => {
-        if (!product) return false;
-        const dropEnd = product.dropEnd || (product.metafields ? getMetafieldValue(product.metafields, 'ogfilm', 'drop_end') : null);
-        return dropEnd && new Date(dropEnd) > new Date();
-      });
+  // Get products with active countdowns - Temporarily disabled for debugging
+  // useEffect(() => {
+  //   try {
+  //     const productsWithCountdown = products.filter(product => {
+  //       if (!product) return false;
+  //       const dropEnd = product.dropEnd || (product.metafields ? getMetafieldValue(product.metafields, 'ogfilm', 'drop_end') : null);
+  //       return dropEnd && new Date(dropEnd) > new Date();
+  //     });
 
-      if (productsWithCountdown.length > 0) {
-        setActiveCountdown(productsWithCountdown[0].dropEnd);
-      }
-    } catch (error) {
-      console.warn('Error processing countdowns:', error);
-    }
-  }, [products]);
+  //     if (productsWithCountdown.length > 0) {
+  //       setActiveCountdown(productsWithCountdown[0].dropEnd);
+  //     }
+  //   } catch (error) {
+  //     console.warn('Error processing countdowns:', error);
+  //   }
+  // }, [products]);
 
   // Get rebel drop products (equivalent to new arrivals) - Fixed for safety
   const rebelDrops = products.filter(product => 
