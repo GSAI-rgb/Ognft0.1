@@ -295,6 +295,7 @@ class BackendTester:
                             id
                             title
                             handle
+                            availableForSale
                             priceRange {
                                 minVariantPrice {
                                     amount
