@@ -122,16 +122,17 @@ export const useFilteredProducts = (category, filter) => {
     // CRITICAL FIX: Avoid array copying for billion-user scale
     let filtered = products;
 
-    // Category filtering - Enhanced for our product structure
-    if (category && category !== 'all' && category !== 'accessories') {
-      filtered = filtered.filter(p => 
-        p.category && p.category.toLowerCase() === category.toLowerCase()
-      );
-    } else if (category === 'accessories') {
-      // Special handling for accessories - include Hats, Wallet, Slippers
-      filtered = filtered.filter(p => 
-        p.category && ['hats', 'wallet', 'slippers'].includes(p.category.toLowerCase())
-      );
+    // CRITICAL FIX: Only filter when necessary to avoid memory allocation
+    if (category && category !== 'all') {
+      if (category === 'accessories') {
+        filtered = products.filter(p => 
+          p.category && ['hats', 'wallet', 'slippers'].includes(p.category.toLowerCase())
+        );
+      } else {
+        filtered = products.filter(p => 
+          p.category && p.category.toLowerCase() === category.toLowerCase()
+        );
+      }
     }
 
     // Badge/Special filtering
