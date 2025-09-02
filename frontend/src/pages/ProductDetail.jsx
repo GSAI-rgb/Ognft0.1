@@ -128,8 +128,39 @@ const ProductDetail = () => {
 
         {/* Main Product Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Left Side - Product Details */}
-          <div className="space-y-8">
+          {/* Product Images - Shows FIRST on mobile, right side on desktop */}
+          <div className="order-2 lg:order-2 space-y-6">
+            {/* Main Image */}
+            <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
+              <img
+                src={product.images[selectedImage]}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Thumbnail Gallery */}
+            <div className="grid grid-cols-4 gap-4">
+              {product.images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`aspect-square bg-gray-900 overflow-hidden border-2 transition-colors ${
+                    selectedImage === index ? 'border-white' : 'border-transparent hover:border-gray-600'
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`${product.name} ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Product Details - Shows SECOND on mobile, left side on desktop */}
+          <div className="order-1 lg:order-1 space-y-8">
             {/* Product Title */}
             <div>
               <h1 className="text-5xl lg:text-6xl font-bold uppercase tracking-wider leading-none mb-6">
@@ -279,37 +310,6 @@ const ProductDetail = () => {
                   'Add to Bag'
                 )}
               </button>
-            </div>
-          </div>
-
-          {/* Right Side - Product Images */}
-          <div className="space-y-6">
-            {/* Main Image */}
-            <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
-              <img
-                src={product.images[selectedImage]}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            {/* Thumbnail Gallery */}
-            <div className="grid grid-cols-4 gap-4">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-square bg-gray-900 overflow-hidden border-2 transition-colors ${
-                    selectedImage === index ? 'border-white' : 'border-transparent hover:border-gray-600'
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`${product.name} ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
             </div>
           </div>
         </div>
