@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import About from './pages/About';
 import Journal from './pages/Journal';
 import Contact from './pages/Contact';
+import SearchResults from './pages/SearchResults';
 
 function App() {
   return (
