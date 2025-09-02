@@ -7,7 +7,6 @@ import { mockInstagramPosts } from '../data/mock';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
-import CartSidebar from '../components/CartSidebar';
 
 const ProductDetail = () => {
   const { id } = useParams();
