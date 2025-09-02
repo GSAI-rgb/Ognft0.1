@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import SearchModal from './SearchModal';
 import { useTheme } from '../hooks/useTheme';
 import { useCart } from '../context/CartContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
   const { isReducedMotion } = useTheme();
   const { itemCount } = useCart();
