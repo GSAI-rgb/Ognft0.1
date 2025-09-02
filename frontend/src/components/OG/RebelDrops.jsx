@@ -57,18 +57,42 @@ const RebelDrops = () => {
           ))}
         </div>
 
-        {/* No products fallback */}
-        {rebelProducts.length === 0 && (
+        {/* Show all products if no rebel products found - Debug mode */}
+        {rebelProducts.length === 0 && products.length > 0 && (
+          <div>
+            <div className="text-center py-8 mb-8">
+              <h3 className="text-xl font-bold mb-2">Loading Arsenal...</h3>
+              <p className="text-[var(--color-text-muted)]">
+                Found {products.length} products in the armory
+              </p>
+            </div>
+            
+            {/* Show first 4 products regardless of badges as fallback */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {products.slice(0, 4).map((product) => (
+                <div key={product.id} className="group">
+                  <ProductCard product={product} />
+                  <div className="mt-3 text-sm text-[var(--color-text-muted)]">
+                    <p>Ready for deployment.</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Absolute fallback */}
+        {rebelProducts.length === 0 && products.length === 0 && (
           <div className="text-center py-16">
-            <h3 className="text-2xl font-bold mb-4">No active drops</h3>
+            <h3 className="text-2xl font-bold mb-4">Arsenal Loading...</h3>
             <p className="text-[var(--color-text-muted)] mb-8">
-              The next rebellion is brewing. Stay tuned for new drops.
+              Deploying the rebellion arsenal. Stand by...
             </p>
             <Link
               to="/collections"
               className="text-[var(--color-red)] hover:underline font-medium"
             >
-              Explore Arsenal
+              Explore Collections
             </Link>
           </div>
         )}
