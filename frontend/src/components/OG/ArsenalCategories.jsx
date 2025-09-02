@@ -143,10 +143,10 @@ const ArsenalCategories = () => {
                     Vault Only
                   </div>
                   <h3 className="text-2xl font-bold font-headline uppercase tracking-wider text-[var(--color-text)] group-hover:text-[var(--color-gold)] transition-colors">
-                    Limited<br />Collection
+                    Vault<br />Exclusive
                   </h3>
                   <p className="text-[var(--color-text-muted)] text-sm mt-2">
-                    Not for the weak
+                    not for the weak (బలహీనులకు కాదు)
                   </p>
                 </div>
 
