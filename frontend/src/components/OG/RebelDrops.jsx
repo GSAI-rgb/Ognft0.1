@@ -9,10 +9,22 @@ const RebelDrops = () => {
   const { t } = useI18n();
   const { products } = useProducts();
 
-  // Get rebel drop products (NEW items)
+  // Get rebel drop products (NEW items) - Enhanced filtering for OG products
   const rebelProducts = products.filter(product => 
-    product.badges.includes('NEW')
+    product.badges && (
+      product.badges.includes('NEW') || 
+      product.badges.includes('REBEL DROP') ||
+      product.badges.includes('FAN ARSENAL')
+    )
   );
+
+  // Debug logging
+  console.log('RebelDrops Debug:', {
+    totalProducts: products.length,
+    rebelProducts: rebelProducts.length,
+    sampleProduct: products[0],
+    sampleBadges: products[0]?.badges
+  });
 
   return (
     <div className="bg-[var(--color-bg)] text-[var(--color-text)] py-20 px-6">
