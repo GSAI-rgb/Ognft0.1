@@ -44,21 +44,35 @@ const ProductCard = ({ product, className = "", priority = false }) => {
           />
         </div>
         
-        {/* Badges */}
+        {/* OG Theme Badges */}
         <div className="absolute top-4 left-4 flex flex-col space-y-2">
-          {product.badges.map((badge, index) => (
-            <span
-              key={index}
-              className={`px-3 py-1 text-xs font-semibold tracking-wider uppercase ${
-                badge === 'NEW' ? 'bg-white text-black' :
-                badge === 'BEST SELLER' ? 'bg-red-600 text-white' :
-                badge === 'SALE' ? 'bg-green-600 text-white' :
-                'bg-gray-800 text-white'
-              }`}
-            >
-              {badge}
-            </span>
-          ))}
+          {product.badges.map((badge, index) => {
+            // Transform badge labels to OG theme
+            let displayBadge = badge;
+            let badgeClass = '';
+            
+            if (badge === 'NEW') {
+              displayBadge = 'REBEL DROP';
+              badgeClass = 'bg-[var(--color-red)] text-white shadow-[0_0_10px_rgba(193,18,31,0.5)]';
+            } else if (badge === 'BEST SELLER') {
+              displayBadge = 'FAN ARSENAL';
+              badgeClass = 'bg-[var(--color-red)] text-white border border-[var(--color-gold)] shadow-[0_0_10px_rgba(201,151,0,0.3)]';
+            } else if (badge === 'SALE') {
+              displayBadge = 'BLOOD PRICE';
+              badgeClass = 'bg-[var(--color-gold)] text-black shadow-[0_0_10px_rgba(201,151,0,0.5)]';
+            } else {
+              badgeClass = 'bg-[var(--color-steel)] text-white';
+            }
+            
+            return (
+              <span
+                key={index}
+                className={`px-3 py-1 text-xs font-bold tracking-wider uppercase ${badgeClass}`}
+              >
+                {displayBadge}
+              </span>
+            );
+          })}
         </div>
 
         {/* Arrow Icon on Hover */}
