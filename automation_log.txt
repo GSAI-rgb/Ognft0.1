@@ -1,3 +1,28 @@
 🔥 STARTING COMPLETE OG STORE AUTOMATION
 ============================================================
 🏪 Updating store settings...
+❌ API Error 406: 
+📚 Creating OG collections...
+❌ API Error 422: {"errors":{"handle":["has already been taken"]}}
+❌ API Error 422: {"errors":{"handle":["has already been taken"]}}
+❌ API Error 422: {"errors":{"handle":["has already been taken"]}}
+❌ API Error 422: {"errors":{"handle":["has already been taken"]}}
+🚀 Processing product directory: /app/PRODUCTS
+
+📁 Creating product: product2 (wallet)
+   ✅ Created: OG Product2 Tactical Wallet
+
+📁 Creating product: product1 (wallet)
+   ✅ Created: OG Product1 Tactical Wallet
+
+📁 Creating product: Tropical Paradise (teeshirt)
+   ✅ Created: OG Tropical Paradise Rebel Tee
+
+📁 Creating product: Tropical Paradise (teeshirt)
+   ✅ Created: OG Tropical Paradise Rebel Tee
+
+📁 Creating product: Nature Photography (teeshirt)
+   ✅ Created: OG Nature Photography Rebel Tee
+
+📁 Creating product: Urban Street Art (teeshirt)
+   ✅ Created: OG Urban Street Art Rebel Tee
