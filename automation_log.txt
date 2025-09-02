@@ -26,3 +26,12 @@
 
 📁 Creating product: Urban Street Art (teeshirt)
    ✅ Created: OG Urban Street Art Rebel Tee
+
+📁 Creating product: Mountain Adventure (teeshirt)
+   ✅ Created: OG Mountain Adventure Rebel Tee
+
+📁 Creating product: Neon Lights (teeshirt)
+   ✅ Created: OG Neon Lights Rebel Tee
+
+📁 Creating product: Vintage Typography (teeshirt)
+   ✅ Created: OG Vintage Typography Rebel Tee
