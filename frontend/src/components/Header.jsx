@@ -109,13 +109,14 @@ const Header = () => {
 
           {/* Right Icons */}
           <div className="flex items-center space-x-2">
+            <LanguageToggle />
             <ThemeToggle />
             <button 
               onClick={() => setIsSearchOpen(true)}
               className={`p-2 hover:bg-[var(--color-panel)] rounded-full transition-colors duration-[var(--transition-base)] ${
                 isReducedMotion ? 'transition-none' : ''
               }`}
-              title="Search products"
+              title={t('navigation.search')}
             >
               <Search size={20} />
             </button>
