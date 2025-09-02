@@ -9,9 +9,9 @@ const RebelDrops = () => {
   const { t } = useI18n();
   const { products } = useProducts();
 
-  // Get rebel drop products (NEW items or Rebel rank)
+  // Get rebel drop products (NEW items)
   const rebelProducts = products.filter(product => 
-    product.badges.includes('NEW') || product.rank === 'Rebel'
+    product.badges.includes('NEW')
   );
 
   return (
