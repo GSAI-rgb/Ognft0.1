@@ -37,11 +37,9 @@ const Header = () => {
           <div className="flex items-center">
             <Link 
               to="/" 
-              className={`text-2xl font-bold tracking-wider transition-colors duration-[var(--transition-base)] hover:text-[var(--color-accent)] ${
-                isReducedMotion ? 'transition-none' : ''
-              } ${isOGTheme ? 'font-headline' : ''}`}
+              className="text-3xl font-black font-headline tracking-wider text-[var(--color-red)] hover:text-white transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(193,18,31,0.8)]"
             >
-              {isOGTheme ? 'OG' : 'AXM'}
+              OG
             </Link>
           </div>
 
