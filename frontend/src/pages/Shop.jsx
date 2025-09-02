@@ -26,16 +26,16 @@ const Shop = () => {
     }
   }, [category]);
 
-  // Tab configuration matching the original exactly
+  // OG Armory tab configuration
   const tabs = [
-    { id: 'all', label: 'ALL', filter: null },
-    { id: 'tops', label: 'TOPS', filter: 'Tops' },
-    { id: 'bottoms', label: 'BOTTOMS', filter: 'Bottoms' },
-    { id: 'outerwear', label: 'OUTERWEAR', filter: 'Outerwear' },
-    { id: 'accessories', label: 'ACCESSORIES', filter: 'Accessories' },
-    { id: 'new-arrivals', label: 'NEW ARRIVALS', filter: 'NEW' },
-    { id: 'best-sellers', label: 'BEST SELLERS', filter: 'BEST SELLER' },
-    { id: 'sale', label: 'SALE', filter: 'SALE' }
+    { id: 'all', label: 'ARMORY', filter: null },
+    { id: 'tops', label: 'REBEL TEES', filter: 'Tops' },
+    { id: 'bottoms', label: 'GROUND ZERO PANTS', filter: 'Bottoms' },
+    { id: 'outerwear', label: 'KATANA HOODIES', filter: 'Outerwear' },
+    { id: 'accessories', label: 'CHAINS, BANDS, POSTERS', filter: 'Accessories' },
+    { id: 'new-arrivals', label: 'REBEL DROP', filter: 'NEW' },
+    { id: 'best-sellers', label: 'FAN ARSENAL', filter: 'BEST SELLER' },
+    { id: 'sale', label: 'BLOOD PRICE', filter: 'SALE' }
   ];
 
   // Get filtered products using the new hook
