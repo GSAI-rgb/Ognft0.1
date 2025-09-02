@@ -33,11 +33,8 @@ const Home = () => {
           <RebelDrops />
           <FanArsenal />
           <ArsenalCategories />
-          {/* TODO: Add remaining OG components */}
-          <Collections />
-          <Performance />
-          <InstagramFeed />
-          <Journal />
+          <FanArmyWall />
+          <FromFirestorm />
           <Footer />
         </>
       ) : (
