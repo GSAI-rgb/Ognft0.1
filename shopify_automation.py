@@ -68,6 +68,27 @@ class ShopifyOGAutomation:
                 "description_template": "OG {title} Slippers - Comfort for warriors at rest. Scene code: {scene_code}",
                 "tags": ["og", "slippers", "comfort", "home", "accessories"],
                 "vendor": "DVV Entertainment"
+            },
+            "full shirts": {
+                "product_type": "Shirts",
+                "base_price": 1299,
+                "description_template": "OG {title} Combat Shirt - Full sleeves for maximum coverage. Scene code: {scene_code}",
+                "tags": ["og", "fullshirt", "combat", "premium", "battle"],
+                "vendor": "DVV Entertainment"
+            },
+            "wallet": {
+                "product_type": "Wallets",
+                "base_price": 799,
+                "description_template": "OG {title} Tactical Wallet - Secure your resources. Scene code: {scene_code}",
+                "tags": ["og", "wallet", "tactical", "leather", "accessories"],
+                "vendor": "DVV Entertainment"
+            },
+            "headband": {
+                "product_type": "Headbands",
+                "base_price": 399,
+                "description_template": "OG {title} Battle Band - Focus for the fight. Scene code: {scene_code}",
+                "tags": ["og", "headband", "battle", "focus", "accessories"],
+                "vendor": "DVV Entertainment"
             }
         }
         
