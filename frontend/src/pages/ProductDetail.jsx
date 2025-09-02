@@ -191,7 +191,7 @@ const ProductDetail = () => {
                 </button>
                 {expandedSections.materials && (
                   <div className="pb-4 text-gray-300 text-sm">
-                    <p>{product.materials}</p>
+                    <p>Premium cotton, battle-tested.</p>
                   </div>
                 )}
               </div>
