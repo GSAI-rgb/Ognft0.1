@@ -348,6 +348,62 @@ export const getCustomerTribeInfo = (customerMetafields) => {
   return { tribeId, rank, points };
 };
 
+// OG Theme specific metafield helpers
+export const getOGRank = (product) => {
+  const metafields = product.metafields?.edges?.map(edge => edge.node) || product.metafields || [];
+  const rank = getMetafieldValue(metafields, 'og', 'rank');
+  return rank || 'Common';
+};
+
+export const isLimitedProduct = (product) => {
+  const metafields = product.metafields?.edges?.map(edge => edge.node) || product.metafields || [];
+  const isLimited = getMetafieldValue(metafields, 'og', 'is_limited');
+  return isLimited === 'true' || isLimited === true;
+};
+
+export const getDropEndTime = (product) => {
+  const metafields = product.metafields?.edges?.map(edge => edge.node) || product.metafields || [];
+  const dropEnd = getMetafieldValue(metafields, 'og', 'drop_end');
+  return dropEnd ? new Date(dropEnd) : null;
+};
+
+export const hasActiveCountdown = (product) => {
+  const dropEnd = getDropEndTime(product);
+  return dropEnd && dropEnd > new Date();
+};
+
+export const getRankBadgeStyle = (rank) => {
+  switch (rank?.toLowerCase()) {
+    case 'vault':
+      return {
+        class: 'bg-[var(--color-gold)] text-black border border-[var(--color-gold)]',
+        glow: 'shadow-[0_0_15px_rgba(201,151,0,0.6)]'
+      };
+    case 'captain':
+      return {
+        class: 'bg-[var(--color-red)] text-white border border-[var(--color-gold)]',
+        glow: 'shadow-[0_0_15px_rgba(193,18,31,0.6)]'
+      };
+    case 'rebel':
+      return {
+        class: 'bg-white text-black border border-[var(--color-red)]',
+        glow: 'shadow-[0_0_10px_rgba(255,255,255,0.4)]'
+      };
+    default: // Common
+      return {
+        class: 'bg-[var(--color-steel)] text-white border border-[var(--color-steel)]',
+        glow: ''
+      };
+  }
+};
+
+export const isVaultLocked = (product, userRank = 'Common') => {
+  const productRank = getOGRank(product);
+  const rankOrder = { 'Common': 0, 'Rebel': 1, 'Captain': 2, 'Vault': 3 };
+  
+  return rankOrder[productRank] > rankOrder[userRank];
+};
+
 export default {
   PRODUCT_METAFIELDS,
   COLLECTION_METAFIELDS,
@@ -358,5 +414,11 @@ export default {
   hasVaultAccess,
   getAffordablePriceCeiling,
   formatIndianPrice,
-  getCustomerTribeInfo
+  getCustomerTribeInfo,
+  getOGRank,
+  isLimitedProduct,
+  getDropEndTime,
+  hasActiveCountdown,
+  getRankBadgeStyle,
+  isVaultLocked
 };
