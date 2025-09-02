@@ -4,7 +4,7 @@ import { axiomTheme, ogTheme, generateCSSVars } from '../styles/tokens';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState('og');
+  const [currentTheme] = useState('og'); // OG is permanent theme
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   // Check for reduced motion preference
