@@ -6,46 +6,56 @@ import { useI18n } from '../../hooks/useI18n';
 const ArsenalCategories = () => {
   const { t } = useI18n();
 
-  // Arsenal categories with curated images for OG theme
+  // Arsenal categories with OG cinematic brutality theme
   const categories = [
     {
       title: "Hoodies",
+      subtitle: "Katana Hoodies",
+      description: "armor for midnight battles",
       href: "/collections/hoodies",
       image: {
         src: "https://images.unsplash.com/photo-1562327699-e48794711fe9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwyfHxkYXJrJTIwY2luZW1hdGljfGVufDB8fHx8MTc1Njc5MTcwN3ww&ixlib=rb-4.1.0&q=85",
-        alt: "Hoodies - Dark & Cinematic"
+        alt: "Katana Hoodies - Armor for midnight battles"
       }
     },
     {
-      title: "T-Shirts", 
+      title: "Tees",
+      subtitle: "Rebel Tees", 
+      description: "simple, deadly, frontline gear",
       href: "/collections/t-shirts",
       image: {
         src: "https://images.unsplash.com/photo-1718117455350-829dde835cec?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxiYXR0bGUlMjByZWFkeXxlbnwwfHx8fDE3NTY3OTE3MDB8MA&ixlib=rb-4.1.0&q=85",
-        alt: "T-Shirts - Battle Ready"
+        alt: "Rebel Tees - Simple, deadly, frontline gear"
       }
     },
     {
       title: "Chains",
+      subtitle: "Blood Chains",
+      description: "forged in rebellion",
       href: "/collections/chains", 
       image: {
         src: "https://images.unsplash.com/photo-1529981188441-8a2e6fe30103?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwzfHxiYXR0bGUlMjByZWFkeXxlbnwwfHx8fDE3NTY3OTE3MDB8MA&ixlib=rb-4.1.0&q=85",
-        alt: "Chains - Chainmail Arsenal"
-      }
-    },
-    {
-      title: "Accessories",
-      href: "/collections/accessories",
-      image: {
-        src: "https://images.unsplash.com/photo-1577223618563-3d858655ab86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHw0fHxhcnNlbmFsfGVufDB8fHx8MTc1Njc5MTY5NHww&ixlib=rb-4.1.0&q=85",
-        alt: "Accessories - Arsenal Gear"
+        alt: "Blood Chains - Forged in rebellion"
       }
     },
     {
       title: "Posters",
+      subtitle: "Scene Captures",
+      description: "scenes captured in blood & fire",
       href: "/collections/posters",
       image: {
         src: "https://images.unsplash.com/photo-1651627567991-e4ec7b8fc72c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHw0fHxkYXJrJTIwY2luZW1hdGljfGVufDB8fHx8MTc1Njc5MTcwN3ww&ixlib=rb-4.1.0&q=85",
-        alt: "Posters - Cinematic Night"
+        alt: "Scene Captures - Scenes captured in blood & fire"
+      }
+    },
+    {
+      title: "Accessories",
+      subtitle: "Every Detail",
+      description: "bands, caps, slippers — every detail matters",
+      href: "/collections/accessories",
+      image: {
+        src: "https://images.unsplash.com/photo-1577223618563-3d858655ab86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHw0fHxhcnNlbmFsfGVufDB8fHx8MTc1Njc5MTY5NHww&ixlib=rb-4.1.0&q=85",
+        alt: "Every Detail - Bands, caps, slippers — every detail matters"
       }
     }
   ];
