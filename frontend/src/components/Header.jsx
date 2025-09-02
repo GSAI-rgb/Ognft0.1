@@ -95,9 +95,11 @@ const Header = () => {
             >
               <ShoppingBag size={20} />
               {/* Cart Badge */}
-              <span className="absolute -top-1 -right-1 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
-                2
-              </span>
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                  {itemCount > 99 ? '99+' : itemCount}
+                </span>
+              )}
             </button>
             
             {/* Mobile Menu Button */}
