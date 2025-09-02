@@ -8,7 +8,13 @@ import ProductCard from '../components/ProductCard';
 const Shop = () => {
   const { category } = useParams();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(category || 'all');
+  const [activeTab, setActiveTab] = useState(() => {
+    // Set initial tab based on URL
+    if (category) return category;
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter = urlParams.get('filter');
+    return filter || 'all';
+  });
 
   // Tab configuration matching the original exactly
   const tabs = [
