@@ -344,16 +344,11 @@ def main():
     """Main execution function"""
     automation = ShopifyOGAutomation()
     
-    # You need to specify your product directory path
-    # Update this path to where your product images are stored
-    PRODUCT_DIRECTORY = "/path/to/your/product/images"
+    # Your product directory path
+    PRODUCT_DIRECTORY = "/app/PRODUCTS"
     
-    # Uncomment this line and set the correct path to your images
-    # automation.run_complete_setup(PRODUCT_DIRECTORY)
-    
-    print("🚨 UPDATE REQUIRED:")
-    print("Set your product directory path in the PRODUCT_DIRECTORY variable")
-    print("Then uncomment the automation.run_complete_setup() line")
+    # Run the complete automation
+    automation.run_complete_setup(PRODUCT_DIRECTORY)
 
 if __name__ == "__main__":
     main()
