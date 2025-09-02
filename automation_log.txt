@@ -95,3 +95,17 @@
 
 📁 Creating product: product2 (hoodies)
    ✅ Created: OG Product2 Battle Hoodie
+
+📁 Creating product: product2 (hoodies)
+   ✅ Created: OG Product2 Battle Hoodie
+
+📁 Creating product: product3 (hoodies)
+   ✅ Created: OG Product3 Battle Hoodie
+
+📁 Creating product: product3 (hoodies)
+   ✅ Created: OG Product3 Battle Hoodie
+
+📁 Creating product: product18 (hoodies)
+   ✅ Created: OG Product18 Battle Hoodie
+
+📁 Creating product: product18 (hoodies)
