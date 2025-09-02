@@ -177,61 +177,52 @@ const ProductDetail = () => {
               </p>
             </div>
 
-            {/* Collapsible Sections */}
-            <div className="space-y-4">
-              {/* Materials */}
+            {/* Price and Add to Arsenal - MOVED UP */}
+            <div className="bg-black/20 border border-red-500/30 rounded-lg p-6 mb-8">
+              <div className="flex items-baseline space-x-4 mb-4">
+                <span className="text-4xl lg:text-5xl font-bold text-red-500">₹{product.price}</span>
+                {product.originalPrice && (
+                  <span className="text-xl text-gray-400 line-through">
+                    ₹{product.originalPrice}
+                  </span>
+                )}
+              </div>
+              
+              <button 
+                onClick={handleAddToCart}
+                disabled={cartLoading}
+                className="w-full bg-red-500 text-white py-4 px-8 font-bold text-lg uppercase tracking-wider hover:bg-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center rounded-lg border-2 border-red-400"
+              >
+                {cartLoading ? (
+                  <>
+                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-3"></div>
+                    Adding to Arsenal...
+                  </>
+                ) : (
+                  'ADD TO ARSENAL'
+                )}
+              </button>
+            </div>
+
+            {/* Materials Only - Simplified */}
+            <div className="border-t border-gray-800 pt-6">
               <div className="border-b border-gray-800">
                 <button
                   onClick={() => toggleSection('materials')}
                   className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
                 >
-                  <span>Materials</span>
+                  <span>Materials & Details</span>
                   <ChevronDown 
                     size={20} 
                     className={`transition-transform ${expandedSections.materials ? 'rotate-180' : ''}`}
                   />
                 </button>
                 {expandedSections.materials && (
-                  <div className="pb-4 text-gray-300 text-sm">
-                    <p>Premium cotton, battle-tested.</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Care */}
-              <div className="border-b border-gray-800">
-                <button
-                  onClick={() => toggleSection('care')}
-                  className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
-                >
-                  <span>Care</span>
-                  <ChevronDown 
-                    size={20} 
-                    className={`transition-transform ${expandedSections.care ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                {expandedSections.care && (
-                  <div className="pb-4 text-gray-300 text-sm">
-                    <p>Wash cold, keep the blood stains alive.</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Shipping */}
-              <div className="border-b border-gray-800">
-                <button
-                  onClick={() => toggleSection('shipping')}
-                  className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
-                >
-                  <span>Shipping</span>
-                  <ChevronDown 
-                    size={20} 
-                    className={`transition-transform ${expandedSections.shipping ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                {expandedSections.shipping && (
-                  <div className="pb-4 text-gray-300 text-sm">
-                    <p>Ships worldwide. OG never stops.</p>
+                  <div className="pb-4 text-gray-300 text-sm space-y-2">
+                    <p>• Premium cotton, battle-tested</p>
+                    <p>• Screen printed graphics</p>
+                    <p>• DVV Entertainment official merchandise</p>
+                    <p>• Free shipping on orders above ₹1000</p>
                   </div>
                 )}
               </div>
