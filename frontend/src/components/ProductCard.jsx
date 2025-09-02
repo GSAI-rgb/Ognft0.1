@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import LazyImage from './PerformanceOptimized/LazyImage';
 import { useTheme } from '../hooks/useTheme';
+import OptimizedImage from './OptimizedImage';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
