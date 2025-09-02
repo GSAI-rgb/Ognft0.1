@@ -110,7 +110,7 @@ export const CartProvider = ({ children }) => {
       return { success: true };
       
     } catch (error) {
-      console.error('Add to cart failed:', error);
+      console.error('Failed to add to cart:', error);
       return { success: false, error: error.message };
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
