@@ -317,11 +317,26 @@ export const useMockDataIfShopifyUnavailable = async (shopifyFunction, mockData)
   
   try {
     const result = await shopifyFunction();
-    console.log('✅ Shopify: Data loaded successfully');
+    console.log('✅ Shopify: Data loaded successfully', `Found ${result.length || 0} products`);
+    
+    // If no products returned, fallback to enhanced mock data with OG badges
+    if (!result || result.length === 0) {
+      console.log('⚠️ No products from Shopify, using enhanced mock data');
+      const enhancedMockData = mockData.map(product => ({
+        ...product,
+        badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
+      }));
+      return enhancedMockData;
+    }
+    
     return result;
   } catch (error) {
-    console.warn('⚠️ Shopify API failed, falling back to mock data:', error.message);
-    return mockData;
+    console.warn('⚠️ Shopify API failed, falling back to enhanced mock data:', error.message);
+    const enhancedMockData = mockData.map(product => ({
+      ...product,
+      badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
+    }));
+    return enhancedMockData;
   }
 };
 
