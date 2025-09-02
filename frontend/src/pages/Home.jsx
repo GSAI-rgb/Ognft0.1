@@ -19,8 +19,7 @@ import Journal from '../components/Journal';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const { currentTheme } = useTheme();
-  const isOGTheme = currentTheme === 'og';
+  // OG theme is permanent - no theme checking needed
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
