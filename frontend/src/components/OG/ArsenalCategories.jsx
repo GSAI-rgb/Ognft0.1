@@ -101,10 +101,18 @@ const ArsenalCategories = () => {
               </div>
 
               {/* Category Text Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h3 className="text-xl font-bold font-headline uppercase tracking-wider text-[var(--color-text)] group-hover:text-[var(--color-red)] transition-colors">
-                  {category.title}
-                </h3>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-[var(--color-gold)]">
+                    {category.subtitle}
+                  </h4>
+                  <h3 className="text-xl font-bold font-headline uppercase tracking-wider text-[var(--color-text)] group-hover:text-[var(--color-red)] transition-colors">
+                    {category.title}
+                  </h3>
+                  <p className="text-xs text-[var(--color-text-muted)] italic">
+                    {category.description}
+                  </p>
+                </div>
               </div>
 
               {/* Hover arrow indicator */}
