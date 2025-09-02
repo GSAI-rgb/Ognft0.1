@@ -108,25 +108,26 @@ export const useSearch = () => {
   }, []);
 
   // Add to search history
-  const addToHistory = (query) => {
+  const addToHistory = useCallback((query) => {
     if (!query.trim()) return;
     
     const trimmedQuery = query.trim();
-    const newHistory = [
-      trimmedQuery,
-      ...searchHistory.filter(item => item !== trimmedQuery)
-    ].slice(0, 10); // Keep only last 10 searches
-    
-    setSearchHistory(newHistory);
-  };
+    setSearchHistory(prevHistory => {
+      const newHistory = [
+        trimmedQuery,
+        ...prevHistory.filter(item => item !== trimmedQuery)
+      ].slice(0, 10); // Keep only last 10 searches
+      return newHistory;
+    });
+  }, []);
 
   // Clear search history
-  const clearHistory = () => {
+  const clearHistory = useCallback(() => {
     setSearchHistory([]);
-  };
+  }, []);
 
   // Perform search
-  const search = (query) => {
+  const search = useCallback((query) => {
     setIsSearching(true);
     setSearchQuery(query);
     addToHistory(query);
@@ -135,13 +136,13 @@ export const useSearch = () => {
     setTimeout(() => {
       setIsSearching(false);
     }, 300);
-  };
+  }, [addToHistory]);
 
   // Clear search
-  const clearSearch = () => {
+  const clearSearch = useCallback(() => {
     setSearchQuery('');
     setIsSearching(false);
-  };
+  }, []);
 
   return {
     searchQuery,
