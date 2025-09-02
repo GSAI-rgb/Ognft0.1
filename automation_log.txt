@@ -53,3 +53,20 @@
 
 📁 Creating product: product2 (posters)
    ✅ Created: OG Product2 Scene Poster
+
+📁 Creating product: product3 (posters)
+   ✅ Created: OG Product3 Scene Poster
+
+📁 Creating product: product8 (posters)
+   ✅ Created: OG Product8 Scene Poster
+
+📁 Creating product: product5 (posters)
+   ✅ Created: OG Product5 Scene Poster
+
+📁 Creating product: product4 (posters)
+   ✅ Created: OG Product4 Scene Poster
+
+📁 Creating product: product1 (posters)
+   ✅ Created: OG Product1 Scene Poster
+
+📁 Creating product: product10 (posters)
