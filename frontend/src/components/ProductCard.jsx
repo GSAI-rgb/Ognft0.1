@@ -75,9 +75,9 @@ const ProductCard = ({ product, className = "", priority = false }) => {
           })}
         </div>
 
-        {/* Arrow Icon on Hover */}
+        {/* Arrow Icon on Hover - OG Theme */}
         <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="bg-white text-black p-2 rounded-full">
+          <div className="bg-[var(--color-red)] text-white p-2 rounded-full shadow-[0_0_15px_rgba(193,18,31,0.6)]">
             <ArrowUpRight size={16} />
           </div>
         </div>
