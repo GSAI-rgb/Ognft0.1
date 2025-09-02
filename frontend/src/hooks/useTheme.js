@@ -58,7 +58,7 @@ export const ThemeProvider = ({ children }) => {
       switchTheme,
       toggleTheme,
       isReducedMotion,
-      theme: currentTheme === 'og' ? ogTheme : axiomTheme
+      theme: ogTheme // OG theme is permanent
     }}>
       {children}
     </ThemeContext.Provider>
