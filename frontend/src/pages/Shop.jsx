@@ -97,10 +97,13 @@ const Shop = () => {
       
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-6xl lg:text-8xl font-bold uppercase tracking-wider leading-none">
+        <div className="mb-12">
+          <h1 className="text-6xl lg:text-8xl font-bold font-headline uppercase tracking-wider leading-none mb-4">
             {getCurrentTitle()}
           </h1>
+          <p className="text-xl text-[var(--color-text-muted)] max-w-3xl">
+            {getCurrentSubtitle()}
+          </p>
         </div>
 
         {/* Tab Navigation */}
