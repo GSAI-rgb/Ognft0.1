@@ -1,4 +1,4 @@
-// Mock data for Axiom fashion e-commerce site
+// Mock data for OG Film Official Merch - Only used as emergency fallback
 
 export const mockProducts = [
   {
