@@ -9,24 +9,22 @@ const ProductCard = ({ product, className = "", priority = false }) => {
   const navigate = useNavigate();
   const { isReducedMotion } = useTheme();
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     if (product.images && product.images.length > 1 && !isReducedMotion) {
-      // For T-shirts, prefer showing back image on hover (index 1)
-      // For other products, cycle through available images
       const nextIndex = product.category === 'Teeshirt' ? 1 : (currentImageIndex + 1) % product.images.length;
       setCurrentImageIndex(nextIndex);
     }
-  };
+  }, [product.images, product.category, isReducedMotion, currentImageIndex]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (!isReducedMotion) {
       setCurrentImageIndex(0);
     }
-  };
+  }, [isReducedMotion]);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     navigate(`/product/${product.id}`);
-  };
+  }, [navigate, product.id]);
 
   return (
     <div className={`group cursor-pointer will-change-transform ${className}`} onClick={handleClick}>
