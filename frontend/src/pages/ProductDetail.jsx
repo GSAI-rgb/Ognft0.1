@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, ShoppingBag, Plus, Minus } from 'lucide-react';
-import { mockProducts } from '../data/mock';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { ChevronRight, ChevronDown, ExternalLink } from 'lucide-react';
+import { mockProducts, mockInstagramPosts } from '../data/mock';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ProductCard from '../components/ProductCard';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -11,24 +12,47 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('M');
-  const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
-
-  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const [selectedColor, setSelectedColor] = useState('White');
+  const [expandedSections, setExpandedSections] = useState({
+    materials: false,
+    care: false,
+    shipping: false
+  });
 
   useEffect(() => {
     const foundProduct = mockProducts.find(p => p.id === parseInt(id));
     setProduct(foundProduct);
+    // Reset selections when product changes
+    setSelectedImage(0);
+    setSelectedSize('M');
+    setSelectedColor('White');
   }, [id]);
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  // Get related products (same category, different product)
+  const relatedProducts = mockProducts.filter(p => 
+    p.category === product?.category && p.id !== product?.id
+  ).slice(0, 6);
+
+  // Get "from this collection" products (same collection)
+  const collectionProducts = mockProducts.filter(p => 
+    p.collection === product?.collection && p.id !== product?.id
+  ).slice(0, 3);
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Product not found</h2>
           <button 
             onClick={() => navigate('/')} 
-            className="text-white hover:text-gray-300 underline"
+            className="text-[var(--color-text)] hover:text-gray-300 underline"
           >
             Return to Home
           </button>
@@ -38,110 +62,109 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
       <Header />
       
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate(-1)}
-          className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors mb-8"
-        >
-          <ArrowLeft size={20} />
-          <span className="text-sm uppercase tracking-wider">Back</span>
-        </button>
+        {/* Breadcrumb */}
+        <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
+          <Link to="/shop" className="hover:text-white transition-colors uppercase tracking-wider">
+            SHOP
+          </Link>
+          <span>/</span>
+          <Link 
+            to={`/shop/category/${product.category.toLowerCase()}`} 
+            className="hover:text-white transition-colors uppercase tracking-wider"
+          >
+            {product.category.toUpperCase()}
+          </Link>
+          <span>/</span>
+          <span className="text-white uppercase tracking-wider">{product.name.toUpperCase()}</span>
+        </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Images */}
-          <div className="space-y-6">
-            {/* Main Image */}
-            <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
-              <img
-                src={product.images[selectedImage]}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
+        {/* Main Product Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Left Side - Product Details */}
+          <div className="space-y-8">
+            {/* Product Title */}
+            <div>
+              <h1 className="text-5xl lg:text-6xl font-bold uppercase tracking-wider leading-none mb-6">
+                {product.name}
+              </h1>
+              <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                {product.description}
+              </p>
             </div>
-            
-            {/* Thumbnail Images */}
-            <div className="flex space-x-4">
-              {product.images.map((image, index) => (
+
+            {/* Collapsible Sections */}
+            <div className="space-y-4">
+              {/* Materials */}
+              <div className="border-b border-gray-800">
                 <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 bg-gray-900 overflow-hidden border-2 transition-colors ${
-                    selectedImage === index ? 'border-white' : 'border-transparent'
-                  }`}
+                  onClick={() => toggleSection('materials')}
+                  className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
                 >
-                  <img
-                    src={image}
-                    alt={`${product.name} ${index + 1}`}
-                    className="w-full h-full object-cover"
+                  <span>Materials</span>
+                  <ChevronDown 
+                    size={20} 
+                    className={`transition-transform ${expandedSections.materials ? 'rotate-180' : ''}`}
                   />
                 </button>
-              ))}
-            </div>
-          </div>
+                {expandedSections.materials && (
+                  <div className="pb-4 text-gray-300 text-sm">
+                    <p>{product.materials}</p>
+                  </div>
+                )}
+              </div>
 
-          {/* Product Info */}
-          <div className="space-y-8">
-            {/* Badges */}
-            <div className="flex space-x-2">
-              {product.badges.map((badge, index) => (
-                <span
-                  key={index}
-                  className={`px-3 py-1 text-xs font-semibold tracking-wider uppercase ${
-                    badge === 'NEW' ? 'bg-white text-black' :
-                    badge === 'BEST SELLER' ? 'bg-red-600 text-white' :
-                    badge === 'SALE' ? 'bg-green-600 text-white' :
-                    'bg-gray-800 text-white'
-                  }`}
+              {/* Care */}
+              <div className="border-b border-gray-800">
+                <button
+                  onClick={() => toggleSection('care')}
+                  className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
                 >
-                  {badge}
-                </span>
-              ))}
-            </div>
+                  <span>Care</span>
+                  <ChevronDown 
+                    size={20} 
+                    className={`transition-transform ${expandedSections.care ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {expandedSections.care && (
+                  <div className="pb-4 text-gray-300 text-sm">
+                    <p>{product.care}</p>
+                  </div>
+                )}
+              </div>
 
-            {/* Product Title and Category */}
-            <div>
-              <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">
-                {product.category}
-              </p>
-              <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
-              <div className="flex items-center space-x-4">
-                <span className="text-2xl font-bold">
-                  ${product.price}
-                </span>
-                {product.originalPrice && (
-                  <span className="text-lg text-gray-400 line-through">
-                    ${product.originalPrice}
-                  </span>
+              {/* Shipping */}
+              <div className="border-b border-gray-800">
+                <button
+                  onClick={() => toggleSection('shipping')}
+                  className="w-full flex items-center justify-between py-4 text-left font-medium uppercase tracking-wider hover:text-gray-300 transition-colors"
+                >
+                  <span>Shipping</span>
+                  <ChevronDown 
+                    size={20} 
+                    className={`transition-transform ${expandedSections.shipping ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {expandedSections.shipping && (
+                  <div className="pb-4 text-gray-300 text-sm">
+                    <p>{product.shipping}</p>
+                  </div>
                 )}
               </div>
             </div>
 
-            {/* Product Description */}
-            <div className="space-y-4">
-              <p className="text-gray-300 leading-relaxed">
-                Premium quality streetwear designed for the modern individual. Crafted with attention to detail and built to last, this piece combines style with functionality for everyday wear.
-              </p>
-              <ul className="text-gray-300 text-sm space-y-2">
-                <li>• 100% Premium Cotton</li>
-                <li>• Regular Fit</li>
-                <li>• Pre-shrunk</li>
-                <li>• Machine Washable</li>
-              </ul>
-            </div>
-
             {/* Size Selection */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Size</h3>
-              <div className="flex space-x-3">
-                {sizes.map((size) => (
+              <h3 className="text-sm font-medium uppercase tracking-wider">Size</h3>
+              <div className="flex flex-wrap gap-3">
+                {product.sizes?.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 border transition-colors ${
+                    className={`px-4 py-2 border text-sm font-medium uppercase tracking-wider transition-colors ${
                       selectedSize === size
                         ? 'border-white bg-white text-black'
                         : 'border-gray-600 hover:border-white'
@@ -153,54 +176,151 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Quantity Selection */}
+            {/* Color Selection */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Quantity</h3>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 border border-gray-600 hover:border-white transition-colors flex items-center justify-center"
-                >
-                  <Minus size={16} />
-                </button>
-                <span className="text-lg font-semibold w-8 text-center">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 border border-gray-600 hover:border-white transition-colors flex items-center justify-center"
-                >
-                  <Plus size={16} />
-                </button>
+              <h3 className="text-sm font-medium uppercase tracking-wider">Color</h3>
+              <div className="flex space-x-3">
+                {product.colors?.map((color) => (
+                  <button
+                    key={color.name}
+                    onClick={() => setSelectedColor(color.name)}
+                    className={`px-4 py-2 border text-sm font-medium uppercase tracking-wider transition-colors ${
+                      selectedColor === color.name
+                        ? 'border-white bg-white text-black'
+                        : 'border-gray-600 hover:border-white'
+                    }`}
+                  >
+                    {color.name}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="space-y-4">
-              <button className="w-full bg-white text-black py-4 px-8 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2">
-                <ShoppingBag size={20} />
-                <span>Add to Cart</span>
+            {/* Size Guide */}
+            <div>
+              <button className="flex items-center space-x-2 text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors">
+                <span>Size Guide</span>
+                <ExternalLink size={16} />
               </button>
+            </div>
+
+            {/* Price and Add to Bag */}
+            <div className="space-y-6">
+              <div className="flex items-baseline space-x-4">
+                <span className="text-3xl font-bold">${product.price}</span>
+                {product.originalPrice && (
+                  <span className="text-lg text-gray-400 line-through">
+                    ${product.originalPrice}
+                  </span>
+                )}
+              </div>
               
-              <button 
-                onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`w-full border py-4 px-8 font-semibold uppercase tracking-wider transition-colors flex items-center justify-center space-x-2 ${
-                  isWishlisted 
-                    ? 'border-red-500 text-red-500 bg-red-500 bg-opacity-10' 
-                    : 'border-gray-600 hover:border-white'
-                }`}
-              >
-                <Heart size={20} fill={isWishlisted ? 'currentColor' : 'none'} />
-                <span>{isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}</span>
+              <p className="text-sm text-gray-400">
+                <Link to="/shipping" className="underline hover:text-white transition-colors">
+                  shipping
+                </Link> calculated at checkout
+              </p>
+              
+              <button className="w-full bg-white text-black py-4 px-8 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors">
+                Add to Bag
               </button>
             </div>
+          </div>
 
-            {/* Additional Info */}
-            <div className="border-t border-gray-800 pt-8 space-y-4">
-              <div className="text-sm text-gray-400">
-                <p>Free shipping on orders over $100</p>
-                <p>30-day returns</p>
-                <p>Secure checkout</p>
-              </div>
+          {/* Right Side - Product Images */}
+          <div className="space-y-6">
+            {/* Main Image */}
+            <div className="aspect-[4/5] bg-gray-900 overflow-hidden">
+              <img
+                src={product.images[selectedImage]}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
             </div>
+            
+            {/* Thumbnail Gallery */}
+            <div className="grid grid-cols-4 gap-4">
+              {product.images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`aspect-square bg-gray-900 overflow-hidden border-2 transition-colors ${
+                    selectedImage === index ? 'border-white' : 'border-transparent hover:border-gray-600'
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`${product.name} ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* From This Collection */}
+        {collectionProducts.length > 0 && (
+          <div className="mt-20 border-t border-gray-800 pt-20">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold uppercase tracking-wider">from this collection</h2>
+              <Link 
+                to={`/shop?filter=collection&value=${product.collection}`}
+                className="text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors"
+              >
+                {product.collection}
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {collectionProducts.map((collectionProduct) => (
+                <ProductCard key={collectionProduct.id} product={collectionProduct} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* You May Also Like */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-20 border-t border-gray-800 pt-20">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold uppercase tracking-wider">You may also like</h2>
+              <Link 
+                to={`/shop/category/${product.category.toLowerCase()}`}
+                className="text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors"
+              >
+                {product.category}
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
+              {relatedProducts.map((relatedProduct) => (
+                <ProductCard key={relatedProduct.id} product={relatedProduct} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Instagram Feed */}
+        <div className="mt-20 border-t border-gray-800 pt-20">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold uppercase tracking-wider mb-4">Follow Axiom</h2>
+            <p className="text-gray-400 mb-6">Wear it your way. Tag us on Instagram for your chance to be featured.</p>
+            <a 
+              href="https://instagram.com" 
+              className="text-sm uppercase tracking-wider text-gray-400 hover:text-white transition-colors"
+            >
+              Follow Us
+            </a>
+          </div>
+          <div className="grid grid-cols-5 md:grid-cols-10 gap-4">
+            {mockInstagramPosts.slice(0, 20).map((image, index) => (
+              <div key={index} className="aspect-square bg-gray-900 overflow-hidden group cursor-pointer">
+                <img
+                  src={image}
+                  alt={`Instagram post ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
