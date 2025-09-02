@@ -154,7 +154,8 @@ export const useSearch = () => {
     search,
     clearSearch,
     clearHistory,
-    setSearchQuery
+    setSearchQuery: useCallback((query) => setSearchQuery(query), []),
+    addToHistory
   };
 };
 
