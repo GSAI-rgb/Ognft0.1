@@ -146,23 +146,26 @@ const Shop = () => {
           </div>
         )}
 
-        {/* Newsletter Section - Replacing the Framer promotion */}
-        <div className="border-t border-gray-800 pt-16 mt-16">
+        {/* Restock Alerts - OG Theme */}
+        <div className="border-t border-[var(--color-steel)] pt-16 mt-16">
           <div className="text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-wider">
-              Stay Updated
+            <h2 className="text-3xl md:text-4xl font-bold font-headline uppercase tracking-wider">
+              Join Restock Alerts
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Be the first to know about new arrivals, exclusive collections, and special offers.
+            <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto">
+              Be the first rebel to know about drops, restocks, and exclusive vault access.
+            </p>
+            <p className="text-[var(--color-gold)] font-medium">
+              Never miss a battle. Never miss a drop (ఎప్పుడూ యుద్ధాన్ని కోల్పోవద్దు).
             </p>
             <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-4">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 bg-[var(--color-bg)] border border-gray-600 px-4 py-3 focus:outline-none focus:border-white transition-colors"
+                className="flex-1 bg-[var(--color-bg)] border border-[var(--color-steel)] px-4 py-3 focus:outline-none focus:border-[var(--color-red)] focus:shadow-[0_0_10px_rgba(193,18,31,0.3)] transition-all"
               />
-              <button className="bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-3 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors">
-                Subscribe
+              <button className="bg-[var(--color-red)] text-white px-8 py-3 font-bold uppercase tracking-wider hover:bg-opacity-90 hover:shadow-[0_0_15px_rgba(193,18,31,0.6)] transition-all">
+                ARM UP
               </button>
             </div>
           </div>
