@@ -354,6 +354,12 @@ const ProductDetail = () => {
       </div>
 
       <Footer />
+      
+      {/* Cart Sidebar */}
+      <CartSidebar 
+        isOpen={cartSidebarOpen}
+        onClose={() => setCartSidebarOpen(false)}
+      />
     </div>
   );
 };
