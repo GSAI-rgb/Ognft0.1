@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-02T07:14:59.473091",
+  "timestamp": "2025-09-02T10:14:14.239203",
   "backend_url": "https://shopify-og-sync.preview.emergentagent.com/api",
   "passed_tests": 7,
   "failed_tests": 0,
@@ -9,43 +9,43 @@
       "test": "Server Health Check",
       "success": true,
       "message": "Root endpoint responding correctly",
-      "timestamp": "2025-09-02T07:14:59.014047"
+      "timestamp": "2025-09-02T10:14:13.066674"
     },
     {
       "test": "Environment Variables",
       "success": true,
       "message": "Backend accessible, env vars loaded",
-      "timestamp": "2025-09-02T07:14:59.065679"
+      "timestamp": "2025-09-02T10:14:13.337123"
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
-      "timestamp": "2025-09-02T07:14:59.112718"
+      "timestamp": "2025-09-02T10:14:13.492255"
     },
     {
       "test": "API Routes Accessibility",
       "success": true,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-02T07:14:59.267389"
+      "timestamp": "2025-09-02T10:14:13.937968"
     },
     {
       "test": "Create Status Check",
       "success": true,
-      "message": "Created status check with ID: ffabae4d-21f6-4e5d-b0f5-97f7b48713e5",
-      "timestamp": "2025-09-02T07:14:59.316843"
+      "message": "Created status check with ID: 915d80b3-45d3-4b2a-ba53-60322b95c4a1",
+      "timestamp": "2025-09-02T10:14:14.038669"
     },
     {
       "test": "Get Status Checks",
       "success": true,
-      "message": "Retrieved 8 status checks",
-      "timestamp": "2025-09-02T07:14:59.367176"
+      "message": "Retrieved 11 status checks",
+      "timestamp": "2025-09-02T10:14:14.087440"
     },
     {
       "test": "MongoDB Integration",
       "success": true,
       "message": "Successfully created and retrieved record from MongoDB",
-      "timestamp": "2025-09-02T07:14:59.470262"
+      "timestamp": "2025-09-02T10:14:14.235840"
     }
   ]
 }
