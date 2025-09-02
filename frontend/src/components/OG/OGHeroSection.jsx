@@ -124,8 +124,8 @@ const OGHeroSection = () => {
                 </span>
               </div>
               
-              <h2 className="text-5xl lg:text-6xl font-bold font-headline uppercase tracking-wider leading-none">
-                CHOOSE YOUR<br />WEAPON
+              <h2 className="text-6xl lg:text-8xl font-brutalist font-ultra uppercase tracking-extreme leading-[0.85] drop-shadow-[0_6px_12px_rgba(193,18,31,0.7)]">
+                CHOOSE YOUR<br /><span className="text-[var(--color-red)]">WEAPON</span>
               </h2>
               
               <p className="text-[var(--color-text-muted)] text-lg leading-relaxed max-w-md">
