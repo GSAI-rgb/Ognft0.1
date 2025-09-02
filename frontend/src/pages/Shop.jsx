@@ -171,27 +171,37 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* About Section */}
-        <div className="border-t border-gray-800 pt-16 mt-16">
+        {/* OG Guarantees */}
+        <div className="border-t border-[var(--color-steel)] pt-16 mt-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Free Shipping</h3>
-              <p className="text-gray-400 text-sm">
-                Complimentary shipping on all orders worldwide
+              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Battle-Ready Shipping</h3>
+              <p className="text-[var(--color-text-muted)] text-sm">
+                Worldwide delivery for the global tribe
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Easy Returns</h3>
-              <p className="text-gray-400 text-sm">
-                30-day return policy for unworn items
+              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Warrior Returns</h3>
+              <p className="text-[var(--color-text-muted)] text-sm">
+                30-day return policy — no questions asked
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 uppercase tracking-wider">Premium Quality</h3>
-              <p className="text-gray-400 text-sm">
-                Crafted with attention to detail and built to last
+              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Theater-Grade Quality</h3>
+              <p className="text-[var(--color-text-muted)] text-sm">
+                Premium cotton, battle-tested durability
               </p>
             </div>
+          </div>
+          
+          {/* Bottom tribal line */}
+          <div className="text-center mt-12">
+            <p className="text-[var(--color-text-muted)] text-lg">
+              Every product is a weapon. Every fan is a soldier.
+            </p>
+            <p className="text-[var(--color-red)] font-bold mt-2 tracking-wide">
+              (ప్రతి అభిమాని ఒక సైనికుడు)
+            </p>
           </div>
         </div>
       </div>
