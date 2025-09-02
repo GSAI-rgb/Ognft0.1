@@ -54,7 +54,11 @@ const ProductDetail = () => {
 
   // Handle add to cart
   const handleAddToCart = async () => {
-    if (!product) return;
+    console.log('🔥 Add to Arsenal clicked!');
+    if (!product) {
+      console.error('No product found');
+      return;
+    }
     
     const selectedVariant = {
       size: selectedSize,
@@ -62,15 +66,18 @@ const ProductDetail = () => {
       id: `${product.id}-${selectedSize}-${selectedColor}`
     };
     
+    console.log('🛒 Adding to cart:', { product: product.name, variant: selectedVariant });
+    
     const result = await addToCart(product, selectedVariant, 1);
     
-    if (result.success) {
-      console.log('✅ Added to cart successfully');
+    if (result && result.success) {
+      console.log('✅ Added to cart successfully, opening sidebar');
       // Show cart sidebar instead of redirecting
       setCartSidebarOpen(true);
     } else {
-      console.error('❌ Failed to add to cart:', result.error);
-      // Optional: Show error feedback to user
+      console.error('❌ Failed to add to cart:', result?.error || 'Unknown error');
+      // For now, show sidebar anyway to test
+      setCartSidebarOpen(true);
     }
   };
 
