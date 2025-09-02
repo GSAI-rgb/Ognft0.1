@@ -154,6 +154,12 @@ const Header = () => {
           </div>
         )}
       </header>
+
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </div>
   );
 };
