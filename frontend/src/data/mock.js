@@ -10,8 +10,20 @@ export const mockProducts = [
     badges: ["NEW"],
     images: [
       "https://framerusercontent.com/images/TITuLcYSx53fInKnsoSGfE8Xuw.jpg",
-      "https://framerusercontent.com/images/rO3nueqqdzWMFmQMfScFEHQKDK8.jpg"
-    ]
+      "https://framerusercontent.com/images/rO3nueqqdzWMFmQMfScFEHQKDK8.jpg",
+      "https://framerusercontent.com/images/Lob4Ke8wWWs4mRnpIc1nR5otRQ.jpg",
+      "https://framerusercontent.com/images/BVM804ckLux0BNzhhthMfZjDC4.jpg"
+    ],
+    description: "Bold expression through minimal design. Our Freedom Graphic Tee Series 1 features architectural prints on premium cotton.",
+    materials: "100% Premium Cotton",
+    care: "Machine wash cold with like colors. Tumble dry low. Do not bleach.",
+    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "White", value: "#FFFFFF" },
+      { name: "Black", value: "#000000" }
+    ],
+    collection: "Freedom"
   },
   {
     id: 2,
