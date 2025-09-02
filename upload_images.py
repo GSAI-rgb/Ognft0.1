@@ -12,8 +12,8 @@ from typing import Optional, Dict, List
 
 class ShopifyImageUploader:
     def __init__(self):
-        self.store_domain = "r1s7fa-eb.myshopify.com"
-        self.admin_api_key = "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"
+        self.store_domain = "40fg1q-ju.myshopify.com"
+        self.admin_api_key = "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"
         self.base_url = f"https://{self.store_domain}/admin/api/2024-01"
         
         self.headers = {
