@@ -9,6 +9,7 @@ import { I18nProvider } from './hooks/useI18n';
 
 // Performance Components
 import PageTransition from './components/PerformanceOptimized/PageTransition';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Import Pages
 import Home from './pages/Home';
