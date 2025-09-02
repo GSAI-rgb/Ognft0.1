@@ -73,8 +73,8 @@ const OGHeroSection = () => {
               OG ISN'T MERCH.<br />
               <span className="text-[var(--color-red)] animate-pulse">IT'S A CALLSIGN.</span>
             </h1>
-            <p className="text-xl text-[var(--color-text-muted)] mt-6 max-w-2xl leading-relaxed">
-              {t('home.hero.subtitle')}
+            <p className="text-xl font-body text-[var(--color-text-muted)] mt-6 max-w-3xl leading-relaxed text-center">
+              Cinematic drops. Theater-grade prints. Built for the tribe.
             </p>
             {/* Telugu line */}
             <p className="text-lg text-[var(--color-red)] font-bold mt-4 tracking-wide">
