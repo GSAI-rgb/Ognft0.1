@@ -12,15 +12,44 @@ export const useProducts = () => {
     const loadProducts = async () => {
       try {
         setLoading(true);
-        const productData = await useMockDataIfShopifyUnavailable(
+        
+        // Try Shopify Storefront API first
+        let productData = await useMockDataIfShopifyUnavailable(
           () => shopify.getProducts(50),
-          mockProducts
+          []
         );
+        
+        // If no products from Storefront API, try direct JSON fallback
+        if (!productData || productData.length === 0) {
+          try {
+            console.log('🔄 Loading products from direct integration...');
+            const response = await fetch('/products.json');
+            if (response.ok) {
+              const directProducts = await response.json();
+              console.log(`✅ Loaded ${directProducts.length} products from direct integration`);
+              productData = directProducts;
+            } else {
+              throw new Error('Failed to load direct products');
+            }
+          } catch (directError) {
+            console.warn('⚠️ Direct integration failed, using mock data:', directError.message);
+            productData = mockProducts.map(product => ({
+              ...product,
+              badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
+            }));
+          }
+        }
+        
         setProducts(productData);
         setError(null);
       } catch (err) {
         setError(err.message);
         console.error('Failed to load products:', err);
+        // Final fallback to enhanced mock data
+        setProducts(mockProducts.map(product => ({
+          ...product,
+          badges: [...(product.badges || []), 'NEW', 'REBEL DROP']
+        })));
       } finally {
         setLoading(false);
       }
