@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+// ThemeToggle removed - OG is permanent theme
 import LanguageToggle from './LanguageToggle';
 import SearchModal from './SearchModal';
 import { useTheme } from '../hooks/useTheme';
