@@ -1,8 +1,11 @@
 // Shopify Storefront API client
-const SHOPIFY_DOMAIN = process.env.REACT_APP_SHOPIFY_DOMAIN || 'your-shop.myshopify.com';
-const SHOPIFY_STOREFRONT_TOKEN = process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN || '';
+const SHOPIFY_DOMAIN = process.env.REACT_APP_SHOPIFY_DOMAIN || 'axm-demo-store.myshopify.com';
+const SHOPIFY_STOREFRONT_TOKEN = process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN || 'demo-token-12345';
 
 const SHOPIFY_ENDPOINT = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`;
+
+// Demo mode flag - set to false when Shopify is configured
+const DEMO_MODE = !process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN || process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN === 'demo-token-12345';
 
 // GraphQL queries
 const PRODUCTS_QUERY = `
