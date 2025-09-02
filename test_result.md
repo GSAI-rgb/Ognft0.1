@@ -177,6 +177,18 @@ frontend:
         - agent: "main" 
         - comment: "Updated Home component to import and render new OG components (ArsenalCategories, FanArmyWall, FromFirestorm) in proper order when OG theme is active. Cleaned up non-existing component imports."
 
+  - task: "Fix ProductDetail mobile layout - images first"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/ProductDetail.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Fixed mobile layout order using Flexbox order classes. Product images now appear FIRST on mobile (order-1 lg:order-2) and product details appear SECOND on mobile (order-2 lg:order-1). Desktop layout maintained with images on right, details on left. Verified with mobile and desktop screenshots."
+
 backend:
   - task: "Maintain existing Shopify integration"
     implemented: true
