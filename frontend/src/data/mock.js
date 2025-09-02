@@ -35,7 +35,17 @@ export const mockProducts = [
     images: [
       "https://framerusercontent.com/images/TzE4HV2Rd2nSnBPovKnaeVJ4ig.jpg",
       "https://framerusercontent.com/images/Go8FgbJq5k83GEHQpJxfiOfyU.jpg"
-    ]
+    ],
+    description: "Oversized comfort meets contemporary design. This hoodie features architectural details and premium construction.",
+    materials: "80% Cotton, 20% Polyester Fleece",
+    care: "Machine wash cold. Tumble dry low. Do not iron on print.",
+    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Black", value: "#000000" },
+      { name: "Gray", value: "#808080" }
+    ],
+    collection: "Freedom"
   },
   {
     id: 3,
@@ -47,7 +57,17 @@ export const mockProducts = [
     images: [
       "https://framerusercontent.com/images/tgZdGQSoxXaU1e2WoJLa4YQ.jpg",
       "https://framerusercontent.com/images/dVQplzo9TYGR0ic60Unw0TJjI.jpg"
-    ]
+    ],
+    description: "Statement piece with subtle architectural elements. Crafted for those who appreciate understated luxury.",
+    materials: "100% Premium Cotton French Terry",
+    care: "Machine wash cold with like colors. Tumble dry low.",
+    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Navy", value: "#1a237e" },
+      { name: "Black", value: "#000000" }
+    ],
+    collection: "Freedom"
   },
   {
     id: 4,
@@ -59,7 +79,17 @@ export const mockProducts = [
     images: [
       "https://framerusercontent.com/images/WCPUxU8le7cGYEMic8GQuKrQTLI.jpg",
       "https://framerusercontent.com/images/D9XYlok0cgs0AR1T9UYgXebum4.jpg"
-    ]
+    ],
+    description: "Performance meets style in these technical track pants. Designed for movement with architectural aesthetic.",
+    materials: "90% Nylon, 10% Elastane",
+    care: "Machine wash cold. Hang dry. Do not bleach.",
+    shipping: "Free standard shipping on all orders. Expedited shipping available at checkout.",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Black", value: "#000000" },
+      { name: "Charcoal", value: "#36454f" }
+    ],
+    collection: "Freedom"
   },
   {
     id: 5,
