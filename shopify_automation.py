@@ -283,32 +283,45 @@ class ShopifyOGAutomation:
             # Skip root directory
             if root == directory_path:
                 continue
-                
-            # Get category from folder name
-            category = os.path.basename(root).lower()
             
-            # Process image files in this category
-            image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp'))]
+            # Get category and product name from path
+            path_parts = root.replace(directory_path, "").strip("/").split("/")
             
-            print(f"\n📁 Processing category: {category} ({len(image_files)} images)")
-            
-            for image_file in image_files:
-                image_path = os.path.join(root, image_file)
+            if len(path_parts) >= 1:
+                category = path_parts[0].lower()
                 
-                print(f"   Creating product from: {image_file}")
+                # Skip color variant folders (Blue, black, grey, etc.)
+                if len(path_parts) > 1 and path_parts[-1].lower() in ['blue', 'black', 'grey', 'white', 'red', 'green']:
+                    continue
                 
-                product = self.create_product_from_image(image_path, category, product_index)
+                # Process image files in this category/product
+                image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp'))]
                 
-                if product:
-                    created_products.append(product)
-                    print(f"   ✅ Created: {product['product']['title']}")
-                else:
-                    print(f"   ❌ Failed to create product from: {image_file}")
-                
-                product_index += 1
-                
-                # Rate limiting - don't overwhelm Shopify API
-                time.sleep(1)
+                if image_files:
+                    # Use first image for product creation
+                    main_image = image_files[0]
+                    image_path = os.path.join(root, main_image)
+                    
+                    # Create product name from folder structure
+                    if len(path_parts) > 1:
+                        product_name = path_parts[1]  # Use product folder name
+                    else:
+                        product_name = os.path.splitext(main_image)[0]
+                    
+                    print(f"\n📁 Creating product: {product_name} ({category})")
+                    
+                    product = self.create_product_from_folder(image_path, category, product_name, product_index)
+                    
+                    if product:
+                        created_products.append(product)
+                        print(f"   ✅ Created: {product['product']['title']}")
+                    else:
+                        print(f"   ❌ Failed to create product: {product_name}")
+                    
+                    product_index += 1
+                    
+                    # Rate limiting - don't overwhelm Shopify API
+                    time.sleep(2)
         
         print(f"\n🎉 Successfully created {len(created_products)} products!")
         return created_products
