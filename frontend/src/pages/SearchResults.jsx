@@ -31,7 +31,7 @@ const SearchResults = () => {
       setSearchQuery(query);
       search(query);
     }
-  }, [query, search, setSearchQuery]);
+  }, [query]); // Remove search and setSearchQuery from dependencies to prevent infinite loop
 
   // Get available categories from search results
   const availableCategories = [...new Set(searchResults.map(p => p.category))];
