@@ -139,19 +139,29 @@ const Collections = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-20 text-center">
+        {/* Bottom CTA with OG Footer Line */}
+        <div className="mt-20 text-center border-t border-[var(--color-steel)] pt-16">
           <h2 className="text-3xl font-bold mb-6">Can't Find Your Rank?</h2>
           <p className="text-[var(--color-text-muted)] mb-8 max-w-2xl mx-auto">
             Every purchase builds your tribe status. Start your journey and unlock exclusive collections.
           </p>
           <Link
             to="/shop"
-            className="inline-flex items-center space-x-2 bg-[var(--color-red)] text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-opacity-90 transition-colors"
+            className="inline-flex items-center space-x-2 bg-[var(--color-red)] text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-opacity-90 transition-colors mb-8"
           >
             <span>Start Shopping</span>
             <ArrowRight size={20} />
           </Link>
+          
+          {/* OG Footer Line */}
+          <div className="text-center">
+            <p className="text-[var(--color-text-muted)] text-lg">
+              Every product is a weapon. Every fan is a soldier
+            </p>
+            <p className="text-[var(--color-red)] font-bold mt-2 tracking-wide">
+              (ప్రతి అభిమాని ఒక సైనికుడు)
+            </p>
+          </div>
         </div>
       </div>
 
