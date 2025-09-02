@@ -4,6 +4,7 @@ import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 // ThemeToggle removed - OG is permanent theme
 import LanguageToggle from './LanguageToggle';
 import SearchModal from './SearchModal';
+import CartSidebar from './CartSidebar';
 import { useTheme } from '../hooks/useTheme';
 import { useI18n } from '../hooks/useI18n';
 import { useCart } from '../context/CartContext';
