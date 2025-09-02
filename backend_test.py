@@ -447,17 +447,17 @@ class BackendTester:
                 if len(og_products) >= 10:  # Expecting at least 10 OG products out of 52
                     available_count = sum(1 for p in og_products if p['available'])
                     message = f"Found {len(og_products)} OG products, {available_count} available for sale"
-                    if og_metafields_count > 0:
-                        message += f", {og_metafields_count} OG metafields"
                     
                     # Show sample products
-                    sample_titles = [p['title'] for p in og_products[:3]]
+                    sample_titles = [p['title'] for p in og_products[:5]]
                     message += f". Samples: {', '.join(sample_titles)}"
                     
                     self.log_result("OG Products Availability", True, message)
                     return True
                 else:
-                    self.log_result("OG Products Availability", False, f"Only found {len(og_products)} OG products, expected at least 10")
+                    # Show what products we did find for debugging
+                    found_titles = [p['title'] for p in og_products]
+                    self.log_result("OG Products Availability", False, f"Only found {len(og_products)} OG products (expected ≥10). Found: {', '.join(found_titles) if found_titles else 'None'}")
                     return False
             else:
                 self.log_result("OG Products Availability", False, f"HTTP {response.status_code}: {response.text}")
