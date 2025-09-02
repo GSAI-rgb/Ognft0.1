@@ -25,8 +25,12 @@ const Home = () => {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
       
-      {/* OG Theme Components - Production Ready */}
+      {/* OG Theme Components - Debug Mode */}
       <OGHeroSection />
+      <div className="py-8 px-6 bg-red-500 text-white text-center">
+        <h2 className="text-2xl font-bold">DEBUG: Component Rendering Test</h2>
+        <p>If you can see this, React components are working</p>
+      </div>
       <RebelDrops />
       <FanArsenal />
       <ArsenalCategories />
