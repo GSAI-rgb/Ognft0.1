@@ -40,6 +40,7 @@ const Home = () => {
       </div>
       
       <RebelDrops />
+      <FeaturedTees />
       <FanArsenal />
       <ArsenalCategories />
       <Footer />
