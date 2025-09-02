@@ -1,6 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
-import { shopify, useMockDataIfShopifyUnavailable } from '../lib/shopify';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useMockDataIfShopifyUnavailable } from '../lib/shopify';
+import shopify from '../lib/shopify';
 import { mockProducts } from '../data/mock';
+
+// Cache products to prevent repeated loading
+let cachedProducts = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // Custom hook for seamless product data management
 export const useProducts = () => {
