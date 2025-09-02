@@ -47,39 +47,63 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
+            <Link 
+              to="/collections" 
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
+            >
+              {t('navigation.collections')}
+            </Link>
+            
             <div className="relative group">
-              <Link to="/shop" className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium">
+              <Link 
+                to="/shop" 
+                className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
+              >
                 SHOP
               </Link>
               {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-2 w-48 bg-black border border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute top-full left-0 mt-2 w-48 bg-[var(--color-bg)] border border-[var(--color-steel)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="py-2">
-                  <Link to="/shop" className="block px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
+                  <Link to="/shop" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
                     All Products
                   </Link>
-                  <Link to="/shop/category/tops" className="block px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
+                  <Link to="/shop/category/tops" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
                     Tops
                   </Link>
-                  <Link to="/shop/category/bottoms" className="block px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
+                  <Link to="/shop/category/bottoms" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
                     Bottoms
                   </Link>
-                  <Link to="/shop/category/outerwear" className="block px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
+                  <Link to="/shop/category/outerwear" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
                     Outerwear
                   </Link>
-                  <Link to="/shop/category/accessories" className="block px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
+                  <Link to="/shop/category/accessories" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
                     Accessories
                   </Link>
                 </div>
               </div>
             </div>
-            <Link to="/about" className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium">
-              ABOUT
+            
+            {isOGTheme && (
+              <Link 
+                to="/collections/vault-exclusive" 
+                className="text-[var(--color-gold)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
+              >
+                {t('navigation.vault')}
+              </Link>
+            )}
+            
+            <Link 
+              to="/about" 
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
+            >
+              {t('navigation.about')}
             </Link>
-            <Link to="/journal" className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium">
-              JOURNAL
-            </Link>
-            <Link to="/contact" className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium">
-              CONTACT
+            
+            <Link 
+              to="/contact" 
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
+            >
+              {t('navigation.contact')}
             </Link>
           </nav>
 
