@@ -125,3 +125,14 @@
 
 📁 Creating product: product8 (hoodies)
    ✅ Created: OG Product8 Battle Hoodie
+
+📁 Creating product: product8 (hoodies)
+   ✅ Created: OG Product8 Battle Hoodie
+
+📁 Creating product: product5 (hoodies)
+   ✅ Created: OG Product5 Battle Hoodie
+
+📁 Creating product: product5 (hoodies)
+   ✅ Created: OG Product5 Battle Hoodie
+
+📁 Creating product: product4 (hoodies)
