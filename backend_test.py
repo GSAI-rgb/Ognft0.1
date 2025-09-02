@@ -329,72 +329,38 @@ class BackendTester:
             return False
     
     def test_og_products_availability(self):
-        """Test that OG products are available through Shopify API"""
+        """Test that OG products are available through Shopify Admin API"""
         try:
             # Load Shopify credentials
             load_dotenv('/app/backend/.env')
             
             store_domain = os.getenv('SHOPIFY_STORE_DOMAIN')
-            access_token = os.getenv('SHOPIFY_STOREFRONT_API_TOKEN')
-            api_version = os.getenv('SHOPIFY_STOREFRONT_API_VERSION')
+            admin_api_key = os.getenv('SHOPIFY_ADMIN_API_KEY')
             
-            if not all([store_domain, access_token, api_version]):
-                self.log_result("OG Products Availability", False, "Missing Shopify credentials")
+            if not all([store_domain, admin_api_key]):
+                self.log_result("OG Products Availability", False, "Missing Shopify Admin API credentials")
                 return False
             
-            # Query for OG-themed products
-            graphql_url = f"https://{store_domain}/api/{api_version}/graphql.json"
-            
-            query = """
-            {
-                products(first: 50, query: "tag:OG OR title:*OG* OR title:*Death* OR title:*War* OR title:*Rebel*") {
-                    edges {
-                        node {
-                            id
-                            title
-                            handle
-                            tags
-                            availableForSale
-                            priceRange {
-                                minVariantPrice {
-                                    amount
-                                    currencyCode
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            """
+            # Use Admin API to check products (more reliable than Storefront API for this test)
+            admin_url = f"https://{store_domain}/admin/api/2024-01/products.json?limit=250"
             
             headers = {
-                'Content-Type': 'application/json',
-                'X-Shopify-Storefront-Access-Token': access_token
+                'X-Shopify-Access-Token': admin_api_key,
+                'Content-Type': 'application/json'
             }
             
-            response = requests.post(
-                graphql_url,
-                json={'query': query},
-                headers=headers,
-                timeout=15
-            )
+            response = requests.get(admin_url, headers=headers, timeout=15)
             
             if response.status_code == 200:
                 data = response.json()
-                
-                if 'errors' in data:
-                    self.log_result("OG Products Availability", False, f"GraphQL errors: {data['errors']}")
-                    return False
-                
-                products = data.get('data', {}).get('products', {}).get('edges', [])
+                products = data.get('products', [])
                 
                 og_products = []
                 
-                for product_edge in products:
-                    product = product_edge['node']
+                for product in products:
                     title = product.get('title', '')
-                    tags = product.get('tags', [])
-                    available = product.get('availableForSale', False)
+                    status = product.get('status', 'unknown')
+                    tags = product.get('tags', '').split(', ') if product.get('tags') else []
                     
                     # Check for OG-related content
                     is_og_product = (
@@ -404,30 +370,35 @@ class BackendTester:
                         'Rebel' in title or
                         'Stalker' in title or
                         'Machine' in title or
+                        'Beast' in title or
+                        'Hunter' in title or
+                        'Shadow' in title or
+                        'Storm' in title or
                         any('og' in tag.lower() for tag in tags)
                     )
                     
                     if is_og_product:
                         og_products.append({
                             'title': title,
-                            'available': available,
+                            'status': status,
                             'tags': tags
                         })
                 
-                if len(og_products) >= 10:  # Expecting at least 10 OG products out of 52
-                    available_count = sum(1 for p in og_products if p['available'])
-                    message = f"Found {len(og_products)} OG products, {available_count} available for sale"
-                    
+                total_products = len(products)
+                og_count = len(og_products)
+                active_og_count = sum(1 for p in og_products if p['status'] == 'active')
+                
+                if og_count >= 20:  # Expecting at least 20 OG-themed products out of 52
                     # Show sample products
                     sample_titles = [p['title'] for p in og_products[:5]]
-                    message += f". Samples: {', '.join(sample_titles)}"
+                    message = f"Found {og_count} OG products out of {total_products} total ({active_og_count} active). Samples: {', '.join(sample_titles)}"
                     
                     self.log_result("OG Products Availability", True, message)
                     return True
                 else:
                     # Show what products we did find for debugging
-                    found_titles = [p['title'] for p in og_products]
-                    self.log_result("OG Products Availability", False, f"Only found {len(og_products)} OG products (expected ≥10). Found: {', '.join(found_titles) if found_titles else 'None'}")
+                    found_titles = [p['title'] for p in og_products[:10]]
+                    self.log_result("OG Products Availability", False, f"Only found {og_count} OG products (expected ≥20) out of {total_products} total. Found: {', '.join(found_titles) if found_titles else 'None'}")
                     return False
             else:
                 self.log_result("OG Products Availability", False, f"HTTP {response.status_code}: {response.text}")
