@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 import SearchModal from './SearchModal';
 import { useTheme } from '../hooks/useTheme';
+import { useI18n } from '../hooks/useI18n';
 import { useCart } from '../context/CartContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
-  const { isReducedMotion } = useTheme();
+  const { isReducedMotion, currentTheme } = useTheme();
+  const { t } = useI18n();
   const { itemCount } = useCart();
+
+  // Check if OG theme is active
+  const isOGTheme = currentTheme === 'og';
 
   return (
     <div className="relative">
