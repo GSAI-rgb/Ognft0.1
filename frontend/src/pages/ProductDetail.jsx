@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronRight, ChevronDown, ExternalLink } from 'lucide-react';
-import { mockProducts, mockInstagramPosts } from '../data/mock';
+import { useProduct, useFilteredProducts, useCart } from '../hooks/useProducts';
+import { mockInstagramPosts } from '../data/mock';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
@@ -9,7 +10,9 @@ import ProductCard from '../components/ProductCard';
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
+  const { product, loading: productLoading } = useProduct(id);
+  const { addToCart, loading: cartLoading } = useCart();
+  
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('M');
   const [selectedColor, setSelectedColor] = useState('White');
@@ -20,13 +23,13 @@ const ProductDetail = () => {
   });
 
   useEffect(() => {
-    const foundProduct = mockProducts.find(p => p.id === parseInt(id));
-    setProduct(foundProduct);
-    // Reset selections when product changes
-    setSelectedImage(0);
-    setSelectedSize('M');
-    setSelectedColor('White');
-  }, [id]);
+    if (product) {
+      // Reset selections when product changes
+      setSelectedImage(0);
+      setSelectedSize(product.sizes?.[2] || 'M'); // Default to middle size
+      setSelectedColor(product.colors?.[0]?.name || 'White');
+    }
+  }, [product]);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => ({
