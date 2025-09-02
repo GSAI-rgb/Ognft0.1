@@ -69,18 +69,37 @@ const ProductDetail = () => {
     }
   };
 
+  if (productLoading) {
+    return (
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="animate-spin w-8 h-8 border-2 border-white border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-gray-400">Loading product...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!product) {
     return (
-      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Product not found</h2>
-          <button 
-            onClick={() => navigate('/')} 
-            className="text-[var(--color-text)] hover:text-gray-300 underline"
-          >
-            Return to Home
-          </button>
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">Product not found</h2>
+            <button 
+              onClick={() => navigate('/shop')} 
+              className="text-[var(--color-text)] hover:text-gray-300 underline"
+            >
+              Return to Shop
+            </button>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
