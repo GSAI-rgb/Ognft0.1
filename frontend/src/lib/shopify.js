@@ -281,13 +281,25 @@ class ShopifyAPI {
     };
   }
 
-  // Generate badges based on Shopify data
+  // Generate badges based on Shopify data - Enhanced for OG products
   getBadges(product) {
     const badges = [];
     
-    if (product.tags.includes('new')) badges.push('NEW');
-    if (product.tags.includes('bestseller')) badges.push('BEST SELLER');
-    if (product.tags.includes('sale')) badges.push('SALE');
+    // Check tags (case insensitive)
+    const tags = product.tags.map(tag => tag.toLowerCase());
+    
+    if (tags.includes('new') || tags.includes('og') || tags.includes('limited')) badges.push('NEW');
+    if (tags.includes('bestseller') || tags.includes('premium')) badges.push('BEST SELLER');
+    if (tags.includes('sale')) badges.push('SALE');
+    
+    // Add OG-specific badges
+    if (tags.includes('og') || product.title.includes('OG')) badges.push('REBEL DROP');
+    if (tags.includes('premium') || tags.includes('limited')) badges.push('FAN ARSENAL');
+    
+    // Ensure at least one badge for OG products
+    if (badges.length === 0 && (product.title.includes('OG') || tags.includes('og'))) {
+      badges.push('NEW');
+    }
     
     return badges;
   }
