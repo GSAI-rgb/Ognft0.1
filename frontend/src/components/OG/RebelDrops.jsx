@@ -35,7 +35,7 @@ const RebelDrops = () => {
             Rebel Drops
           </h2>
           <Link 
-            to="/collections/new-arrivals"
+            to="/shop"
             className="flex items-center space-x-2 text-[var(--color-text)] hover:text-[var(--color-red)] transition-colors group"
           >
             <span className="text-sm uppercase tracking-wider font-medium">Arm Up</span>
