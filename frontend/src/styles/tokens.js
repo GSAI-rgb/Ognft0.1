@@ -102,21 +102,45 @@ export const axiomTheme = {
 
 export const ogTheme = {
   colors: {
-    bg: "#0B0B0D",
-    panel: "#1A1A1A",
-    text: "#EAEAEA", 
-    textMuted: "#888888",
+    bg: "#0B0B0D",           // ogBlack - page bg, nav, footer
+    panel: "#1A1A1A",        // ogSteel - cards, panels, PDP sections
+    text: "#EAEAEA",         // ogText - primary text
+    textMuted: "#888888",    // ogMuted - secondary text/labels
     textSecondary: "#BBBBBB",
-    accent: "#C1121F",
+    accent: "#C1121F",       // ogRed - CTAs, timers, badges, highlights
     border: "#333333",
     error: "#FF4444",
     success: "#00FF88", 
-    warning: "#C99700",
-    primary: "#C1121F",
-    secondary: "#C99700"
+    warning: "#C99700",      // ogGold - vault/limited accents, hover halo
+    primary: "#C1121F",      // ogRed
+    secondary: "#C99700",    // ogGold
+    gold: "#C99700",         // ogGold - explicit gold color
+    red: "#C1121F",          // ogRed - explicit red color
+    steel: "#1A1A1A"         // ogSteel - explicit steel color
   },
-  // Inherit all other tokens from axiom
-  ...axiomTheme
+  typography: {
+    ...axiomTheme.typography,
+    fontFamily: {
+      base: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      headline: "'Inter Tight', 'Oswald', 'Inter', sans-serif", // Condensed/stencil vibe for headlines
+    },
+    fontWeight: {
+      ...axiomTheme.typography.fontWeight,
+      headline: "800", // Bold headlines for OG theme
+    }
+  },
+  // Inherit spacing, shadows, etc. from axiom to maintain layout
+  spacing: axiomTheme.spacing,
+  borderRadius: axiomTheme.borderRadius,
+  shadows: {
+    ...axiomTheme.shadows,
+    redGlow: "0 0 20px rgba(193, 18, 31, 0.3)",
+    goldGlow: "0 0 20px rgba(201, 151, 0, 0.3)",
+  },
+  transitions: {
+    ...axiomTheme.transitions,
+    flash: "150ms cubic-bezier(0.4, 0, 0.2, 1)", // Route transitions
+  }
 };
 
 // CSS custom properties generator
