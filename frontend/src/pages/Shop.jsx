@@ -1,13 +1,12 @@
-import React, { useState, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { mockProducts } from '../data/mock';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useFilteredProducts } from '../hooks/useProducts';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 
 const Shop = () => {
   const { category } = useParams();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(() => {
     // Set initial tab based on URL
     if (category) return category;
@@ -15,6 +14,17 @@ const Shop = () => {
     const filter = urlParams.get('filter');
     return filter || 'all';
   });
+
+  // Update active tab when URL changes
+  useEffect(() => {
+    if (category) {
+      setActiveTab(category);
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      const filter = urlParams.get('filter');
+      setActiveTab(filter || 'all');
+    }
+  }, [category]);
 
   // Tab configuration matching the original exactly
   const tabs = [
