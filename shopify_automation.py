@@ -210,11 +210,9 @@ class ShopifyOGAutomation:
         return base_tags + og_tags
 
     def create_product_from_folder(self, image_path: str, category: str, product_name: str, index: int) -> Optional[Dict]:
-        """Create a product from image file"""
-        filename = os.path.basename(image_path)
-        
-        # Generate product data
-        title = self.generate_product_title(filename, category)
+        """Create a product from product folder"""
+        # Generate product data using folder name
+        title = self.generate_product_title(product_name, category)
         scene_code = self.generate_scene_code(index)
         
         template = self.og_templates.get(category, self.og_templates["teeshirt"])
