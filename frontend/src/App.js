@@ -5,6 +5,7 @@ import './App.css';
 // Providers
 import { ThemeProvider } from './hooks/useTheme';
 import { CartProvider } from './context/CartContext';
+import { I18nProvider } from './hooks/useI18n';
 
 // Performance Components
 import PageTransition from './components/PerformanceOptimized/PageTransition';
@@ -19,32 +20,39 @@ import About from './pages/About';
 import Journal from './pages/Journal';
 import Contact from './pages/Contact';
 import SearchResults from './pages/SearchResults';
+import Collections from './pages/Collections';
+import CollectionDetail from './pages/CollectionDetail';
 
 function App() {
   return (
-    <ThemeProvider>
-      <CartProvider>
-        <div className="App">
-          <BrowserRouter>
-            <PageTransition>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/shop/category/:category" element={<Shop />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/search" element={<SearchResults />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/journal" element={<Journal />} />
-                <Route path="/journal/:id" element={<Journal />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </PageTransition>
-          </BrowserRouter>
-        </div>
-      </CartProvider>
-    </ThemeProvider>
+    <I18nProvider>
+      <ThemeProvider>
+        <CartProvider>
+          <div className="App">
+            <BrowserRouter>
+              <PageTransition>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/collections" element={<Collections />} />
+                  <Route path="/collections/:handle" element={<CollectionDetail />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/shop/category/:category" element={<Shop />} />
+                  <Route path="/products/:handle" element={<ProductDetail />} />
+                  <Route path="/product/:id" element={<ProductDetail />} />
+                  <Route path="/search" element={<SearchResults />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/journal" element={<Journal />} />
+                  <Route path="/journal/:id" element={<Journal />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </PageTransition>
+            </BrowserRouter>
+          </div>
+        </CartProvider>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }
 
