@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronRight, ChevronDown, ExternalLink } from 'lucide-react';
-import { useProduct, useFilteredProducts, useCart } from '../hooks/useProducts';
+import { useProduct, useFilteredProducts } from '../hooks/useProducts';
+import { useCart } from '../context/CartContext';
 import { mockInstagramPosts } from '../data/mock';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
