@@ -194,6 +194,12 @@ const Header = () => {
         isOpen={isSearchOpen} 
         onClose={() => setIsSearchOpen(false)} 
       />
+      
+      {/* Cart Sidebar */}
+      <CartSidebar 
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </div>
   );
 };
