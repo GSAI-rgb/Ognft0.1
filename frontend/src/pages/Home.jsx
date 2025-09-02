@@ -22,21 +22,14 @@ const Home = () => {
   // OG theme is permanent - no theme checking needed
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)]">
-      <Header />
-      
-      {/* OG Theme Components - Debug Mode */}
-      <OGHeroSection />
-      <div className="py-8 px-6 bg-red-500 text-white text-center">
-        <h2 className="text-2xl font-bold">DEBUG: Component Rendering Test</h2>
-        <p>If you can see this, React components are working</p>
+    <div className="min-h-screen bg-black text-white">
+      <div className="py-20 px-6 text-center">
+        <h1 className="text-6xl font-bold mb-4 text-red-500">OG STORE - TESTING</h1>
+        <p className="text-xl mb-8">React is working! Components loading...</p>
+        <div className="bg-red-500 p-4 rounded">
+          <p>If you see this, the basic React app is functional</p>
+        </div>
       </div>
-      <RebelDrops />
-      <FanArsenal />
-      <ArsenalCategories />
-      <FanArmyWall />
-      <FromFirestorm />
-      <Footer />
     </div>
   );
 };
