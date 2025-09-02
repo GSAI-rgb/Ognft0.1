@@ -43,3 +43,16 @@
    ✅ Created: OG Space Exploration Rebel Tee
 
 📁 Creating product: City Skyline (teeshirt)
+   ✅ Created: OG City Skyline Rebel Tee
+
+📁 Creating product: City Skyline (teeshirt)
+   ✅ Created: OG City Skyline Rebel Tee
+
+📁 Creating product: Minimalist Design (teeshirt)
+   ✅ Created: OG Minimalist Design Rebel Tee
+
+📁 Creating product: product2 (posters)
+   ✅ Created: OG Product2 Scene Poster
+
+📁 Creating product: product3 (posters)
+   ✅ Created: OG Product3 Scene Poster
