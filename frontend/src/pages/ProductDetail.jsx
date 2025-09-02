@@ -38,15 +38,36 @@ const ProductDetail = () => {
     }));
   };
 
-  // Get related products (same category, different product)
-  const relatedProducts = mockProducts.filter(p => 
+  // Get related products using the hook
+  const { products: allProducts } = useFilteredProducts('all', null);
+  
+  const relatedProducts = allProducts.filter(p => 
     p.category === product?.category && p.id !== product?.id
   ).slice(0, 6);
 
-  // Get "from this collection" products (same collection)
-  const collectionProducts = mockProducts.filter(p => 
+  const collectionProducts = allProducts.filter(p => 
     p.collection === product?.collection && p.id !== product?.id
   ).slice(0, 3);
+
+  // Handle add to cart
+  const handleAddToCart = async () => {
+    if (!product) return;
+    
+    const selectedVariant = {
+      size: selectedSize,
+      color: selectedColor,
+      id: `${product.id}-${selectedSize}-${selectedColor}`
+    };
+    
+    const result = await addToCart(product, selectedVariant, 1);
+    
+    if (result.success) {
+      // Show success feedback (you could add a toast notification here)
+      console.log('✅ Added to cart successfully');
+    } else {
+      console.error('❌ Failed to add to cart:', result.error);
+    }
+  };
 
   if (!product) {
     return (
