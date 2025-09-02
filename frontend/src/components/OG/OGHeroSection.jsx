@@ -12,21 +12,30 @@ const OGHeroSection = () => {
   const { products } = useProducts();
   const [activeCountdown, setActiveCountdown] = useState(null);
 
-  // Get products with active countdowns
+  // Get products with active countdowns - Fixed for safety
   useEffect(() => {
-    const productsWithCountdown = products.filter(product => {
-      const dropEnd = product.dropEnd || getMetafieldValue(product.metafields, 'og', 'drop_end');
-      return dropEnd && new Date(dropEnd) > new Date();
-    });
+    try {
+      const productsWithCountdown = products.filter(product => {
+        if (!product) return false;
+        const dropEnd = product.dropEnd || (product.metafields ? getMetafieldValue(product.metafields, 'ogfilm', 'drop_end') : null);
+        return dropEnd && new Date(dropEnd) > new Date();
+      });
 
-    if (productsWithCountdown.length > 0) {
-      setActiveCountdown(productsWithCountdown[0].dropEnd);
+      if (productsWithCountdown.length > 0) {
+        setActiveCountdown(productsWithCountdown[0].dropEnd);
+      }
+    } catch (error) {
+      console.warn('Error processing countdowns:', error);
     }
   }, [products]);
 
-  // Get rebel drop products (equivalent to new arrivals)
+  // Get rebel drop products (equivalent to new arrivals) - Fixed for safety
   const rebelDrops = products.filter(product => 
-    product.badges.includes('NEW') || product.rank === 'Rebel'
+    product && product.badges && (
+      product.badges.includes('NEW') || 
+      product.badges.includes('REBEL DROP') ||
+      product.rank === 'Rebel'
+    )
   ).slice(0, 3);
 
   return (
