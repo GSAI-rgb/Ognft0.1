@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-02T05:47:17.139452",
+  "backend_url": "https://rebel-drops.preview.emergentagent.com/api",
+  "passed_tests": 6,
+  "failed_tests": 1,
+  "overall_success": false,
+  "test_results": [
+    {
+      "test": "Server Health Check",
+      "success": true,
+      "message": "Root endpoint responding correctly",
+      "timestamp": "2025-09-02T05:47:16.652439"
+    },
+    {
+      "test": "Environment Variables",
+      "success": true,
+      "message": "Backend accessible, env vars loaded",
+      "timestamp": "2025-09-02T05:47:16.708397"
+    },
+    {
+      "test": "CORS Configuration",
+      "success": false,
+      "message": "No CORS headers found",
+      "timestamp": "2025-09-02T05:47:16.759947"
+    },
+    {
+      "test": "API Routes Accessibility",
+      "success": true,
+      "message": "All defined routes tested",
+      "timestamp": "2025-09-02T05:47:16.931943"
+    },
+    {
+      "test": "Create Status Check",
+      "success": true,
+      "message": "Created status check with ID: d3d3e673-00ae-4a0d-9a62-483e1609b7f5",
+      "timestamp": "2025-09-02T05:47:16.985909"
+    },
+    {
+      "test": "Get Status Checks",
+      "success": true,
+      "message": "Retrieved 2 status checks",
+      "timestamp": "2025-09-02T05:47:17.038882"
+    },
+    {
+      "test": "MongoDB Integration",
+      "success": true,
+      "message": "Successfully created and retrieved record from MongoDB",
+      "timestamp": "2025-09-02T05:47:17.136602"
+    }
+  ]
+}
