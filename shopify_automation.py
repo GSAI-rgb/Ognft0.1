@@ -289,7 +289,9 @@ class ShopifyOGAutomation:
                         "inventory_management": "shopify"
                     }
                 ],
-                "status": "active"
+                "status": "active",
+                "published": True,
+                "published_scope": "web"
             }
         }
         
