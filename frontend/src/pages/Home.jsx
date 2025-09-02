@@ -31,11 +31,12 @@ const Home = () => {
           <RebelDrops />
           <FanArsenal />
           <ArsenalCategories />
-          <ChooseArsenal />
-          <OGPerformance />
-          <FanArmyWall />
-          <FromFirestorm />
-          <OGFooter />
+          {/* TODO: Add remaining OG components */}
+          <Collections />
+          <Performance />
+          <InstagramFeed />
+          <Journal />
+          <Footer />
         </>
       ) : (
         <>
