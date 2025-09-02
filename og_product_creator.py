@@ -117,13 +117,13 @@ class OGProductCreator:
                 "published": True,
                 "metafields": [
                     {
-                        "namespace": "og",
+                        "namespace": "ogfilm",
                         "key": "category_type",
                         "value": category,
                         "type": "single_line_text_field"
                     },
                     {
-                        "namespace": "og", 
+                        "namespace": "ogfilm", 
                         "key": "is_premium",
                         "value": "true",
                         "type": "boolean"
