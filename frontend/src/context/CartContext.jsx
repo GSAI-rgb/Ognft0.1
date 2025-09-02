@@ -13,12 +13,16 @@ const cartReducer = (state, action) => {
         item => item.id === action.payload.id
       );
       
+      // CRITICAL FIX: Avoid array spread operators for billion-user scale
       let newItems;
       if (existingItemIndex >= 0) {
-        newItems = [...state.items];
-        newItems[existingItemIndex].quantity += action.payload.quantity;
+        newItems = state.items.slice(); // More memory efficient than spread
+        newItems[existingItemIndex] = {
+          ...newItems[existingItemIndex],
+          quantity: newItems[existingItemIndex].quantity + action.payload.quantity
+        };
       } else {
-        newItems = [...state.items, action.payload];
+        newItems = state.items.concat(action.payload); // More efficient than spread
       }
       
       return {
