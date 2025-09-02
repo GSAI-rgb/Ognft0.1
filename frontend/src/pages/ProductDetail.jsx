@@ -255,7 +255,7 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Color Selection */}
+            {/* Color Selection with OG hover glow */}
             <div className="space-y-4">
               <h3 className="text-sm font-medium uppercase tracking-wider">Color</h3>
               <div className="flex space-x-3">
@@ -263,10 +263,10 @@ const ProductDetail = () => {
                   <button
                     key={color.name}
                     onClick={() => setSelectedColor(color.name)}
-                    className={`px-4 py-2 border text-sm font-medium uppercase tracking-wider transition-colors ${
+                    className={`px-4 py-2 border text-sm font-medium uppercase tracking-wider transition-all duration-300 ${
                       selectedColor === color.name
-                        ? 'border-white bg-white text-black'
-                        : 'border-gray-600 hover:border-white'
+                        ? 'border-[var(--color-red)] bg-[var(--color-red)] text-white shadow-[0_0_15px_rgba(193,18,31,0.6)]'
+                        : 'border-[var(--color-steel)] hover:border-[var(--color-red)] hover:shadow-[0_0_10px_rgba(193,18,31,0.4)]'
                     }`}
                   >
                     {color.name}
