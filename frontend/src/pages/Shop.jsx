@@ -26,16 +26,16 @@ const Shop = () => {
     }
   }, [category]);
 
-  // OG Armory tab configuration
+  // OG Armory tab configuration - Updated to match our actual products
   const tabs = [
     { id: 'all', label: 'ARMORY', filter: null },
-    { id: 'tops', label: 'REBEL TEES', filter: 'Tops' },
-    { id: 'bottoms', label: 'GROUND ZERO PANTS', filter: 'Bottoms' },
-    { id: 'outerwear', label: 'KATANA HOODIES', filter: 'Outerwear' },
-    { id: 'accessories', label: 'CHAINS, BANDS, POSTERS', filter: 'Accessories' },
-    { id: 'new-arrivals', label: 'REBEL DROP', filter: 'NEW' },
-    { id: 'best-sellers', label: 'FAN ARSENAL', filter: 'BEST SELLER' },
-    { id: 'sale', label: 'BLOOD PRICE', filter: 'SALE' }
+    { id: 'teeshirts', label: 'REBEL TEES', filter: 'Teeshirt' },
+    { id: 'hoodies', label: 'PREDATOR HOODIES', filter: 'Hoodies' },
+    { id: 'posters', label: 'WAR POSTERS', filter: 'Posters' },
+    { id: 'sweatshirts', label: 'BEAST SWEATSHIRTS', filter: 'Sweatshirts' },
+    { id: 'shirts', label: 'FORMAL ARSENAL', filter: 'Full Shirts' },
+    { id: 'accessories', label: 'GEAR & ACCESSORIES', filter: 'accessories' },
+    { id: 'new-arrivals', label: 'REBEL DROP', filter: 'NEW' }
   ];
 
   // Get filtered products using the new hook
