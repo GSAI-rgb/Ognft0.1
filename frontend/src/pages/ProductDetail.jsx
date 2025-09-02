@@ -303,15 +303,15 @@ const ProductDetail = () => {
               <button 
                 onClick={handleAddToCart}
                 disabled={cartLoading}
-                className="w-full bg-white text-black py-4 px-8 font-semibold uppercase tracking-wider hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full bg-[var(--color-red)] text-white py-4 px-8 font-bold uppercase tracking-wider hover:bg-opacity-90 hover:shadow-[0_0_20px_rgba(193,18,31,0.6)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {cartLoading ? (
                   <>
-                    <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full mr-2"></div>
-                    Adding...
+                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"></div>
+                    Adding to Arsenal...
                   </>
                 ) : (
-                  'Add to Bag'
+                  'Add to Arsenal'
                 )}
               </button>
             </div>
