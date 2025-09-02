@@ -2,7 +2,8 @@
 const SHOPIFY_DOMAIN = process.env.REACT_APP_SHOPIFY_STORE_DOMAIN || 'r1s7fa-eb.myshopify.com';
 const SHOPIFY_STOREFRONT_TOKEN = process.env.REACT_APP_SHOPIFY_STOREFRONT_API_TOKEN || 'c354b4e5fc2f5821176027fd2d8ba53b';
 
-const SHOPIFY_ENDPOINT = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`;
+const SHOPIFY_API_VERSION = process.env.REACT_APP_SHOPIFY_STOREFRONT_API_VERSION || '2024-01';
+const SHOPIFY_ENDPOINT = `https://${SHOPIFY_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
 // Demo mode flag - set to false when Shopify is configured
 const DEMO_MODE = !process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN || process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN === 'demo-token-12345';
