@@ -168,9 +168,9 @@ const ProductDetail = () => {
               <h1 className="text-5xl lg:text-6xl font-bold font-headline uppercase tracking-wider leading-none mb-6">
                 {product.name.replace('GRAPHIC TEE', 'Graphic Tee — Scene')} {product.id.toString().padStart(3, '0')}
               </h1>
-              <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                {product.description}
-              </p>
+              <div className="text-lg text-gray-300 leading-relaxed mb-4"
+                   dangerouslySetInnerHTML={{ __html: product.description || 'Premium OG merchandise for true fans. Crafted with precision and designed for warriors.' }}>
+              </div>
               {/* Telugu accent line */}
               <p className="text-base text-[var(--color-gold)] font-medium mb-8">
                 Owning this tee = Owning a piece of the Hungry Cheetah fight scene (హంగ్రీ చీతా సన్నివేశం).
