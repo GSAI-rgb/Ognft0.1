@@ -1,51 +1,75 @@
 {
-  "timestamp": "2025-09-02T10:14:14.239203",
+  "timestamp": "2025-09-02T10:15:20.782146",
   "backend_url": "https://shopify-og-sync.preview.emergentagent.com/api",
-  "passed_tests": 7,
-  "failed_tests": 0,
-  "overall_success": true,
+  "passed_tests": 9,
+  "failed_tests": 2,
+  "overall_success": false,
   "test_results": [
     {
       "test": "Server Health Check",
       "success": true,
       "message": "Root endpoint responding correctly",
-      "timestamp": "2025-09-02T10:14:13.066674"
+      "timestamp": "2025-09-02T10:15:18.799293"
     },
     {
       "test": "Environment Variables",
       "success": true,
       "message": "Backend accessible, env vars loaded",
-      "timestamp": "2025-09-02T10:14:13.337123"
+      "timestamp": "2025-09-02T10:15:18.850409"
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
-      "timestamp": "2025-09-02T10:14:13.492255"
+      "timestamp": "2025-09-02T10:15:18.900281"
     },
     {
       "test": "API Routes Accessibility",
       "success": true,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-02T10:14:13.937968"
+      "timestamp": "2025-09-02T10:15:19.070161"
     },
     {
       "test": "Create Status Check",
       "success": true,
-      "message": "Created status check with ID: 915d80b3-45d3-4b2a-ba53-60322b95c4a1",
-      "timestamp": "2025-09-02T10:14:14.038669"
+      "message": "Created status check with ID: 6589d3d7-c917-4335-8065-3dc374a942e9",
+      "timestamp": "2025-09-02T10:15:19.120093"
     },
     {
       "test": "Get Status Checks",
       "success": true,
-      "message": "Retrieved 11 status checks",
-      "timestamp": "2025-09-02T10:14:14.087440"
+      "message": "Retrieved 14 status checks",
+      "timestamp": "2025-09-02T10:15:19.179293"
     },
     {
       "test": "MongoDB Integration",
       "success": true,
       "message": "Successfully created and retrieved record from MongoDB",
-      "timestamp": "2025-09-02T10:14:14.235840"
+      "timestamp": "2025-09-02T10:15:19.282928"
+    },
+    {
+      "test": "Shopify Environment Variables",
+      "success": true,
+      "message": "All Shopify vars configured: SHOPIFY_STORE_DOMAIN=40fg1q-ju.myshopify.com, SHOPIFY_STOREFRONT_API_TOKEN=bab636f9...5e21, SHOPIFY_STOREFRONT_API_VERSION=2024-01, SHOPIFY_ADMIN_API_KEY=shpat_b2...a192, SHOPIFY_ADMIN_API_SECRET=61c8a6e5...55b2",
+      "timestamp": "2025-09-02T10:15:19.286729"
+    },
+    {
+      "test": "Shopify Storefront API Connectivity",
+      "success": false,
+      "message": "No shop data or products found",
+      "timestamp": "2025-09-02T10:15:20.495190"
+    },
+    {
+      "test": "OG Products Availability",
+      "success": false,
+      "message": "GraphQL errors: [{'message': \"Field 'metafields' is missing required arguments: identifiers\", 'locations': [{'line': 17, 'column': 29}], 'path': ['query', 'products', 'edges', 'node', 'metafields'], 'extensions': {'code': 'missingRequiredArguments', 'className': 'Field', 'name': 'metafields', 'arguments': 'identifiers'}}, {'message': \"Field 'metafields' doesn't accept argument 'first'\", 'locations': [{'line': 17, 'column': 40}], 'path': ['query', 'products', 'edges', 'node', 'metafields', 'first'], 'extensions': {'code': 'argumentNotAccepted', 'name': 'metafields', 'typeName': 'Field', 'argumentName': 'first'}}, {'message': \"Field 'edges' doesn't exist on type 'Metafield'\", 'locations': [{'line': 18, 'column': 33}], 'path': ['query', 'products', 'edges', 'node', 'metafields', 'edges'], 'extensions': {'code': 'undefinedField', 'typeName': 'Metafield', 'fieldName': 'edges'}}]",
+      "timestamp": "2025-09-02T10:15:20.629410"
+    },
+    {
+      "test": "Backend Shopify Integration Health",
+      "success": true,
+      "message": "Backend stable with Shopify integration",
+      "timestamp": "2025-09-02T10:15:20.780204"
     }
   ]
 }
