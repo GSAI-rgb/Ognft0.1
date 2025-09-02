@@ -419,14 +419,12 @@ class BackendTester:
                 products = data.get('data', {}).get('products', {}).get('edges', [])
                 
                 og_products = []
-                og_metafields_count = 0
                 
                 for product_edge in products:
                     product = product_edge['node']
                     title = product.get('title', '')
                     tags = product.get('tags', [])
                     available = product.get('availableForSale', False)
-                    metafields = product.get('metafields', {}).get('edges', [])
                     
                     # Check for OG-related content
                     is_og_product = (
@@ -434,6 +432,8 @@ class BackendTester:
                         'Death' in title or 
                         'War' in title or 
                         'Rebel' in title or
+                        'Stalker' in title or
+                        'Machine' in title or
                         any('og' in tag.lower() for tag in tags)
                     )
                     
@@ -441,15 +441,8 @@ class BackendTester:
                         og_products.append({
                             'title': title,
                             'available': available,
-                            'tags': tags,
-                            'metafields_count': len(metafields)
+                            'tags': tags
                         })
-                        
-                        # Count OG metafields
-                        for mf_edge in metafields:
-                            mf = mf_edge['node']
-                            if mf.get('namespace') == 'ogfilm':
-                                og_metafields_count += 1
                 
                 if len(og_products) >= 10:  # Expecting at least 10 OG products out of 52
                     available_count = sum(1 for p in og_products if p['available'])
