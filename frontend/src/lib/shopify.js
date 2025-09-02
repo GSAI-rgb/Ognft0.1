@@ -262,18 +262,50 @@ class ShopifyAPI {
 // Export singleton instance
 export const shopify = new ShopifyAPI();
 
-// Helper functions for mock data fallback
+// Enhanced helper functions for seamless Shopify integration
 export const useMockDataIfShopifyUnavailable = async (shopifyFunction, mockData) => {
-  try {
-    if (!SHOPIFY_STOREFRONT_TOKEN) {
-      console.log('Using mock data - Shopify not configured');
-      return mockData;
-    }
-    return await shopifyFunction();
-  } catch (error) {
-    console.warn('Shopify API failed, using mock data:', error.message);
+  if (DEMO_MODE) {
+    console.log('🎭 Demo Mode: Using mock data - Shopify not configured');
     return mockData;
   }
+  
+  try {
+    const result = await shopifyFunction();
+    console.log('✅ Shopify: Data loaded successfully');
+    return result;
+  } catch (error) {
+    console.warn('⚠️ Shopify API failed, falling back to mock data:', error.message);
+    return mockData;
+  }
+};
+
+// Cart management functions
+export const addToShopifyCart = async (variantId, quantity = 1) => {
+  if (DEMO_MODE) {
+    console.log('🎭 Demo Mode: Simulating add to cart', { variantId, quantity });
+    return { success: true, cartId: 'demo-cart-id' };
+  }
+  
+  try {
+    const cart = await shopify.createCart([
+      {
+        merchandiseId: variantId,
+        quantity: quantity
+      }
+    ]);
+    return { success: true, cart };
+  } catch (error) {
+    console.error('Failed to add to Shopify cart:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Generate Shopify checkout URL
+export const getShopifyCheckoutUrl = (cartId) => {
+  if (DEMO_MODE) {
+    return '#demo-checkout';
+  }
+  return `https://${SHOPIFY_DOMAIN}/cart/${cartId}`;
 };
 
 export default shopify;
