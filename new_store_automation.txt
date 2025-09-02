@@ -3,3 +3,11 @@
 🏪 Updating store settings...
 ❌ API Error 406: 
 📚 Creating OG collections...
+✅ Created collection: Rebellion Core
+✅ Created collection: Rebel Drops
+✅ Created collection: Vault Exclusive
+✅ Created collection: Fan Arsenal
+🚀 Processing product directory: /app/PRODUCTS
+
+📁 Creating product: product2 (wallet)
+   ✅ Created: OG Product2 Tactical Wallet
