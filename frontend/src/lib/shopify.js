@@ -6,7 +6,7 @@ const SHOPIFY_API_VERSION = process.env.REACT_APP_SHOPIFY_STOREFRONT_API_VERSION
 const SHOPIFY_ENDPOINT = `https://${SHOPIFY_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
 // Demo mode flag - disabled now that real Shopify is configured
-const DEMO_MODE = false;
+const DEMO_MODE = false; // Real Shopify products loading
 
 // GraphQL queries with OG metafields support
 const PRODUCTS_QUERY = `

@@ -35,3 +35,12 @@
 
 📁 Creating product: Vintage Typography (teeshirt)
    ✅ Created: OG Vintage Typography Rebel Tee
+
+📁 Creating product: Music Festival Vibes (teeshirt)
+   ✅ Created: OG Music Festival Vibes Rebel Tee
+
+📁 Creating product: Space Exploration (teeshirt)
+   ✅ Created: OG Space Exploration Rebel Tee
+
+📁 Creating product: City Skyline (teeshirt)
+   ✅ Created: OG City Skyline Rebel Tee
