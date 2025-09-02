@@ -118,6 +118,28 @@ const PRODUCT_QUERY = `
   }
 `;
 
+const SHOP_QUERY = `
+  query getShop {
+    shop {
+      id
+      name
+      description
+      primaryDomain {
+        url
+      }
+      currencyCode
+      metafields(identifiers: [
+        {namespace: "og", key: "affordable_price_ceiling"}
+      ]) {
+        key
+        value
+        type
+        namespace
+      }
+    }
+  }
+`;
+
 const CART_CREATE_MUTATION = `
   mutation CartCreate($input: CartInput!) {
     cartCreate(input: $input) {
