@@ -5,11 +5,6 @@ import OGHeroSection from '../components/OG/OGHeroSection';
 import RebelDrops from '../components/OG/RebelDrops';
 import FanArsenal from '../components/OG/FanArsenal';
 import ArsenalCategories from '../components/OG/ArsenalCategories';
-import ChooseArsenal from '../components/OG/ChooseArsenal';
-import OGPerformance from '../components/OG/OGPerformance';
-import FanArmyWall from '../components/OG/FanArmyWall';
-import FromFirestorm from '../components/OG/FromFirestorm';
-import OGFooter from '../components/OG/OGFooter';
 // Fallback to original components for non-OG theme
 import HeroSection from '../components/HeroSection';
 import NewArrivals from '../components/NewArrivals';
