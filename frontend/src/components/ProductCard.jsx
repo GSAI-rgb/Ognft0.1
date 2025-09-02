@@ -44,22 +44,22 @@ const ProductCard = ({ product, className = "", priority = false }) => {
           />
         </div>
         
-        {/* OG Theme Badges */}
-        <div className="absolute top-4 left-4 flex flex-col space-y-2">
-          {product.badges.map((badge, index) => {
+        {/* OG Theme Badges - Smaller and better positioned */}
+        <div className="absolute top-2 left-2 flex flex-wrap gap-1 max-w-[70%]">
+          {product.badges.slice(0, 2).map((badge, index) => {
             // Transform badge labels to OG theme
             let displayBadge = badge;
             let badgeClass = '';
             
             if (badge === 'NEW') {
-              displayBadge = 'REBEL DROP';
-              badgeClass = 'bg-[var(--color-red)] text-white shadow-[0_0_10px_rgba(193,18,31,0.5)]';
+              displayBadge = 'REBEL';
+              badgeClass = 'bg-[var(--color-red)] text-white shadow-[0_0_8px_rgba(193,18,31,0.6)]';
             } else if (badge === 'BEST SELLER') {
-              displayBadge = 'FAN ARSENAL';
-              badgeClass = 'bg-[var(--color-red)] text-white border border-[var(--color-gold)] shadow-[0_0_10px_rgba(201,151,0,0.3)]';
+              displayBadge = 'ARSENAL';
+              badgeClass = 'bg-[var(--color-red)] text-white border border-[var(--color-gold)] shadow-[0_0_8px_rgba(201,151,0,0.4)]';
             } else if (badge === 'SALE') {
-              displayBadge = 'BLOOD PRICE';
-              badgeClass = 'bg-[var(--color-gold)] text-black shadow-[0_0_10px_rgba(201,151,0,0.5)]';
+              displayBadge = 'BLOOD';
+              badgeClass = 'bg-[var(--color-gold)] text-black shadow-[0_0_8px_rgba(201,151,0,0.6)]';
             } else {
               badgeClass = 'bg-[var(--color-steel)] text-white';
             }
@@ -67,7 +67,7 @@ const ProductCard = ({ product, className = "", priority = false }) => {
             return (
               <span
                 key={index}
-                className={`px-3 py-1 text-xs font-bold tracking-wider uppercase ${badgeClass}`}
+                className={`px-2 py-1 text-[10px] font-black tracking-wider uppercase ${badgeClass} backdrop-blur-sm`}
               >
                 {displayBadge}
               </span>
