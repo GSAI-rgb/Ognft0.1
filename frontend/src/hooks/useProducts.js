@@ -72,11 +72,25 @@ export const useProduct = (productId) => {
       try {
         setLoading(true);
         
-        // Try to get from Shopify first, fallback to mock
-        const productData = await useMockDataIfShopifyUnavailable(
-          () => shopify.getProduct(productId),
-          mockProducts.find(p => p.id === parseInt(productId))
-        );
+        // First try to get from our products.json (direct integration)
+        let productData = null;
+        try {
+          const response = await fetch('/products.json');
+          if (response.ok) {
+            const directProducts = await response.json();
+            productData = directProducts.find(p => p.id === parseInt(productId));
+          }
+        } catch (directError) {
+          console.warn('Direct integration failed:', directError.message);
+        }
+
+        // If not found in direct integration, try Shopify
+        if (!productData) {
+          productData = await useMockDataIfShopifyUnavailable(
+            () => shopify.getProduct(productId),
+            mockProducts.find(p => p.id === parseInt(productId))
+          );
+        }
         
         setProduct(productData);
         setError(null);
