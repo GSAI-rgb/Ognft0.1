@@ -2,7 +2,9 @@ import React, { useState, memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { formatPrice } from '../lib/price';
 import OptimizedImage from './OptimizedImage';
+import WaitlistModal from './WaitlistModal';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
