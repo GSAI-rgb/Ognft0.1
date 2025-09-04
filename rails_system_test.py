@@ -215,8 +215,8 @@ class RailsSystemTester:
                 self.log_result("OG Product Names Quality", False, "No products data loaded")
                 return False
             
-            # Check for premium OG-themed names
-            og_keywords = ['OG', 'Death', 'War', 'Rebel', 'Stalker', 'Machine', 'Beast', 'Hunter', 'Shadow', 'Storm', 'Phoenix', 'Wolf', 'Blood', 'Black']
+            # Check for premium OG-themed names (expanded cinematic keywords)
+            og_keywords = ['OG', 'Death', 'War', 'Rebel', 'Stalker', 'Machine', 'Beast', 'Hunter', 'Shadow', 'Storm', 'Phoenix', 'Wolf', 'Blood', 'Black', 'Brutal', 'Crimson', 'Dark', 'Predator', 'Thunder', 'Executive', 'Firestorm', 'Fighter', 'Iron', 'Legion', 'Midnight', 'Hawk', 'Night', 'Fury', 'Savage', 'Steel', 'Venom', 'Strike']
             
             og_named_products = []
             for product in self.products:
