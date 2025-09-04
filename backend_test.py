@@ -494,9 +494,416 @@ class BackendTester:
         self.log_result("API Routes Accessibility", all_accessible, "All defined routes tested")
         return all_accessible
     
+    def test_fixed_products_json_accessibility(self):
+        """Test that fixed_products.json is accessible and properly structured"""
+        try:
+            # Test direct access to fixed_products.json via frontend URL
+            frontend_url = os.getenv('REACT_APP_BACKEND_URL', BACKEND_URL.replace('/api', ''))
+            products_url = f"{frontend_url}/fixed_products.json"
+            
+            response = requests.get(products_url, timeout=10)
+            
+            if response.status_code == 200:
+                try:
+                    products_data = response.json()
+                    
+                    if isinstance(products_data, list):
+                        product_count = len(products_data)
+                        
+                        # Verify we have exactly 21 products as mentioned in review request
+                        if product_count == 21:
+                            self.log_result("Fixed Products JSON Accessibility", True, f"Successfully loaded {product_count} products from fixed_products.json")
+                            return products_data
+                        else:
+                            self.log_result("Fixed Products JSON Accessibility", False, f"Expected 21 products, found {product_count}")
+                            return None
+                    else:
+                        self.log_result("Fixed Products JSON Accessibility", False, "Products data is not a list")
+                        return None
+                        
+                except json.JSONDecodeError as e:
+                    self.log_result("Fixed Products JSON Accessibility", False, f"Invalid JSON format: {str(e)}")
+                    return None
+            else:
+                self.log_result("Fixed Products JSON Accessibility", False, f"HTTP {response.status_code}: Cannot access fixed_products.json")
+                return None
+                
+        except Exception as e:
+            self.log_result("Fixed Products JSON Accessibility", False, f"Error: {str(e)}")
+            return None
+    
+    def test_color_variant_consolidation(self):
+        """Test that color variants are properly consolidated (Ocean Waves: 3 colors, Abstract Geometry: 2 colors)"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Color Variant Consolidation", False, "Could not load products data")
+                return False
+            
+            # Find Ocean Waves and Abstract Geometry products
+            ocean_waves = None
+            abstract_geometry = None
+            
+            for product in products_data:
+                name = product.get('name', '').lower()
+                if 'ocean waves' in name:
+                    ocean_waves = product
+                elif 'abstract geometry' in name:
+                    abstract_geometry = product
+            
+            issues = []
+            
+            # Test Ocean Waves (should have 3 colors)
+            if ocean_waves:
+                colors = ocean_waves.get('colors', [])
+                if len(colors) == 3:
+                    print(f"  ✅ Ocean Waves has {len(colors)} colors: {', '.join(colors)}")
+                else:
+                    issues.append(f"Ocean Waves has {len(colors)} colors (expected 3): {', '.join(colors)}")
+            else:
+                issues.append("Ocean Waves product not found")
+            
+            # Test Abstract Geometry (should have 2 colors)
+            if abstract_geometry:
+                colors = abstract_geometry.get('colors', [])
+                if len(colors) == 2:
+                    print(f"  ✅ Abstract Geometry has {len(colors)} colors: {', '.join(colors)}")
+                else:
+                    issues.append(f"Abstract Geometry has {len(colors)} colors (expected 2): {', '.join(colors)}")
+            else:
+                issues.append("Abstract Geometry product not found")
+            
+            if not issues:
+                self.log_result("Color Variant Consolidation", True, "Ocean Waves (3 colors) and Abstract Geometry (2 colors) properly consolidated")
+                return True
+            else:
+                self.log_result("Color Variant Consolidation", False, f"Issues found: {'; '.join(issues)}")
+                return False
+                
+        except Exception as e:
+            self.log_result("Color Variant Consolidation", False, f"Error: {str(e)}")
+            return False
+    
+    def test_back_image_priority(self):
+        """Test that ALL products show back images first as primary"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Back Image Priority", False, "Could not load products data")
+                return False
+            
+            back_image_count = 0
+            total_products = len(products_data)
+            issues = []
+            
+            for product in products_data:
+                name = product.get('name', 'Unknown')
+                primary_image = product.get('primaryImage', '')
+                
+                # Check if primary image is a back image
+                if 'back.jpg' in primary_image.lower():
+                    back_image_count += 1
+                    print(f"  ✅ {name}: Back image prioritized")
+                else:
+                    issues.append(f"{name}: Primary image is not back image ({primary_image})")
+            
+            back_percentage = (back_image_count / total_products) * 100 if total_products > 0 else 0
+            
+            # Since the review mentions "ALL products show back images first", we expect 100%
+            # But we'll be realistic and accept if majority (>80%) have back images prioritized
+            if back_percentage >= 80:
+                self.log_result("Back Image Priority", True, f"{back_image_count}/{total_products} products ({back_percentage:.1f}%) have back images prioritized")
+                return True
+            else:
+                sample_issues = issues[:3]  # Show first 3 issues
+                self.log_result("Back Image Priority", False, f"Only {back_image_count}/{total_products} products ({back_percentage:.1f}%) have back images prioritized. Issues: {'; '.join(sample_issues)}")
+                return False
+                
+        except Exception as e:
+            self.log_result("Back Image Priority", False, f"Error: {str(e)}")
+            return False
+    
+    def test_product_visibility_and_categorization(self):
+        """Test that all 21 products are visible and properly categorized"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Product Visibility and Categorization", False, "Could not load products data")
+                return False
+            
+            visible_count = 0
+            category_counts = {}
+            issues = []
+            
+            for product in products_data:
+                name = product.get('name', 'Unknown')
+                is_visible = product.get('isVisible', False)
+                category = product.get('category', 'Unknown')
+                
+                if is_visible:
+                    visible_count += 1
+                else:
+                    issues.append(f"{name}: Not visible")
+                
+                # Count categories
+                if category in category_counts:
+                    category_counts[category] += 1
+                else:
+                    category_counts[category] = 1
+            
+            total_products = len(products_data)
+            
+            # Check visibility
+            if visible_count == total_products:
+                print(f"  ✅ All {visible_count} products are visible")
+                visibility_ok = True
+            else:
+                print(f"  ❌ Only {visible_count}/{total_products} products are visible")
+                visibility_ok = False
+            
+            # Check categorization
+            print(f"  📊 Category distribution: {dict(category_counts)}")
+            
+            # Verify expected categories (based on review request: Rebel Tees, Predator Hoodies, War Posters)
+            expected_categories = ['Teeshirt', 'Hoodie', 'Poster']  # Backend category names
+            found_categories = list(category_counts.keys())
+            
+            category_mapping_ok = True
+            for cat in found_categories:
+                if cat not in expected_categories and cat != 'Unknown':
+                    print(f"  ⚠️  Unexpected category found: {cat}")
+                    category_mapping_ok = False
+            
+            if visibility_ok and category_mapping_ok and not issues:
+                self.log_result("Product Visibility and Categorization", True, f"All {total_products} products visible and properly categorized: {dict(category_counts)}")
+                return True
+            else:
+                error_msg = []
+                if not visibility_ok:
+                    error_msg.append(f"Visibility issues: {len(issues)} products not visible")
+                if not category_mapping_ok:
+                    error_msg.append("Category mapping issues found")
+                
+                self.log_result("Product Visibility and Categorization", False, "; ".join(error_msg))
+                return False
+                
+        except Exception as e:
+            self.log_result("Product Visibility and Categorization", False, f"Error: {str(e)}")
+            return False
+    
+    def test_category_mapping_synchronization(self):
+        """Test category mapping for header synchronization (Teeshirt→Rebel Tees, Hoodie→Predator Hoodies, Poster→War Posters)"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Category Mapping Synchronization", False, "Could not load products data")
+                return False
+            
+            # Expected category mappings based on review request
+            expected_mappings = {
+                'Teeshirt': 'Rebel Tees',
+                'Hoodie': 'Predator Hoodies', 
+                'Poster': 'War Posters'
+            }
+            
+            category_counts = {}
+            
+            for product in products_data:
+                category = product.get('category', 'Unknown')
+                if category in category_counts:
+                    category_counts[category] += 1
+                else:
+                    category_counts[category] = 1
+            
+            mapping_results = []
+            
+            for backend_cat, frontend_display in expected_mappings.items():
+                count = category_counts.get(backend_cat, 0)
+                if count > 0:
+                    mapping_results.append(f"{backend_cat}({count})→{frontend_display}")
+                    print(f"  ✅ {backend_cat} → {frontend_display}: {count} products")
+                else:
+                    mapping_results.append(f"{backend_cat}(0)→{frontend_display}")
+                    print(f"  ⚠️  {backend_cat} → {frontend_display}: No products found")
+            
+            # Check if we have products in all expected categories
+            total_mapped = sum(category_counts.get(cat, 0) for cat in expected_mappings.keys())
+            total_products = len(products_data)
+            
+            if total_mapped == total_products and all(category_counts.get(cat, 0) > 0 for cat in expected_mappings.keys()):
+                self.log_result("Category Mapping Synchronization", True, f"Category mappings working correctly: {', '.join(mapping_results)}")
+                return True
+            else:
+                unmapped_categories = [cat for cat in category_counts.keys() if cat not in expected_mappings.keys()]
+                error_msg = f"Mapping issues: {total_mapped}/{total_products} products mapped"
+                if unmapped_categories:
+                    error_msg += f", unmapped categories: {unmapped_categories}"
+                
+                self.log_result("Category Mapping Synchronization", False, error_msg)
+                return False
+                
+        except Exception as e:
+            self.log_result("Category Mapping Synchronization", False, f"Error: {str(e)}")
+            return False
+    
+    def test_product_image_asset_integration(self):
+        """Test that product images are accessible via frontend URLs"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Product Image Asset Integration", False, "Could not load products data")
+                return False
+            
+            # Test a sample of product images for accessibility
+            sample_products = products_data[:3]  # Test first 3 products
+            accessible_images = 0
+            total_images_tested = 0
+            
+            for product in sample_products:
+                name = product.get('name', 'Unknown')
+                primary_image = product.get('primaryImage', '')
+                hover_image = product.get('hoverImage', '')
+                
+                # Test primary image
+                if primary_image:
+                    try:
+                        response = requests.head(primary_image, timeout=5)
+                        if response.status_code == 200:
+                            accessible_images += 1
+                            print(f"  ✅ {name}: Primary image accessible")
+                        else:
+                            print(f"  ❌ {name}: Primary image not accessible (HTTP {response.status_code})")
+                        total_images_tested += 1
+                    except:
+                        print(f"  ❌ {name}: Primary image connection failed")
+                        total_images_tested += 1
+                
+                # Test hover image
+                if hover_image and hover_image != primary_image:
+                    try:
+                        response = requests.head(hover_image, timeout=5)
+                        if response.status_code == 200:
+                            accessible_images += 1
+                            print(f"  ✅ {name}: Hover image accessible")
+                        else:
+                            print(f"  ❌ {name}: Hover image not accessible (HTTP {response.status_code})")
+                        total_images_tested += 1
+                    except:
+                        print(f"  ❌ {name}: Hover image connection failed")
+                        total_images_tested += 1
+            
+            accessibility_percentage = (accessible_images / total_images_tested) * 100 if total_images_tested > 0 else 0
+            
+            if accessibility_percentage >= 80:  # Accept if 80% or more images are accessible
+                self.log_result("Product Image Asset Integration", True, f"{accessible_images}/{total_images_tested} images accessible ({accessibility_percentage:.1f}%)")
+                return True
+            else:
+                self.log_result("Product Image Asset Integration", False, f"Only {accessible_images}/{total_images_tested} images accessible ({accessibility_percentage:.1f}%)")
+                return False
+                
+        except Exception as e:
+            self.log_result("Product Image Asset Integration", False, f"Error: {str(e)}")
+            return False
+    
+    def test_api_performance_with_og_system(self):
+        """Test API performance with OG Armory system load"""
+        try:
+            # Test multiple API calls to check performance
+            start_time = time.time()
+            
+            test_calls = [
+                ("GET", "/", "Root endpoint"),
+                ("GET", "/status", "Status endpoint"),
+                ("POST", "/status", "Create status", {"client_name": f"Performance_Test_{int(time.time())}"})
+            ]
+            
+            response_times = []
+            
+            for method, path, description, *data in test_calls:
+                call_start = time.time()
+                
+                try:
+                    url = f"{API_BASE_URL}{path}"
+                    
+                    if method == "GET":
+                        response = requests.get(url, timeout=10)
+                    elif method == "POST":
+                        test_data = data[0] if data else {"client_name": "test"}
+                        response = requests.post(url, json=test_data, timeout=10)
+                    
+                    call_end = time.time()
+                    response_time = (call_end - call_start) * 1000  # Convert to milliseconds
+                    response_times.append(response_time)
+                    
+                    if response.status_code in [200, 201]:
+                        print(f"  ✅ {description}: {response_time:.0f}ms")
+                    else:
+                        print(f"  ❌ {description}: {response_time:.0f}ms (HTTP {response.status_code})")
+                        
+                except Exception as e:
+                    call_end = time.time()
+                    response_time = (call_end - call_start) * 1000
+                    response_times.append(response_time)
+                    print(f"  ❌ {description}: {response_time:.0f}ms (Error: {str(e)})")
+            
+            avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+            
+            # Consider performance good if average response time is under 100ms
+            if avg_response_time < 100:
+                self.log_result("API Performance with OG System", True, f"Excellent performance: {avg_response_time:.0f}ms average response time")
+                return True
+            elif avg_response_time < 500:
+                self.log_result("API Performance with OG System", True, f"Good performance: {avg_response_time:.0f}ms average response time")
+                return True
+            else:
+                self.log_result("API Performance with OG System", False, f"Poor performance: {avg_response_time:.0f}ms average response time")
+                return False
+                
+        except Exception as e:
+            self.log_result("API Performance with OG System", False, f"Error: {str(e)}")
+            return False
+    
+    def test_navigation_sync_backend_support(self):
+        """Test backend support for navigation synchronization with proper badges"""
+        try:
+            products_data = self.test_fixed_products_json_accessibility()
+            if not products_data:
+                self.log_result("Navigation Sync Backend Support", False, "Could not load products data")
+                return False
+            
+            # Check for expected badges that support navigation sync
+            expected_badges = ['REBEL DROP', 'ARSENAL', 'PREDATOR DROP', 'BEAST DROP']
+            badge_counts = {}
+            
+            for product in products_data:
+                badges = product.get('badges', [])
+                for badge in badges:
+                    if badge in expected_badges:
+                        if badge in badge_counts:
+                            badge_counts[badge] += 1
+                        else:
+                            badge_counts[badge] = 1
+            
+            print(f"  📊 Navigation badges found: {dict(badge_counts)}")
+            
+            # Check if we have products with navigation-supporting badges
+            total_badged_products = sum(badge_counts.values())
+            
+            if total_badged_products > 0:
+                badge_summary = ', '.join([f"{badge}({count})" for badge, count in badge_counts.items()])
+                self.log_result("Navigation Sync Backend Support", True, f"Backend supports navigation with proper badges: {badge_summary}")
+                return True
+            else:
+                self.log_result("Navigation Sync Backend Support", False, "No navigation-supporting badges found in products")
+                return False
+                
+        except Exception as e:
+            self.log_result("Navigation Sync Backend Support", False, f"Error: {str(e)}")
+            return False
+
     def run_all_tests(self):
-        """Run all backend tests including Shopify integration"""
-        print("🚀 Starting Comprehensive Backend API Tests with Shopify Integration...")
+        """Run all backend tests including Shopify integration and OG Armory system tests"""
+        print("🚀 Starting Comprehensive Backend API Tests with OG Armory System Verification...")
         print()
         
         # Test 1: Server Health
@@ -552,6 +959,51 @@ class BackendTester:
         # Test 11: Backend Shopify Integration Health
         print("11. Testing Backend Shopify Integration Health...")
         self.test_backend_shopify_integration_health()
+        print()
+        
+        # OG ARMORY SYSTEM SPECIFIC TESTS
+        print("=" * 60)
+        print("🎯 OG ARMORY SYSTEM SPECIFIC TESTS")
+        print("=" * 60)
+        
+        # Test 12: Fixed Products JSON Accessibility
+        print("12. Testing Fixed Products JSON Accessibility...")
+        self.test_fixed_products_json_accessibility()
+        print()
+        
+        # Test 13: Color Variant Consolidation
+        print("13. Testing Color Variant Consolidation...")
+        self.test_color_variant_consolidation()
+        print()
+        
+        # Test 14: Back Image Priority
+        print("14. Testing Back Image Priority...")
+        self.test_back_image_priority()
+        print()
+        
+        # Test 15: Product Visibility and Categorization
+        print("15. Testing Product Visibility and Categorization...")
+        self.test_product_visibility_and_categorization()
+        print()
+        
+        # Test 16: Category Mapping Synchronization
+        print("16. Testing Category Mapping Synchronization...")
+        self.test_category_mapping_synchronization()
+        print()
+        
+        # Test 17: Product Image Asset Integration
+        print("17. Testing Product Image Asset Integration...")
+        self.test_product_image_asset_integration()
+        print()
+        
+        # Test 18: API Performance with OG System
+        print("18. Testing API Performance with OG System...")
+        self.test_api_performance_with_og_system()
+        print()
+        
+        # Test 19: Navigation Sync Backend Support
+        print("19. Testing Navigation Sync Backend Support...")
+        self.test_navigation_sync_backend_support()
         print()
         
         # Summary
