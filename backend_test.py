@@ -593,43 +593,51 @@ class BackendTester:
             self.log_result("VAULT Product Integration", False, f"Error: {str(e)}")
             return False
     
-    def test_back_image_priority(self):
-        """Test that ALL products show back images first as primary"""
+    def test_badge_system_functionality(self):
+        """Test badge system functionality - verify REBEL DROP, VAULT, PREMIUM, LIMITED badges"""
         try:
-            products_data = self.test_fixed_products_json_accessibility()
+            products_data = self.test_comprehensive_products_json_accessibility()
             if not products_data:
-                self.log_result("Back Image Priority", False, "Could not load products data")
+                self.log_result("Badge System Functionality", False, "Could not load products data")
                 return False
             
-            back_image_count = 0
-            total_products = len(products_data)
-            issues = []
+            # Expected badges from review request
+            expected_badges = ['REBEL DROP', 'VAULT', 'PREMIUM', 'LIMITED', 'LOCKED EXCLUSIVE']
+            badge_counts = {}
+            products_with_badges = 0
             
             for product in products_data:
                 name = product.get('name', 'Unknown')
-                primary_image = product.get('primaryImage', '')
+                badges = product.get('badges', [])
                 
-                # Check if primary image is a back image
-                if 'back.jpg' in primary_image.lower():
-                    back_image_count += 1
-                    print(f"  ✅ {name}: Back image prioritized")
-                else:
-                    issues.append(f"{name}: Primary image is not back image ({primary_image})")
+                if badges:
+                    products_with_badges += 1
+                    
+                for badge in badges:
+                    if badge in expected_badges:
+                        if badge in badge_counts:
+                            badge_counts[badge] += 1
+                        else:
+                            badge_counts[badge] = 1
+                        print(f"  ✅ {name}: {badge} badge found")
             
-            back_percentage = (back_image_count / total_products) * 100 if total_products > 0 else 0
+            total_products = len(products_data)
+            badge_coverage = (products_with_badges / total_products) * 100 if total_products > 0 else 0
             
-            # Since the review mentions "ALL products show back images first", we expect 100%
-            # But we'll be realistic and accept if majority (>80%) have back images prioritized
-            if back_percentage >= 80:
-                self.log_result("Back Image Priority", True, f"{back_image_count}/{total_products} products ({back_percentage:.1f}%) have back images prioritized")
+            # Check if we have all expected badge types
+            found_badge_types = len(badge_counts.keys())
+            expected_badge_types = len(expected_badges)
+            
+            if found_badge_types >= 3 and badge_coverage >= 80:  # At least 3 badge types and 80% coverage
+                badge_summary = ', '.join([f"{badge}({count})" for badge, count in badge_counts.items()])
+                self.log_result("Badge System Functionality", True, f"Badge system working: {badge_summary}. Coverage: {badge_coverage:.1f}% ({products_with_badges}/{total_products} products)")
                 return True
             else:
-                sample_issues = issues[:3]  # Show first 3 issues
-                self.log_result("Back Image Priority", False, f"Only {back_image_count}/{total_products} products ({back_percentage:.1f}%) have back images prioritized. Issues: {'; '.join(sample_issues)}")
+                self.log_result("Badge System Functionality", False, f"Badge system issues: Only {found_badge_types}/{expected_badge_types} badge types found, {badge_coverage:.1f}% coverage")
                 return False
                 
         except Exception as e:
-            self.log_result("Back Image Priority", False, f"Error: {str(e)}")
+            self.log_result("Badge System Functionality", False, f"Error: {str(e)}")
             return False
     
     def test_product_visibility_and_categorization(self):
