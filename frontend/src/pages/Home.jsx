@@ -153,30 +153,41 @@ const Home = () => {
         </section>
       )}
       
-      {/* Rails System */}
-      <Rail 
-        title="Under ₹999 — For Every Rebel" 
-        products={affordableProducts}
-        showViewAll={true}
-        viewAllLink="/shop?filter=affordable"
-      />
+      {/* Rails System - CONVERSION OPTIMIZED */}
+      <div id="rebellion-core">
+        <Rail 
+          title="Under ₹999 — No Fan Left Behind" 
+          products={affordableProducts}
+          showViewAll={true}
+          viewAllLink="/shop?filter=under-999"
+        />
+      </div>
       
       <Rail 
-        title="Rebellion Core — Bestsellers" 
+        title="Rebellion Core — For True PSPK Fans" 
         products={rebelCore.length > 0 ? rebelCore : products.slice(0, 8)}
         showViewAll={true}
-        viewAllLink="/shop?filter=bestsellers"
+        viewAllLink="/shop?filter=rebellion-core"
       />
       
-      <Rail 
-        title="Vault Exclusives — Numbered. Never Reprinted." 
-        products={vaultProducts.length > 0 ? vaultProducts : products.filter(p => p.price >= 2000)}
-        showViewAll={true}
-        viewAllLink="/shop?filter=vault"
-      />
+      {exclusiveProducts.length > 0 && (
+        <Rail 
+          title="Elite Access — Unlock Your Status" 
+          products={exclusiveProducts}
+          showViewAll={true}
+          viewAllLink="/shop?filter=exclusive"
+        />
+      )}
       
       {/* Mood Selection */}
       <MoodChips />
+
+      {/* Community Modal */}
+      <PSPKCommunityModal
+        isOpen={communityModalOpen}
+        onClose={() => setCommunityModalOpen(false)}
+        onConsent={handleCommunityConsent}
+      />
 
       <Footer />
     </div>
