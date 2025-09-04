@@ -93,16 +93,27 @@ export const useProduct = (productId) => {
       try {
         setLoading(true);
         
-        // First try to get from our products.json (direct integration)
+        // First try to get from real_products.json, then fallback to products.json
         let productData = null;
         try {
-          const response = await fetch('/products.json');
+          const response = await fetch('/real_products.json');
           if (response.ok) {
-            const directProducts = await response.json();
-            productData = directProducts.find(p => p.id === parseInt(productId));
+            const realProducts = await response.json();
+            productData = realProducts.find(p => p.id === parseInt(productId));
           }
-        } catch (directError) {
-          console.warn('Direct integration failed:', directError.message);
+        } catch (realProductsError) {
+          console.warn('Real products not found:', realProductsError.message);
+          
+          // Fallback to Shopify products
+          try {
+            const response = await fetch('/products.json');
+            if (response.ok) {
+              const shopifyProducts = await response.json();
+              productData = shopifyProducts.find(p => p.id === parseInt(productId));
+            }
+          } catch (shopifyError) {
+            console.warn('Shopify products not found:', shopifyError.message);
+          }
         }
 
         // If not found in direct integration, try Shopify
