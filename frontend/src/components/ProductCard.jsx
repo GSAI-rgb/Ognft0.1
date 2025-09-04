@@ -7,6 +7,7 @@ import VaultModal from './VaultModal';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showVaultModal, setShowVaultModal] = useState(false);
   const navigate = useNavigate();
   const { isReducedMotion } = useTheme();
 
@@ -25,8 +26,13 @@ const ProductCard = ({ product, className = "", priority = false }) => {
   };
 
   const handleClick = useCallback(() => {
+    // Check if this is a vault product
+    if (product.vault_locked) {
+      setShowVaultModal(true);
+      return;
+    }
     navigate(`/product/${product.id}`);
-  }, [navigate, product.id]);
+  }, [navigate, product.id, product.vault_locked]);
 
   return (
     <div 
