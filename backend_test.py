@@ -162,11 +162,14 @@ class BackendTester:
             
             if response.status_code == 200:
                 data = response.json()
-                if isinstance(data, list):
-                    self.log_result("Get Status Checks", True, f"Retrieved {len(data)} status checks")
+                # Updated to handle the new status response format
+                if isinstance(data, dict) and data.get("status") in ["healthy", "degraded"]:
+                    mongodb_status = data.get("mongodb", "unknown")
+                    doc_count = data.get("documents_count", 0)
+                    self.log_result("Get Status Checks", True, f"Status endpoint working: {data.get('status')}, MongoDB: {mongodb_status}, Documents: {doc_count}")
                     return True
                 else:
-                    self.log_result("Get Status Checks", False, "Response is not a list")
+                    self.log_result("Get Status Checks", False, f"Unexpected response format: {data}")
                     return False
             else:
                 self.log_result("Get Status Checks", False, f"HTTP {response.status_code}: {response.text}")
