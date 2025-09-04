@@ -152,11 +152,18 @@ export const useFilteredProducts = (category, filter) => {
 
     // CRITICAL FIX: Only filter when necessary to avoid memory allocation
     if (category && category !== 'all') {
-      if (category === 'accessories') {
+      if (category === 'Accessories') {
+        // Handle accessories category mapping
         filtered = products.filter(p => 
-          p.category && ['hats', 'wallet', 'slippers'].includes(p.category.toLowerCase())
+          p.category && (
+            p.category.toLowerCase() === 'accessories' ||
+            p.category.toLowerCase() === 'hats' ||
+            p.category.toLowerCase() === 'wallet' ||
+            p.category.toLowerCase() === 'slippers'
+          )
         );
       } else {
+        // Direct category matching
         filtered = products.filter(p => 
           p.category && p.category.toLowerCase() === category.toLowerCase()
         );
@@ -167,13 +174,16 @@ export const useFilteredProducts = (category, filter) => {
     if (filter) {
       switch (filter) {
         case 'new-arrivals':
-          filtered = filtered.filter(p => p.badges.includes('NEW'));
+          filtered = filtered.filter(p => p.badges && p.badges.includes('NEW'));
           break;
         case 'best-sellers':
-          filtered = filtered.filter(p => p.badges.includes('BEST SELLER'));
+          filtered = filtered.filter(p => p.badges && p.badges.includes('BEST SELLER'));
           break;
         case 'sale':
-          filtered = filtered.filter(p => p.badges.includes('SALE'));
+          filtered = filtered.filter(p => p.badges && p.badges.includes('SALE'));
+          break;
+        case 'vault':
+          filtered = filtered.filter(p => p.badges && p.badges.includes('VAULT'));
           break;
         default:
           break;
