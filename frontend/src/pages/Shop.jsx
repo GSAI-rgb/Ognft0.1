@@ -37,6 +37,7 @@ const Shop = () => {
   ];
 
   const getCategoryForTab = () => {
+    if (activeTab === 'vault') return 'Vault';
     if (activeTab === 'teeshirts') return 'Teeshirt';
     if (activeTab === 'hoodies') return 'Hoodies';
     if (activeTab === 'posters') return 'Posters';
