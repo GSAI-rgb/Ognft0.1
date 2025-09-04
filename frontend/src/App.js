@@ -29,6 +29,11 @@ import Collections from './pages/Collections';
 import CollectionDetail from './pages/CollectionDetail';
 
 function App() {
+  useEffect(() => {
+    // Initialize PSPK Analytics
+    ShopifyAnalytics.init();
+  }, []);
+
   return (
     <ErrorBoundary>
       <I18nProvider>
