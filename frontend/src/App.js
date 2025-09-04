@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -11,6 +11,9 @@ import { I18nProvider } from './hooks/useI18n';
 import PageTransition from './components/PerformanceOptimized/PageTransition';
 import ErrorBoundary from './components/ErrorBoundary';
 import HelpButton from './components/HelpButton';
+
+// Analytics
+import ShopifyAnalytics from './lib/shopifyTracking';
 
 // Import Pages
 import Home from './pages/Home';
