@@ -60,8 +60,9 @@ class BackendTester:
             response = requests.get(f"{API_BASE_URL}/", timeout=10)
             if response.status_code == 200:
                 data = response.json()
-                if data.get("message") == "Hello World":
-                    self.log_result("Server Health Check", True, "Root endpoint responding correctly")
+                # Updated to match the actual response from OG Armory Backend
+                if data.get("message") == "OG Armory Backend API" and data.get("status") == "running":
+                    self.log_result("Server Health Check", True, "OG Armory Backend API responding correctly")
                     return True
                 else:
                     self.log_result("Server Health Check", False, f"Unexpected response: {data}")
