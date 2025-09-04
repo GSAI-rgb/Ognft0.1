@@ -181,6 +181,12 @@ export const useFilteredProducts = (category, filter) => {
             p.category.toLowerCase() === 'slippers'
           )
         );
+      } else if (category === 'Vault') {
+        // Handle VAULT category - check both category and badges
+        filtered = products.filter(p => 
+          (p.category && p.category.toLowerCase() === 'vault') ||
+          (p.badges && p.badges.includes('VAULT'))
+        );
       } else {
         // Direct category matching
         filtered = products.filter(p => 
