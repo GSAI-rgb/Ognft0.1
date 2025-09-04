@@ -52,6 +52,9 @@ function App() {
                   </Routes>
                 </PageTransition>
               </BrowserRouter>
+              
+              {/* Global Help Button */}
+              <HelpButton />
             </div>
           </CartProvider>
         </ThemeProvider>
