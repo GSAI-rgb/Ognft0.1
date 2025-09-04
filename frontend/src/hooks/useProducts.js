@@ -26,21 +26,21 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Try fixed products first (corrected assets), then real, then Shopify, then mock
+      // Try simple products first (real working images), then fixed, then real, then Shopify, then mock
       try {
-        const response = await fetch('/fixed_products.json');
+        const response = await fetch('/simple_products.json');
         if (response.ok) {
-          const fixedProducts = await response.json();
-          if (fixedProducts && fixedProducts.length > 0) {
-            cachedProducts = fixedProducts;
+          const simpleProducts = await response.json();
+          if (simpleProducts && simpleProducts.length > 0) {
+            cachedProducts = simpleProducts;
             lastFetchTime = now;
-            setProducts(fixedProducts);
+            setProducts(simpleProducts);
             setError(null);
             return;
           }
         }
-      } catch (fixedError) {
-        console.warn('Fixed products not found:', fixedError.message);
+      } catch (simpleError) {
+        console.warn('Simple products not found:', simpleError.message);
         
         // Fallback to Shopify products
         try {
