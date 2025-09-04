@@ -8,6 +8,7 @@ import WaitlistModal from './WaitlistModal';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const navigate = useNavigate();
   const { isReducedMotion } = useTheme();
@@ -20,6 +21,14 @@ const ProductCard = ({ product, className = "", priority = false }) => {
     : product.stock || 0;
   
   const isLowStock = totalStock <= 12;
+
+  // Get display image - prioritize hover image on hover, otherwise use primary or first image
+  const getDisplayImage = () => {
+    if (isHovered && product.hoverImage && product.hoverImage !== product.primaryImage) {
+      return product.hoverImage;
+    }
+    return product.primaryImage || product.images?.[0] || 'https://via.placeholder.com/400x500?text=No+Image';
+  };
 
   const handleMouseEnter = useCallback(() => {
     if (product.images && product.images.length > 1 && !isReducedMotion) {
