@@ -24,9 +24,10 @@ const Shop = () => {
     }
   }, [category]);
 
-  // WORKING TABS
+  // WORKING TABS - UPDATED WITH VAULT
   const tabs = [
     { id: 'all', label: 'ALL ARSENAL', filter: null },
+    { id: 'vault', label: 'VAULT', filter: 'Vault' },
     { id: 'teeshirts', label: 'REBEL TEES', filter: 'Teeshirt' },
     { id: 'hoodies', label: 'HOODIES', filter: 'Hoodies' },
     { id: 'shirts', label: 'SHIRTS', filter: 'Full Shirts' },
