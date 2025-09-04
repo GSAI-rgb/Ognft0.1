@@ -53,7 +53,7 @@ async def root():
 async def get_status():
     """Get system status"""
     try:
-        if collection:
+        if collection is not None:
             count = collection.count_documents({})
             latest = collection.find().sort("timestamp", -1).limit(1)
             latest_doc = list(latest)
@@ -76,7 +76,7 @@ async def create_status(request: Request):
     """Create status entry"""
     try:
         data = await request.json()
-        if collection:
+        if collection is not None:
             data["timestamp"] = datetime.now()
             result = collection.insert_one(data)
             return {
