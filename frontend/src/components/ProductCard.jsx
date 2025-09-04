@@ -11,10 +11,16 @@ const ProductCard = ({ product, className = "", priority = false }) => {
 
   // Get display image - back by default, front on hover
   const getDisplayImage = () => {
-    if (isHovered && product.images && product.images.length > 1) {
-      return product.images[1]; // Front image on hover
+    // For products with multiple images: first image = back (default), second image = front (hover)
+    if (product.images && product.images.length > 1) {
+      if (isHovered) {
+        return product.images[1]; // Front image on hover
+      }
+      return product.images[0]; // Back image as default
     }
-    return product.featured_image || product.images?.[0] || 'https://via.placeholder.com/400x500?text=No+Image'; // Back image default
+    
+    // For single image products
+    return product.featured_image || product.images?.[0] || 'https://via.placeholder.com/400x500?text=No+Image';
   };
 
   const handleClick = useCallback(() => {
