@@ -110,17 +110,16 @@ def analyze_uploaded_assets():
     
     # Generate all tee products with proper color grouping
     for design in tee_designs:
-        # Create base images - using a mix of your actual structure
+        # Create base images - ENSURE BACK IMAGES ARE ALWAYS FIRST
         images = []
         
-        # For each color, create image URLs
+        # For each color, create image URLs - BACK IMAGE FIRST ALWAYS
         for color in design["colors"]:
-            # Back image first (prioritized)
             back_img = f"https://storefront-migrate.preview.emergentagent.com/products/teeshirt/{design['name']}/{color}/back.jpg"
             front_img = f"https://storefront-migrate.preview.emergentagent.com/products/teeshirt/{design['name']}/{color}/front.jpg"
             images.extend([back_img, front_img])
         
-        # If no colors specified, use standard structure
+        # If no colors specified, use standard structure - BACK FIRST
         if not design["colors"]:
             back_img = f"https://storefront-migrate.preview.emergentagent.com/products/teeshirt/{design['name']}/back/main.jpg"
             front_img = f"https://storefront-migrate.preview.emergentagent.com/products/teeshirt/{design['name']}/front/main.jpg"
