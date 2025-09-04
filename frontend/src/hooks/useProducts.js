@@ -26,37 +26,49 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Try comprehensive products first (ALL products from directory), then fallbacks
+      // Try Shopify products first (working images), then comprehensive products as fallback
       try {
-        const response = await fetch('/comprehensive_products.json');
+        const response = await fetch('/products.json');
         if (response.ok) {
-          const comprehensiveProducts = await response.json();
-          if (comprehensiveProducts && comprehensiveProducts.length > 0) {
-            cachedProducts = comprehensiveProducts;
+          const shopifyProducts = await response.json();
+          if (shopifyProducts && shopifyProducts.length > 0) {
+            // Add proper badges to Shopify products for consistency
+            const productsWithBadges = shopifyProducts.map(product => ({
+              ...product,
+              badges: product.badges || [
+                product.tags?.includes('NEW') ? 'NEW' : null,
+                'REBEL DROP',
+                'FAN ARSENAL',
+                product.price > 2000 ? 'PREMIUM' : null,
+                product.tags?.includes('Limited') ? 'LIMITED' : null
+              ].filter(Boolean)
+            }));
+            
+            cachedProducts = productsWithBadges;
             lastFetchTime = now;
-            setProducts(comprehensiveProducts);
+            setProducts(productsWithBadges);
             setError(null);
             return;
           }
         }
-      } catch (comprehensiveError) {
-        console.warn('Comprehensive products not found:', comprehensiveError.message);
+      } catch (shopifyError) {
+        console.warn('Shopify products not found:', shopifyError.message);
         
-        // Fallback to Shopify products
+        // Fallback to comprehensive products
         try {
-          const response = await fetch('/products.json');
+          const response = await fetch('/comprehensive_products.json');
           if (response.ok) {
-            const shopifyProducts = await response.json();
-            if (shopifyProducts && shopifyProducts.length > 0) {
-              cachedProducts = shopifyProducts;
+            const comprehensiveProducts = await response.json();
+            if (comprehensiveProducts && comprehensiveProducts.length > 0) {
+              cachedProducts = comprehensiveProducts;
               lastFetchTime = now;
-              setProducts(shopifyProducts);
+              setProducts(comprehensiveProducts);
               setError(null);
               return;
             }
           }
-        } catch (shopifyError) {
-          console.warn('Shopify products not found:', shopifyError.message);
+        } catch (comprehensiveError) {
+          console.warn('Comprehensive products not found:', comprehensiveError.message);
         }
       }
       
