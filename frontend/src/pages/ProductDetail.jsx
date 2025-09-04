@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronRight, ChevronDown, ExternalLink } from 'lucide-react';
 import { useProduct, useFilteredProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
-import { mockInstagramPosts } from '../data/mock';
+import { formatPrice } from '../lib/price';
+import { initiateUPIPayment } from '../lib/upi';
+import { sendOrderToWhatsApp } from '../lib/wa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
+import SizeChips from '../components/SizeChips';
+import Scarcity from '../components/Scarcity';
+import TrustChips from '../components/TrustChips';
 import CartSidebar from '../components/CartSidebar';
 
 const ProductDetail = () => {
