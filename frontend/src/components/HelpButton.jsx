@@ -11,7 +11,7 @@ const HelpButton = () => {
       icon: Phone,
       title: 'Call Support',
       description: 'Speak to our team',
-      action: () => window.open('tel:+919876543210', '_self'),
+      action: () => window.open(`tel:${process.env.REACT_APP_SUPPORT_PHONE || '+919876543210'}`, '_self'),
       color: 'from-blue-600 to-blue-700'
     },
     {
