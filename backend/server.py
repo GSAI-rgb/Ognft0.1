@@ -58,6 +58,10 @@ async def get_status():
             latest = collection.find().sort("timestamp", -1).limit(1)
             latest_doc = list(latest)
             
+            # Convert ObjectId to string for JSON serialization
+            if latest_doc and '_id' in latest_doc[0]:
+                latest_doc[0]['_id'] = str(latest_doc[0]['_id'])
+            
             return {
                 "status": "healthy", 
                 "mongodb": "connected",
