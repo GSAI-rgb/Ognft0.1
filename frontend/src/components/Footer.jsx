@@ -1,124 +1,127 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Twitter, Facebook } from 'lucide-react';
-import { useTheme } from '../hooks/useTheme';
+import { Instagram, Twitter, Facebook, Youtube } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
 const Footer = () => {
-  const { currentTheme } = useTheme();
   const { t } = useI18n();
-  const isOGTheme = currentTheme === 'og';
 
   return (
-    <footer className="bg-[var(--color-bg)] text-[var(--color-text)] py-20 px-6 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+    <footer className="bg-[var(--color-bg)] border-t border-[var(--color-steel)] text-[var(--color-text)] py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold tracking-wider">
-              {isOGTheme ? 'OG' : 'AXM'}
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              {isOGTheme 
-                ? t('footer.official') 
-                : 'Premium streetwear designed for the modern individual. Crafted with attention to detail and built to last.'
-              }
+          <div className="space-y-6">
+            <Link to="/" className="text-3xl font-black font-headline tracking-wider text-[var(--color-red)]">
+              OG
+            </Link>
+            <p className="text-[var(--color-text-muted)] max-w-xs leading-relaxed">
+              Every product is a weapon. Every fan is a soldier. (ప్రతి అభిమాని ఒక సైనికుడు)
             </p>
-            {isOGTheme && (
-              <p className="text-[var(--color-red)] text-sm font-bold tracking-wide">
-                {t('footer.tagline')}
-              </p>
-            )}
             <div className="flex space-x-4">
-              <a href="https://instagram.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors duration-200">
                 <Instagram size={20} />
               </a>
-              <a href="https://twitter.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors duration-200">
                 <Twitter size={20} />
               </a>
-              <a href="https://facebook.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors duration-200">
                 <Facebook size={20} />
+              </a>
+              <a href="#" className="text-[var(--color-text-muted)] hover:text-[var(--color-red)] transition-colors duration-200">
+                <Youtube size={20} />
               </a>
             </div>
           </div>
 
-          {/* Shop */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold uppercase tracking-wider">Shop</h4>
-            <div className="space-y-2">
-              <Link to="/shop/category/tops" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Tops
+          {/* ARMORY - UPDATED NAVIGATION */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-black uppercase tracking-wider">
+              ARMORY
+            </h3>
+            <nav className="flex flex-col space-y-3">
+              <Link to="/shop" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                All Arsenal
               </Link>
-              <Link to="/shop/category/bottoms" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Bottoms
+              <Link to="/shop?filter=teeshirts" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                Rebel Tees
               </Link>
-              <Link to="/shop/category/outerwear" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Outerwear
+              <Link to="/shop?filter=hoodies" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                Predator Hoodies
               </Link>
-              <Link to="/shop/category/accessories" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Accessories
+              <Link to="/shop?filter=shirts" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                Formal Arsenal
               </Link>
-            </div>
+              <Link to="/shop?filter=posters" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                War Posters
+              </Link>
+              <Link to="/shop?filter=accessories" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                Gear & Accessories
+              </Link>
+            </nav>
           </div>
 
-          {/* Company */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold uppercase tracking-wider">Company</h4>
-            <div className="space-y-2">
-              <Link to="/about" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                About Us
+          {/* VAULT & SUPPORT */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-black uppercase tracking-wider">
+              VAULT
+            </h3>
+            <nav className="flex flex-col space-y-3">
+              <Link to="/shop?filter=vault" className="block text-[var(--color-gold)] hover:text-white transition-colors text-sm">
+                Vault Exclusives
               </Link>
-              <Link to="/journal" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Journal
+              <Link to="/about" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                About OG
               </Link>
               <Link to="/contact" className="block text-gray-400 hover:text-white transition-colors text-sm">
                 Contact
               </Link>
-              <a href="#careers" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Careers
+              <a href="tel:+919876543210" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                Support: +91 9876543210
               </a>
-            </div>
+            </nav>
           </div>
 
-          {/* Support */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold uppercase tracking-wider">Support</h4>
-            <div className="space-y-2">
-              <a href="#size-guide" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Size Guide
-              </a>
-              <a href="#shipping" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Shipping Info
-              </a>
-              <a href="#returns" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                Returns
-              </a>
-              <a href="#faq" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                FAQ
-              </a>
+          {/* TRIBE */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-black uppercase tracking-wider">
+              JOIN THE TRIBE
+            </h3>
+            <div className="space-y-4">
+              <p className="text-[var(--color-text-muted)] text-sm">
+                Get exclusive drops, early access, and tribal updates.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="flex-1 bg-[var(--color-bg)] border border-[var(--color-steel)] px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-red)]"
+                />
+                <button className="bg-[var(--color-red)] text-white px-4 py-2 text-sm font-bold uppercase tracking-wider hover:bg-opacity-90 transition-colors">
+                  ARM UP
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
-            <p className="text-gray-400 text-sm">
-              © 2024 {isOGTheme ? 'DVV Entertainment' : 'AXM'}. All rights reserved.
+        {/* Bottom */}
+        <div className="border-t border-[var(--color-steel)] pt-8 mt-16">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-[var(--color-text-muted)] text-sm">
+              © 2024 DVV Entertainment. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-xs">
-              <a href="#privacy" className="text-gray-400 hover:text-white transition-colors">
-                {t('footer.privacy')}
-              </a>
-              <a href="#terms" className="text-gray-400 hover:text-white transition-colors">
-                {t('footer.terms')}
-              </a>
+            <div className="flex items-center space-x-6 text-sm">
+              <Link to="/privacy" className="text-[var(--color-text-muted)] hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="text-[var(--color-text-muted)] hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <span className="text-[var(--color-text-muted)]">
+                Made for rebels, by rebels.
+              </span>
             </div>
-          </div>
-          
-          <div className="text-gray-400 text-sm">
-            {isOGTheme ? 'Forged for the tribe' : 'Built with precision and care'}
           </div>
         </div>
       </div>
