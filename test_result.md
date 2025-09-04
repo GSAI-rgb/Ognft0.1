@@ -264,13 +264,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend Shopify Admin API integration with new products"
-    - "Frontend product display with new premium OG names"
-    - "Product images display (front/back) in ProductDetail page"
-    - "Search functionality with new OG products"
-    - "Overall store functionality with 52 new products"
+    - "VAULT system integration and testing complete"
+    - "Backend server health and stability verified"
+    - "Comprehensive products JSON loading verified"
+    - "Badge system functionality verified"
+    - "Image hover behavior fixed and tested"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
   - task: "Transform ALL e-commerce pages to OG cinematic brutality theme"
