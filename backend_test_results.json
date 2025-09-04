@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-04T05:21:51.480237",
+  "timestamp": "2025-09-04T05:43:07.858031",
   "backend_url": "https://storefront-migrate.preview.emergentagent.com/api",
   "passed_tests": 11,
   "failed_tests": 0,
@@ -9,67 +9,67 @@
       "test": "Server Health Check",
       "success": true,
       "message": "Root endpoint responding correctly",
-      "timestamp": "2025-09-04T05:21:49.157809"
+      "timestamp": "2025-09-04T05:43:06.800248"
     },
     {
       "test": "Environment Variables",
       "success": true,
       "message": "Backend accessible, env vars loaded",
-      "timestamp": "2025-09-04T05:21:49.205908"
+      "timestamp": "2025-09-04T05:43:06.852898"
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
-      "timestamp": "2025-09-04T05:21:49.252766"
+      "timestamp": "2025-09-04T05:43:06.906029"
     },
     {
       "test": "API Routes Accessibility",
       "success": true,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-04T05:21:49.430637"
+      "timestamp": "2025-09-04T05:43:07.077805"
     },
     {
       "test": "Create Status Check",
       "success": true,
-      "message": "Created status check with ID: 5e0b46c0-4c57-4af4-934d-f5fb2393a945",
-      "timestamp": "2025-09-04T05:21:49.483161"
+      "message": "Created status check with ID: efe0caa4-b407-46fe-b50d-5900a059aef9",
+      "timestamp": "2025-09-04T05:43:07.130018"
     },
     {
       "test": "Get Status Checks",
       "success": true,
-      "message": "Retrieved 2 status checks",
-      "timestamp": "2025-09-04T05:21:49.536895"
+      "message": "Retrieved 6 status checks",
+      "timestamp": "2025-09-04T05:43:07.185493"
     },
     {
       "test": "MongoDB Integration",
       "success": true,
       "message": "Successfully created and retrieved record from MongoDB",
-      "timestamp": "2025-09-04T05:21:49.640991"
+      "timestamp": "2025-09-04T05:43:07.288435"
     },
     {
       "test": "Shopify Environment Variables",
       "success": true,
       "message": "All Shopify vars configured: SHOPIFY_STORE_DOMAIN=40fg1q-ju.myshopify.com, SHOPIFY_STOREFRONT_API_TOKEN=bab636f9...5e21, SHOPIFY_STOREFRONT_API_VERSION=2024-01, SHOPIFY_ADMIN_API_KEY=shpat_b2...a192, SHOPIFY_ADMIN_API_SECRET=61c8a6e5...55b2",
-      "timestamp": "2025-09-04T05:21:49.644849"
+      "timestamp": "2025-09-04T05:43:07.292670"
     },
     {
       "test": "Shopify Storefront API Connectivity",
       "success": true,
       "message": "Successfully connected to 'OG Store' store via Storefront API",
-      "timestamp": "2025-09-04T05:21:49.870974"
+      "timestamp": "2025-09-04T05:43:07.481603"
     },
     {
       "test": "OG Products Availability",
       "success": true,
       "message": "Found 52 OG products out of 52 total (52 active). Samples: Black Phoenix Tee, Black Storm Hoodie, Blood Moon Poster, Blood Moon Rebel Tee, Blood Wolf Hoodie",
-      "timestamp": "2025-09-04T05:21:51.329372"
+      "timestamp": "2025-09-04T05:43:07.709684"
     },
     {
       "test": "Backend Shopify Integration Health",
       "success": true,
       "message": "Backend stable with Shopify integration",
-      "timestamp": "2025-09-04T05:21:51.478044"
+      "timestamp": "2025-09-04T05:43:07.856165"
     }
   ]
 }
