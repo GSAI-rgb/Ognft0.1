@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { addToShopifyCart, getShopifyCheckoutUrl } from '../lib/shopify';
 
 const CartContext = createContext();
 
@@ -10,19 +9,19 @@ const cartReducer = (state, action) => {
     
     case 'ADD_ITEM':
       const existingItemIndex = state.items.findIndex(
-        item => item.id === action.payload.id
+        item => item.id === action.payload.id && 
+               item.selectedVariant?.size === action.payload.selectedVariant?.size
       );
       
-      // CRITICAL FIX: Avoid array spread operators for billion-user scale
       let newItems;
       if (existingItemIndex >= 0) {
-        newItems = state.items.slice(); // More memory efficient than spread
+        newItems = state.items.slice();
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
           quantity: newItems[existingItemIndex].quantity + action.payload.quantity
         };
       } else {
-        newItems = state.items.concat(action.payload); // More efficient than spread
+        newItems = state.items.concat(action.payload);
       }
       
       return {
@@ -40,6 +39,10 @@ const cartReducer = (state, action) => {
       };
     
     case 'UPDATE_QUANTITY':
+      if (action.payload.quantity === 0) {
+        return cartReducer(state, { type: 'REMOVE_ITEM', payload: action.payload.id });
+      }
+      
       const updatedItems = state.items.map(item =>
         item.id === action.payload.id
           ? { ...item, quantity: action.payload.quantity }
@@ -66,89 +69,87 @@ const cartReducer = (state, action) => {
 const initialState = {
   items: [],
   total: 0,
-  loading: false,
-  checkoutUrl: null
+  loading: false
 };
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // Persist cart to localStorage
+  // Load cart from localStorage
   useEffect(() => {
-    const savedCart = localStorage.getItem('axm-cart');
-    if (savedCart) {
-      try {
+    try {
+      const savedCart = localStorage.getItem('og-cart');
+      if (savedCart) {
         const parsedCart = JSON.parse(savedCart);
         parsedCart.items.forEach(item => {
           dispatch({ type: 'ADD_ITEM', payload: item });
         });
-      } catch (error) {
-        console.warn('Failed to load saved cart:', error);
       }
+    } catch (error) {
+      console.warn('Failed to load cart from localStorage:', error);
     }
   }, []);
 
+  // Save cart to localStorage
   useEffect(() => {
-    localStorage.setItem('axm-cart', JSON.stringify({
-      items: state.items,
-      total: state.total
-    }));
+    try {
+      localStorage.setItem('og-cart', JSON.stringify({
+        items: state.items,
+        total: state.total
+      }));
+    } catch (error) {
+      console.warn('Failed to save cart to localStorage:', error);
+    }
   }, [state.items, state.total]);
 
-  const addToCart = async (product, variant, quantity = 1) => {
-    dispatch({ type: 'SET_LOADING', payload: true });
+  const addToCart = (product, selectedVariant, quantity = 1) => {
+    const cartItem = {
+      id: `${product.id}-${selectedVariant?.size || 'default'}`,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      images: product.images,
+      selectedVariant,
+      quantity
+    };
     
-    try {
-      const cartItem = {
-        id: `${product.id}-${variant?.size || 'default'}-${variant?.color || 'default'}`,
-        name: product.name,
-        images: product.images,
-        selectedVariant: variant,
-        quantity,
-        price: product.price
-      };
-
-      // For now, add directly to local cart (can integrate with Shopify later)
-      dispatch({ type: 'ADD_ITEM', payload: cartItem });
-      console.log('✅ Added to cart:', cartItem);
-      return { success: true };
-      
-    } catch (error) {
-      console.error('Failed to add to cart:', error);
-      return { success: false, error: error.message };
-    } finally {
-      dispatch({ type: 'SET_LOADING', payload: false });
-    }
+    dispatch({ type: 'ADD_ITEM', payload: cartItem });
   };
 
   const removeFromCart = (itemId) => {
     dispatch({ type: 'REMOVE_ITEM', payload: itemId });
   };
 
-  const updateQuantity = (itemId, newQuantity) => {
-    if (newQuantity === 0) {
-      removeFromCart(itemId);
-    } else {
-      dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity: newQuantity } });
-    }
+  const updateQuantity = (itemId, quantity) => {
+    dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity } });
   };
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
 
-  const getCheckoutUrl = () => {
-    return getShopifyCheckoutUrl(state.cartId);
+  // FIXED: Direct checkout with UPI/WhatsApp
+  const proceedToCheckout = () => {
+    const orderText = state.items.map(item => 
+      `${item.name} (${item.selectedVariant?.size || 'Default'}) - Qty: ${item.quantity} - ₹${item.price * item.quantity}`
+    ).join('\n');
+    
+    const total = state.total + (state.total * 0.18); // Add 18% GST
+    const whatsappUrl = `https://wa.me/919876543210?text=🔥 NEW OG ORDER 🔥%0A%0A${encodeURIComponent(orderText)}%0A%0ATotal: ₹${total.toFixed(2)}%0A%0APlease confirm my order!`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   const value = {
-    ...state,
+    items: state.items,
+    total: state.total,
+    loading: state.loading,
+    itemCount: state.items.reduce((sum, item) => sum + item.quantity, 0),
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
-    getCheckoutUrl,
-    itemCount: state.items.reduce((sum, item) => sum + item.quantity, 0)
+    proceedToCheckout
   };
 
   return (
@@ -165,5 +166,3 @@ export const useCart = () => {
   }
   return context;
 };
-
-export default CartContext;
