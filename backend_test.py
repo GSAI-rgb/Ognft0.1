@@ -494,12 +494,12 @@ class BackendTester:
         self.log_result("API Routes Accessibility", all_accessible, "All defined routes tested")
         return all_accessible
     
-    def test_fixed_products_json_accessibility(self):
-        """Test that fixed_products.json is accessible and properly structured"""
+    def test_comprehensive_products_json_accessibility(self):
+        """Test that comprehensive_products.json is accessible and properly structured with VAULT products"""
         try:
-            # Test direct access to fixed_products.json via frontend URL
-            frontend_url = "http://localhost:3000"  # Frontend runs on port 3000
-            products_url = f"{frontend_url}/fixed_products.json"
+            # Test direct access to comprehensive_products.json via frontend URL
+            frontend_url = os.getenv('REACT_APP_BACKEND_URL', 'http://localhost:3000').replace('/api', '').replace('https://shopify-debugger.preview.emergentagent.com', 'http://localhost:3000')
+            products_url = f"{frontend_url}/comprehensive_products.json"
             
             response = requests.get(products_url, timeout=10)
             
@@ -510,26 +510,30 @@ class BackendTester:
                     if isinstance(products_data, list):
                         product_count = len(products_data)
                         
-                        # Verify we have exactly 21 products as mentioned in review request
-                        if product_count == 21:
-                            self.log_result("Fixed Products JSON Accessibility", True, f"Successfully loaded {product_count} products from fixed_products.json")
+                        # Count VAULT products
+                        vault_products = [p for p in products_data if p.get('category') == 'Vault']
+                        vault_count = len(vault_products)
+                        
+                        # Verify we have products including VAULT exclusives
+                        if product_count >= 10 and vault_count >= 3:
+                            self.log_result("Comprehensive Products JSON Accessibility", True, f"Successfully loaded {product_count} products including {vault_count} VAULT exclusives from comprehensive_products.json")
                             return products_data
                         else:
-                            self.log_result("Fixed Products JSON Accessibility", False, f"Expected 21 products, found {product_count}")
+                            self.log_result("Comprehensive Products JSON Accessibility", False, f"Expected ≥10 products with ≥3 VAULT products, found {product_count} total with {vault_count} VAULT")
                             return None
                     else:
-                        self.log_result("Fixed Products JSON Accessibility", False, "Products data is not a list")
+                        self.log_result("Comprehensive Products JSON Accessibility", False, "Products data is not a list")
                         return None
                         
                 except json.JSONDecodeError as e:
-                    self.log_result("Fixed Products JSON Accessibility", False, f"Invalid JSON format: {str(e)}")
+                    self.log_result("Comprehensive Products JSON Accessibility", False, f"Invalid JSON format: {str(e)}")
                     return None
             else:
-                self.log_result("Fixed Products JSON Accessibility", False, f"HTTP {response.status_code}: Cannot access fixed_products.json")
+                self.log_result("Comprehensive Products JSON Accessibility", False, f"HTTP {response.status_code}: Cannot access comprehensive_products.json")
                 return None
                 
         except Exception as e:
-            self.log_result("Fixed Products JSON Accessibility", False, f"Error: {str(e)}")
+            self.log_result("Comprehensive Products JSON Accessibility", False, f"Error: {str(e)}")
             return None
     
     def test_color_variant_consolidation(self):
