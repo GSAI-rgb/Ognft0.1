@@ -1,51 +1,92 @@
 import React from 'react';
-import { useTheme } from '../hooks/useTheme';
+import { useProducts } from '../hooks/useProducts';
+import { filterByPriceRange } from '../lib/price';
 import Header from '../components/Header';
-import OGHeroSection from '../components/OG/OGHeroSection';
-import RebelDrops from '../components/OG/RebelDrops';
-import FeaturedTees from '../components/OG/FeaturedTees';
-import FanArsenal from '../components/OG/FanArsenal';
-import ArsenalCategories from '../components/OG/ArsenalCategories';
-import FanArmyWall from '../components/OG/FanArmyWall';
-import FromFirestorm from '../components/OG/FromFirestorm';
-// Fallback to original components for non-OG theme
-import HeroSection from '../components/HeroSection';
-import NewArrivals from '../components/NewArrivals';
-import BestSellers from '../components/BestSellers';
-import Categories from '../components/Categories';
-import Collections from '../components/Collections';
-import Performance from '../components/Performance';
-import InstagramFeed from '../components/InstagramFeed';
-import Journal from '../components/Journal';
 import Footer from '../components/Footer';
+import Rail from '../components/Rail';
+import MoodChips from '../components/MoodChips';
 
 const Home = () => {
-  // OG theme is permanent - no theme checking needed
+  const { products, loading, error } = useProducts();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-8 h-8 border-2 border-[var(--color-red)] border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-lg font-bold uppercase tracking-wider">Loading Arsenal...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg font-bold uppercase tracking-wider text-red-400">Arsenal Temporarily Offline</p>
+          <p className="text-gray-400 mt-2">Try again in a moment</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Filter products for different rails
+  const affordableProducts = filterByPriceRange(products, 999);
+  const bestSellers = products.filter(p => p.badges && p.badges.includes('BEST SELLER'));
+  const rebelCore = products.filter(p => p.badges && (p.badges.includes('REBEL DROP') || p.badges.includes('FAN ARSENAL')));
+  const vaultProducts = products.filter(p => p.badges && p.badges.includes('PREMIUM'));
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
       
-      {/* Simplified OG Hero */}
-      <div className="bg-black text-white py-20 px-6">
+      {/* Hero Section */}
+      <section className="bg-black text-white py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-7xl lg:text-9xl font-bold uppercase tracking-wider leading-tight mb-8">
-            OG ISN'T MERCH.<br />
-            <span className="text-red-500">IT'S A CALLSIGN.</span>
+          <h1 className="text-7xl lg:text-9xl font-black uppercase tracking-wider leading-tight mb-8 font-headline">
+            EVERY FAN<br />
+            <span className="text-[var(--color-red)]">IS A SOLDIER.</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            Cinematic drops. Theater-grade prints. Built for the tribe.
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Armory zero-scene edition. Premium drops before the trailer. Built for rebels.
+          </p>
+          <p className="text-[var(--color-gold)] font-bold text-lg">
+            ARM UP. (ఆయుధాలు తీసుకో)
           </p>
         </div>
-      </div>
+      </section>
       
-      <RebelDrops />
-      <FeaturedTees />
-      <FanArsenal />
-      <ArsenalCategories />
+      {/* Rails System */}
+      <Rail 
+        title="Under ₹999 — For Every Rebel" 
+        products={affordableProducts}
+        showViewAll={true}
+        viewAllLink="/shop?filter=affordable"
+      />
+      
+      <Rail 
+        title="Rebellion Core — Bestsellers" 
+        products={rebelCore.length > 0 ? rebelCore : products.slice(0, 8)}
+        showViewAll={true}
+        viewAllLink="/shop?filter=bestsellers"
+      />
+      
+      <Rail 
+        title="Vault Exclusives — Numbered. Never Reprinted." 
+        products={vaultProducts.length > 0 ? vaultProducts : products.filter(p => p.price >= 2000)}
+        showViewAll={true}
+        viewAllLink="/shop?filter=vault"
+      />
+      
+      {/* Mood Selection */}
+      <MoodChips />
+
       <Footer />
     </div>
   );
 };
+
+export default Home;
 
 export default Home;
