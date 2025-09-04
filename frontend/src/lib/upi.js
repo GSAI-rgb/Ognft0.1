@@ -42,8 +42,8 @@ export function initiateUPIPayment({
   orderId, 
   items,
   customerInfo,
-  upiId = "ogarmory@paytm", // Default UPI ID
-  merchantName = "OG Armory"
+  upiId = process.env.REACT_APP_UPI_VPA || "ogarmory@paytm",
+  merchantName = process.env.REACT_APP_BRAND_NAME || "OG Armory"
 }) {
   const device = detectUPICapability();
   
