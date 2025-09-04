@@ -142,7 +142,7 @@ def analyze_uploaded_assets():
             "colors": design["colors"],
             "mood_code": design["mood"],
             "images": images[:7],  # Max 7 images
-            "primaryImage": images[0] if images else "",
+            "primaryImage": images[0] if images else f"https://storefront-migrate.preview.emergentagent.com/products/teeshirt/{design['name']}/back/main.jpg",  # ALWAYS BACK IMAGE
             "hoverImage": images[1] if len(images) > 1 else images[0],
             "badges": badges,
             "description": f"{design['name']} rebel tee - Available in {len(design['colors'])} colors. Back design prioritized for maximum impact.",
