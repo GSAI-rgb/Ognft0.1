@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
-// ThemeToggle removed - OG is permanent theme
 import LanguageToggle from './LanguageToggle';
 import SearchModal from './SearchModal';
 import CartSidebar from './CartSidebar';
@@ -18,7 +17,6 @@ const Header = () => {
   const { t } = useI18n();
   const { itemCount } = useCart();
 
-  // Check if OG theme is active
   const isOGTheme = currentTheme === 'og';
 
   return (
@@ -45,39 +43,35 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - FIXED TO MATCH SHOP */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <Link 
-              to="/collections" 
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
-            >
-              {t('navigation.collections')}
-            </Link>
-            
             <div className="relative group">
               <Link 
                 to="/shop" 
                 className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
               >
-                SHOP
+                ARMORY
               </Link>
-              {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-2 w-48 bg-[var(--color-bg)] border border-[var(--color-steel)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              {/* Dropdown Menu - UPDATED */}
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--color-bg)] border border-[var(--color-steel)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="py-2">
                   <Link to="/shop" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
-                    All Products
+                    All Arsenal
                   </Link>
-                  <Link to="/shop/category/tops" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
-                    Tops
+                  <Link to="/shop?filter=teeshirts" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
+                    Rebel Tees
                   </Link>
-                  <Link to="/shop/category/bottoms" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
-                    Bottoms
+                  <Link to="/shop?filter=hoodies" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
+                    Predator Hoodies
                   </Link>
-                  <Link to="/shop/category/outerwear" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
-                    Outerwear
+                  <Link to="/shop?filter=shirts" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
+                    Formal Arsenal
                   </Link>
-                  <Link to="/shop/category/accessories" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
-                    Accessories
+                  <Link to="/shop?filter=posters" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
+                    War Posters
+                  </Link>
+                  <Link to="/shop?filter=accessories" className="block px-4 py-2 text-sm hover:bg-[var(--color-steel)] transition-colors">
+                    Gear & Accessories
                   </Link>
                 </div>
               </div>
@@ -85,10 +79,10 @@ const Header = () => {
             
             {isOGTheme && (
               <Link 
-                to="/collections/vault-exclusive" 
+                to="/shop?filter=vault" 
                 className="text-[var(--color-gold)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
               >
-                {t('navigation.vault')}
+                VAULT
               </Link>
             )}
             
@@ -96,14 +90,14 @@ const Header = () => {
               to="/about" 
               className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
             >
-              {t('navigation.about')}
+              ABOUT
             </Link>
             
             <Link 
               to="/contact" 
               className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider text-sm font-medium"
             >
-              {t('navigation.contact')}
+              CONTACT
             </Link>
           </nav>
 
@@ -152,7 +146,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - UPDATED */}
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pt-4 border-t border-gray-800">
             <nav className="flex flex-col space-y-4">
@@ -161,7 +155,14 @@ const Header = () => {
                 className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                SHOP
+                ARMORY
+              </Link>
+              <Link 
+                to="/shop?filter=vault" 
+                className="text-[var(--color-gold)] hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                VAULT
               </Link>
               <Link 
                 to="/about" 
@@ -169,13 +170,6 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 ABOUT
-              </Link>
-              <Link 
-                to="/journal" 
-                className="text-white hover:text-gray-300 transition-colors uppercase tracking-wider text-sm font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                JOURNAL
               </Link>
               <Link 
                 to="/contact" 

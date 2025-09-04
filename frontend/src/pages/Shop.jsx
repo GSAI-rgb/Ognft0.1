@@ -26,16 +26,16 @@ const Shop = () => {
     }
   }, [category]);
 
-  // OG Armory tab configuration - Updated to match our actual products
+  // CLEANED UP TABS - MATCHING ACTUAL SHOPIFY CATEGORIES
   const tabs = [
-    { id: 'all', label: 'ARMORY', filter: null },
+    { id: 'all', label: 'ALL ARSENAL', filter: null },
     { id: 'teeshirts', label: 'REBEL TEES', filter: 'Teeshirt' },
     { id: 'hoodies', label: 'PREDATOR HOODIES', filter: 'Hoodies' },
-    { id: 'posters', label: 'WAR POSTERS', filter: 'Posters' },
-    { id: 'sweatshirts', label: 'BEAST SWEATSHIRTS', filter: 'Sweatshirts' },
     { id: 'shirts', label: 'FORMAL ARSENAL', filter: 'Full Shirts' },
-    { id: 'accessories', label: 'GEAR & ACCESSORIES', filter: 'accessories' },
-    { id: 'new-arrivals', label: 'REBEL DROP', filter: 'NEW' }
+    { id: 'sweatshirts', label: 'BEAST SWEATSHIRTS', filter: 'Sweatshirts' },
+    { id: 'posters', label: 'WAR POSTERS', filter: 'Posters' },
+    { id: 'accessories', label: 'GEAR', filter: 'accessories' },
+    { id: 'vault', label: 'VAULT', filter: 'PREMIUM' }
   ];
 
   // Get filtered products using the new hook
@@ -43,6 +43,9 @@ const Shop = () => {
     const activeTabConfig = tabs.find(tab => tab.id === activeTab);
     if (!activeTabConfig) return null;
     
+    if (activeTab === 'vault') {
+      return 'PREMIUM';
+    }
     if (['new-arrivals', 'best-sellers', 'sale'].includes(activeTab)) {
       return activeTab;
     }
@@ -55,7 +58,7 @@ const Shop = () => {
     if (activeTab === 'posters') return 'Posters';
     if (activeTab === 'sweatshirts') return 'Sweatshirts';
     if (activeTab === 'shirts') return 'Full Shirts';
-    if (activeTab === 'accessories') return 'accessories'; // This will match Hats, Wallet, Slippers
+    if (activeTab === 'accessories') return 'accessories';
     return null;
   };
 
@@ -74,8 +77,6 @@ const Shop = () => {
   const getUrlForTab = (tabId) => {
     if (tabId === 'all') {
       return '/shop';
-    } else if (['tops', 'bottoms', 'outerwear', 'accessories'].includes(tabId)) {
-      return `/shop/category/${tabId}`;
     } else {
       return `/shop?filter=${tabId}`;
     }
@@ -91,8 +92,26 @@ const Shop = () => {
     if (activeTab === 'all') {
       return 'Browse the arsenal. Every piece forged for the OG tribe.';
     }
+    if (activeTab === 'vault') {
+      return 'Exclusive numbered drops. Never reprinted.';
+    }
     return 'Curated drops for the battlefield.';
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="animate-spin w-8 h-8 border-2 border-[var(--color-red)] border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-lg font-bold uppercase tracking-wider">Loading Arsenal...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
@@ -101,7 +120,7 @@ const Shop = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Title */}
         <div className="mb-12">
-          <h1 className="text-6xl lg:text-8xl font-bold font-headline uppercase tracking-wider leading-none mb-4">
+          <h1 className="text-6xl lg:text-8xl font-black font-headline uppercase tracking-wider leading-none mb-4">
             {getCurrentTitle()}
           </h1>
           <p className="text-xl text-[var(--color-text-muted)] max-w-3xl">
@@ -138,21 +157,21 @@ const Shop = () => {
         {/* No Products Found */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
-            <h3 className="text-2xl font-bold mb-4">No products found</h3>
+            <h3 className="text-2xl font-bold mb-4">No Arsenal Found</h3>
             <p className="text-gray-400 mb-8">No products available in this category</p>
             <button
               onClick={() => handleTabClick('all')}
               className="text-[var(--color-text)] hover:text-gray-300 underline"
             >
-              View all products
+              View all arsenal
             </button>
           </div>
         )}
 
-        {/* Restock Alerts - OG Theme */}
+        {/* Restock Alerts */}
         <div className="border-t border-[var(--color-steel)] pt-16 mt-16">
           <div className="text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline uppercase tracking-wider">
+            <h2 className="text-3xl md:text-4xl font-black font-headline uppercase tracking-wider">
               Join Restock Alerts
             </h2>
             <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto">
@@ -167,7 +186,7 @@ const Shop = () => {
                 placeholder="Enter your email"
                 className="flex-1 bg-[var(--color-bg)] border border-[var(--color-steel)] px-4 py-3 focus:outline-none focus:border-[var(--color-red)] focus:shadow-[0_0_10px_rgba(193,18,31,0.3)] transition-all"
               />
-              <button className="bg-[var(--color-red)] text-white px-8 py-3 font-bold uppercase tracking-wider hover:bg-opacity-90 hover:shadow-[0_0_15px_rgba(193,18,31,0.6)] transition-all">
+              <button className="bg-[var(--color-red)] text-white px-8 py-3 font-black uppercase tracking-wider hover:bg-opacity-90 hover:shadow-[0_0_15px_rgba(193,18,31,0.6)] transition-all">
                 ARM UP
               </button>
             </div>
@@ -178,19 +197,19 @@ const Shop = () => {
         <div className="border-t border-[var(--color-steel)] pt-16 mt-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Battle-Ready Shipping</h3>
+              <h3 className="text-lg font-black mb-4 uppercase tracking-wider text-[var(--color-gold)]">Battle-Ready Shipping</h3>
               <p className="text-[var(--color-text-muted)] text-sm">
                 Worldwide delivery for the global tribe
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Warrior Returns</h3>
+              <h3 className="text-lg font-black mb-4 uppercase tracking-wider text-[var(--color-gold)]">Warrior Returns</h3>
               <p className="text-[var(--color-text-muted)] text-sm">
                 30-day return policy — no questions asked
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-[var(--color-gold)]">Theater-Grade Quality</h3>
+              <h3 className="text-lg font-black mb-4 uppercase tracking-wider text-[var(--color-gold)]">Theater-Grade Quality</h3>
               <p className="text-[var(--color-text-muted)] text-sm">
                 Premium cotton, battle-tested durability
               </p>
