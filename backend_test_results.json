@@ -1,159 +1,159 @@
 {
-  "timestamp": "2025-09-04T08:42:13.648280",
-  "backend_url": "https://None.preview.emergentagent.com/api",
-  "passed_tests": 4,
-  "failed_tests": 21,
+  "timestamp": "2025-09-04T08:42:51.380605",
+  "backend_url": "http://localhost:8001/api",
+  "passed_tests": 12,
+  "failed_tests": 13,
   "overall_success": false,
   "test_results": [
     {
       "test": "Server Health Check",
-      "success": false,
-      "message": "HTTP 404: 404 page not found\n",
-      "timestamp": "2025-09-04T08:42:11.850560"
+      "success": true,
+      "message": "Root endpoint responding correctly",
+      "timestamp": "2025-09-04T08:42:50.929027"
     },
     {
       "test": "Environment Variables",
-      "success": false,
-      "message": "Backend not accessible",
-      "timestamp": "2025-09-04T08:42:11.901534"
+      "success": true,
+      "message": "Backend accessible, env vars loaded",
+      "timestamp": "2025-09-04T08:42:50.931495"
     },
     {
       "test": "CORS Configuration",
-      "success": false,
-      "message": "No CORS headers found",
-      "timestamp": "2025-09-04T08:42:11.951552"
+      "success": true,
+      "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
+      "timestamp": "2025-09-04T08:42:50.933996"
     },
     {
       "test": "API Routes Accessibility",
-      "success": false,
+      "success": true,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-04T08:42:12.101951"
+      "timestamp": "2025-09-04T08:42:50.962087"
     },
     {
       "test": "Create Status Check",
-      "success": false,
-      "message": "HTTP 404: 404 page not found\n",
-      "timestamp": "2025-09-04T08:42:12.150051"
+      "success": true,
+      "message": "Created status check with ID: 46f25c9c-0956-410c-81a8-4e3e05d59ecd",
+      "timestamp": "2025-09-04T08:42:50.965732"
     },
     {
       "test": "Get Status Checks",
-      "success": false,
-      "message": "HTTP 404: 404 page not found\n",
-      "timestamp": "2025-09-04T08:42:12.201054"
+      "success": true,
+      "message": "Retrieved 23 status checks",
+      "timestamp": "2025-09-04T08:42:50.969505"
     },
     {
       "test": "MongoDB Integration",
-      "success": false,
-      "message": "Failed to create test record",
-      "timestamp": "2025-09-04T08:42:12.252886"
+      "success": true,
+      "message": "Successfully created and retrieved record from MongoDB",
+      "timestamp": "2025-09-04T08:42:50.976254"
     },
     {
       "test": "Shopify Environment Variables",
       "success": true,
       "message": "All Shopify vars configured: SHOPIFY_STORE_DOMAIN=40fg1q-ju.myshopify.com, SHOPIFY_STOREFRONT_API_TOKEN=bab636f9...5e21, SHOPIFY_STOREFRONT_API_VERSION=2024-01, SHOPIFY_ADMIN_API_KEY=shpat_b2...a192, SHOPIFY_ADMIN_API_SECRET=61c8a6e5...55b2",
-      "timestamp": "2025-09-04T08:42:12.255213"
+      "timestamp": "2025-09-04T08:42:50.977279"
     },
     {
       "test": "Shopify Storefront API Connectivity",
       "success": true,
       "message": "Successfully connected to 'OG Store' store via Storefront API",
-      "timestamp": "2025-09-04T08:42:12.447640"
+      "timestamp": "2025-09-04T08:42:51.141593"
     },
     {
       "test": "OG Products Availability",
       "success": true,
       "message": "Found 52 OG products out of 52 total (52 active). Samples: Black Phoenix Tee, Black Storm Hoodie, Blood Moon Poster, Blood Moon Rebel Tee, Blood Wolf Hoodie",
-      "timestamp": "2025-09-04T08:42:12.740321"
+      "timestamp": "2025-09-04T08:42:51.347196"
     },
     {
       "test": "Backend Shopify Integration Health",
-      "success": false,
-      "message": "Backend issues detected with Shopify integration",
-      "timestamp": "2025-09-04T08:42:12.886183"
+      "success": true,
+      "message": "Backend stable with Shopify integration",
+      "timestamp": "2025-09-04T08:42:51.358608"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:12.971995"
+      "timestamp": "2025-09-04T08:42:51.360575"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.059944"
+      "timestamp": "2025-09-04T08:42:51.362480"
     },
     {
       "test": "Color Variant Consolidation",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.061256"
+      "timestamp": "2025-09-04T08:42:51.362576"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.144491"
+      "timestamp": "2025-09-04T08:42:51.364366"
     },
     {
       "test": "Back Image Priority",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.145956"
+      "timestamp": "2025-09-04T08:42:51.364472"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.249816"
+      "timestamp": "2025-09-04T08:42:51.366258"
     },
     {
       "test": "Product Visibility and Categorization",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.251284"
+      "timestamp": "2025-09-04T08:42:51.366355"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.333175"
+      "timestamp": "2025-09-04T08:42:51.368111"
     },
     {
       "test": "Category Mapping Synchronization",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.334545"
+      "timestamp": "2025-09-04T08:42:51.368203"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.417017"
+      "timestamp": "2025-09-04T08:42:51.369956"
     },
     {
       "test": "Product Image Asset Integration",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.418287"
+      "timestamp": "2025-09-04T08:42:51.370052"
     },
     {
       "test": "API Performance with OG System",
       "success": true,
-      "message": "Excellent performance: 49ms average response time",
-      "timestamp": "2025-09-04T08:42:13.565025"
+      "message": "Excellent performance: 3ms average response time",
+      "timestamp": "2025-09-04T08:42:51.378403"
     },
     {
       "test": "Fixed Products JSON Accessibility",
       "success": false,
       "message": "HTTP 404: Cannot access fixed_products.json",
-      "timestamp": "2025-09-04T08:42:13.646597"
+      "timestamp": "2025-09-04T08:42:51.380349"
     },
     {
       "test": "Navigation Sync Backend Support",
       "success": false,
       "message": "Could not load products data",
-      "timestamp": "2025-09-04T08:42:13.648001"
+      "timestamp": "2025-09-04T08:42:51.380460"
     }
   ]
 }
