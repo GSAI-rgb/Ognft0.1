@@ -106,39 +106,27 @@ const Collections = () => {
           {collections.map((collection) => (
             <Link
               key={collection.handle}
-              to={`/collections/${collection.handle}`}
+              to={`/shop?collection=${collection.handle}`}
               className="group relative overflow-hidden bg-[var(--color-steel)] hover:bg-opacity-80 transition-all duration-300"
             >
               {/* Collection Image */}
               <div className="aspect-[4/3] overflow-hidden">
                 <img
-                  src={collection.image}
+                  src={collection.image || 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'}
                   alt={collection.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300" />
-                
-                {/* Lock overlay for Vault */}
-                {collection.isLocked && (
-                  <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-4xl mb-4">🔒</div>
-                      <p className="text-[var(--color-gold)] font-bold uppercase tracking-wider">
-                        {t('home.vault.locked_message')}
-                      </p>
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Collection Info */}
               <div className="p-6">
-                {/* Rank Badge */}
+                {/* Collection Badge */}
                 <div className="mb-4">
-                  <span className={`px-3 py-1 text-xs font-bold uppercase tracking-wider ${getRankBadgeColor(collection.rank)}`}>
-                    {t(`ranks.${collection.rank.toLowerCase()}`)}
+                  <span className={`px-3 py-1 text-xs font-bold uppercase tracking-wider ${getRankBadgeColor(collection)}`}>
+                    {collection.handle.replace('-', ' ').toUpperCase()}
                   </span>
                 </div>
 
@@ -155,7 +143,7 @@ const Collections = () => {
                 {/* Product Count & Arrow */}
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-[var(--color-text-muted)]">
-                    {collection.productCount} products
+                    {collection.product_count} products
                   </span>
                   <ArrowRight 
                     size={20} 
