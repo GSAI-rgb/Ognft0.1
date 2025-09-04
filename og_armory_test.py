@@ -443,7 +443,7 @@ class OGArmoryTester:
                     badges.update(product_badges)
                 
                 # Check if we have the expected structure for navigation
-                expected_nav_elements = ['REBEL DROP', 'FAN ARSENAL', 'PREMIUM']
+                expected_nav_elements = ['REBEL DROP', 'ARSENAL', 'PREDATOR DROP', 'BEAST DROP']
                 found_nav_elements = [badge for badge in expected_nav_elements if badge in badges]
                 
                 category_list = sorted(list(categories))
