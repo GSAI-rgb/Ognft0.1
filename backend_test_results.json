@@ -1,159 +1,159 @@
 {
-  "timestamp": "2025-09-04T06:01:32.009255",
-  "backend_url": "https://storefront-migrate.preview.emergentagent.com/api",
-  "passed_tests": 22,
-  "failed_tests": 3,
+  "timestamp": "2025-09-04T08:42:13.648280",
+  "backend_url": "https://None.preview.emergentagent.com/api",
+  "passed_tests": 4,
+  "failed_tests": 21,
   "overall_success": false,
   "test_results": [
     {
       "test": "Server Health Check",
-      "success": true,
-      "message": "Root endpoint responding correctly",
-      "timestamp": "2025-09-04T06:01:30.144991"
+      "success": false,
+      "message": "HTTP 404: 404 page not found\n",
+      "timestamp": "2025-09-04T08:42:11.850560"
     },
     {
       "test": "Environment Variables",
-      "success": true,
-      "message": "Backend accessible, env vars loaded",
-      "timestamp": "2025-09-04T06:01:30.197274"
+      "success": false,
+      "message": "Backend not accessible",
+      "timestamp": "2025-09-04T08:42:11.901534"
     },
     {
       "test": "CORS Configuration",
-      "success": true,
-      "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
-      "timestamp": "2025-09-04T06:01:30.245964"
+      "success": false,
+      "message": "No CORS headers found",
+      "timestamp": "2025-09-04T08:42:11.951552"
     },
     {
       "test": "API Routes Accessibility",
-      "success": true,
+      "success": false,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-04T06:01:30.401274"
+      "timestamp": "2025-09-04T08:42:12.101951"
     },
     {
       "test": "Create Status Check",
-      "success": true,
-      "message": "Created status check with ID: d368fef9-569a-4c07-9220-a5f89240ffe2",
-      "timestamp": "2025-09-04T06:01:30.452565"
+      "success": false,
+      "message": "HTTP 404: 404 page not found\n",
+      "timestamp": "2025-09-04T08:42:12.150051"
     },
     {
       "test": "Get Status Checks",
-      "success": true,
-      "message": "Retrieved 18 status checks",
-      "timestamp": "2025-09-04T06:01:30.503563"
+      "success": false,
+      "message": "HTTP 404: 404 page not found\n",
+      "timestamp": "2025-09-04T08:42:12.201054"
     },
     {
       "test": "MongoDB Integration",
-      "success": true,
-      "message": "Successfully created and retrieved record from MongoDB",
-      "timestamp": "2025-09-04T06:01:30.606421"
+      "success": false,
+      "message": "Failed to create test record",
+      "timestamp": "2025-09-04T08:42:12.252886"
     },
     {
       "test": "Shopify Environment Variables",
       "success": true,
       "message": "All Shopify vars configured: SHOPIFY_STORE_DOMAIN=40fg1q-ju.myshopify.com, SHOPIFY_STOREFRONT_API_TOKEN=bab636f9...5e21, SHOPIFY_STOREFRONT_API_VERSION=2024-01, SHOPIFY_ADMIN_API_KEY=shpat_b2...a192, SHOPIFY_ADMIN_API_SECRET=61c8a6e5...55b2",
-      "timestamp": "2025-09-04T06:01:30.610307"
+      "timestamp": "2025-09-04T08:42:12.255213"
     },
     {
       "test": "Shopify Storefront API Connectivity",
       "success": true,
       "message": "Successfully connected to 'OG Store' store via Storefront API",
-      "timestamp": "2025-09-04T06:01:30.794456"
+      "timestamp": "2025-09-04T08:42:12.447640"
     },
     {
       "test": "OG Products Availability",
       "success": true,
       "message": "Found 52 OG products out of 52 total (52 active). Samples: Black Phoenix Tee, Black Storm Hoodie, Blood Moon Poster, Blood Moon Rebel Tee, Blood Wolf Hoodie",
-      "timestamp": "2025-09-04T06:01:30.998393"
+      "timestamp": "2025-09-04T08:42:12.740321"
     },
     {
       "test": "Backend Shopify Integration Health",
-      "success": true,
-      "message": "Backend stable with Shopify integration",
-      "timestamp": "2025-09-04T06:01:31.155170"
+      "success": false,
+      "message": "Backend issues detected with Shopify integration",
+      "timestamp": "2025-09-04T08:42:12.886183"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.229195"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:12.971995"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.281859"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.059944"
     },
     {
       "test": "Color Variant Consolidation",
-      "success": true,
-      "message": "Ocean Waves (3 colors) and Abstract Geometry (2 colors) properly consolidated",
-      "timestamp": "2025-09-04T06:01:31.283326"
+      "success": false,
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.061256"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.337531"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.144491"
     },
     {
       "test": "Back Image Priority",
       "success": false,
-      "message": "Only 12/21 products (57.1%) have back images prioritized. Issues: Shadow Beast Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Shadow_Beast_Hoodie/back/main.jpg); Predator Elite Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Predator_Elite_Hoodie/back/main.jpg); Storm Warrior Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Storm_Warrior_Hoodie/back/main.jpg)",
-      "timestamp": "2025-09-04T06:01:31.339178"
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.145956"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.386591"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.249816"
     },
     {
       "test": "Product Visibility and Categorization",
       "success": false,
-      "message": "Category mapping issues found",
-      "timestamp": "2025-09-04T06:01:31.388029"
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.251284"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.440003"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.333175"
     },
     {
       "test": "Category Mapping Synchronization",
       "success": false,
-      "message": "Mapping issues: 12/21 products mapped, unmapped categories: ['Hoodies', 'Accessories']",
-      "timestamp": "2025-09-04T06:01:31.441274"
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.334545"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:31.490262"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.417017"
     },
     {
       "test": "Product Image Asset Integration",
-      "success": true,
-      "message": "6/6 images accessible (100.0%)",
-      "timestamp": "2025-09-04T06:01:31.795802"
+      "success": false,
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.418287"
     },
     {
       "test": "API Performance with OG System",
       "success": true,
-      "message": "Excellent performance: 51ms average response time",
-      "timestamp": "2025-09-04T06:01:31.950587"
+      "message": "Excellent performance: 49ms average response time",
+      "timestamp": "2025-09-04T08:42:13.565025"
     },
     {
       "test": "Fixed Products JSON Accessibility",
-      "success": true,
-      "message": "Successfully loaded 21 products from fixed_products.json",
-      "timestamp": "2025-09-04T06:01:32.007409"
+      "success": false,
+      "message": "HTTP 404: Cannot access fixed_products.json",
+      "timestamp": "2025-09-04T08:42:13.646597"
     },
     {
       "test": "Navigation Sync Backend Support",
-      "success": true,
-      "message": "Backend supports navigation with proper badges: REBEL DROP(12), PREDATOR DROP(3), BEAST DROP(2), ARSENAL(4)",
-      "timestamp": "2025-09-04T06:01:32.008892"
+      "success": false,
+      "message": "Could not load products data",
+      "timestamp": "2025-09-04T08:42:13.648001"
     }
   ]
 }
