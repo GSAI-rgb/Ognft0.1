@@ -70,7 +70,7 @@ export function waRestockAlert(productName, customerPhone, customerName) {
   return message;
 }
 
-export function sendRestockAlert(productName, customerInfo, storeWhatsApp = '+919876543210') {
+export function sendRestockAlert(productName, customerInfo, storeWhatsApp = process.env.REACT_APP_SUPPORT_WHATSAPP || '+919876543210') {
   const alertText = waRestockAlert(productName, customerInfo.phone, customerInfo.name);
   const whatsappURL = waLink(storeWhatsApp, alertText);
   
