@@ -98,7 +98,7 @@ export function waCustomerSupport(issue = 'General Query', orderId = null) {
   return message;
 }
 
-export function openCustomerSupport(issue, orderId, storeWhatsApp = '+919876543210') {
+export function openCustomerSupport(issue, orderId, storeWhatsApp = process.env.REACT_APP_SUPPORT_WHATSAPP || '+919876543210') {
   const supportText = waCustomerSupport(issue, orderId);
   const whatsappURL = waLink(storeWhatsApp, supportText);
   
