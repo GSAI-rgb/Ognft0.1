@@ -96,12 +96,16 @@ const Shop = () => {
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
                 className={`text-sm md:text-base font-medium uppercase tracking-wider transition-colors duration-200 ${
-                  activeTab === tab.id
-                    ? 'text-[var(--color-text)] border-b-2 border-[var(--color-text)] pb-2'
-                    : 'text-gray-500 hover:text-gray-300'
+                  tab.id === 'vault' 
+                    ? `${activeTab === tab.id 
+                        ? 'text-[var(--color-gold)] border-b-2 border-[var(--color-gold)] pb-2' 
+                        : 'text-[var(--color-gold)] hover:text-yellow-400'}`
+                    : `${activeTab === tab.id
+                        ? 'text-[var(--color-text)] border-b-2 border-[var(--color-text)] pb-2'
+                        : 'text-gray-500 hover:text-gray-300'}`
                 }`}
               >
-                {tab.label}
+                {tab.id === 'vault' ? '🔒 ' : ''}{tab.label}
               </button>
             ))}
           </div>
