@@ -6,8 +6,8 @@
     "price": 4999,
     "originalPrice": 6999,
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.04_AM.jpeg",
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.03_AM_1.jpeg"
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.04_AM_dfe15ace-3e34-45d2-ab32-3782949d11e8.jpeg?v=1756807751",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.03_AM_1_8d6877f4-5a7e-49f5-b431-74f13833bf74.jpeg?v=1756807751"
     ],
     "primary_image_type": "back",
     "badges": [
@@ -32,8 +32,8 @@
     "price": 5999,
     "originalPrice": 7999,
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.06.42_AM.jpeg",
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.06.43_AM.jpeg"
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.06.42_AM_ae319efb-90fb-4e23-b35a-f557d6485d06.jpeg?v=1756807810",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.06.43_AM_c421ffea-599d-45cf-934d-2f3be441b09d.jpeg?v=1756807840"
     ],
     "primary_image_type": "back",
     "badges": [
@@ -59,7 +59,7 @@
     "price": 2999,
     "originalPrice": 3999,
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.24.21_AM_1.jpeg"
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.24.21_AM_1_f7a1e55b-668a-4b34-8a73-825302030f2a.jpeg?v=1756807780"
     ],
     "primary_image_type": "back",
     "badges": [
@@ -76,43 +76,229 @@
     "unlock_requirement": "Complete OG Challenge"
   },
   {
-    "id": "tee-consolidated-01",
-    "name": "[ARMORY // REBEL TEE] — OCEAN WAVES",
+    "id": 9159155286272,
+    "name": "Black Phoenix Tee",
+    "handle": "black-phoenix-tee",
     "category": "Teeshirt",
-    "price": 1199,
-    "originalPrice": 1499,
-    "colors": [
-      "Blue",
-      "black", 
-      "grey"
-    ],
-    "images": [
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.04_AM.jpeg",
-      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.03_AM_1.jpeg"
-    ],
-    "primary_image_type": "back",
+    "price": 1299.0,
+    "originalPrice": null,
     "badges": [
       "REBEL DROP",
-      "MULTI-COLOR"
+      "FAN ARSENAL"
     ],
-    "description": "Ocean Waves rebel tee - Available in 3 warrior colors. Back design prioritized.",
-    "sizes": [
-      "XS",
-      "S", 
-      "M",
-      "L",
-      "XL",
-      "XXL"
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.09.12_AM_4d5ffc5c-91e0-4d3e-aad4-61c58962b164.jpeg?v=1756807762"
     ],
-    "stock": {
-      "XS": 5,
-      "S": 12,
-      "M": 18,
-      "L": 22,
-      "XL": 9,
-      "XXL": 4
-    }
+    "description": "Black Phoenix Tee - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Premium",
+      "Teeshirt"
+    ],
+    "vendor": "DVV Entertainment"
   },
+  {
+    "id": 9159156629760,
+    "name": "Black Storm Hoodie",
+    "handle": "black-storm-hoodie",
+    "category": "Hoodies",
+    "price": 2499.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL",
+      "PREMIUM"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.18.36_AM_1_b3224edc-b501-4baf-822e-b6378f63ff2e.jpeg?v=1756807829",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.06.49_AM_2_cf7d827f-5375-48ce-8b0e-cb72d0f040a3.jpeg?v=1756807829"
+    ],
+    "description": "Black Storm Hoodie - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Hoodies",
+      "Limited",
+      "OG",
+      "Premium"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159155646720,
+    "name": "Blood Moon Poster",
+    "handle": "blood-moon-poster",
+    "category": "Posters",
+    "price": 899.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_9.24.21_AM_1_f7a1e55b-668a-4b34-8a73-825302030f2a.jpeg?v=1756807780"
+    ],
+    "description": "Blood Moon Poster - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Posters",
+      "Premium"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159155155200,
+    "name": "Blood Moon Rebel Tee",
+    "handle": "blood-moon-rebel-tee",
+    "category": "Teeshirt",
+    "price": 1299.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.59.07_AM_2_431f5168-1955-4bde-83af-9e599286de05.jpeg?v=1756807757"
+    ],
+    "description": "Blood Moon Rebel Tee - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Premium",
+      "Teeshirt"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159156302080,
+    "name": "Blood Wolf Hoodie",
+    "handle": "blood-wolf-hoodie",
+    "category": "Hoodies",
+    "price": 2499.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL",
+      "PREMIUM"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.04_AM_1_b91e5fd7-83b7-4c9a-8d36-d28fcafe176f.jpeg?v=1756807808",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_10.49.08_AM_b08c17c1-5cea-46a5-a352-6b1c822a935a.jpeg?v=1756807808"
+    ],
+    "description": "Blood Wolf Hoodie - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Hoodies",
+      "Limited",
+      "OG",
+      "Premium"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159155450112,
+    "name": "Brutal Legion Tee",
+    "handle": "brutal-legion-tee",
+    "category": "Teeshirt",
+    "price": 1299.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.59.05_AM_dcd50058-3761-4512-9a6c-761d86a839fe.jpeg?v=1756807771",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.59.05_AM_2_cf791b42-a65d-4ea7-9656-ed60842f8933.jpeg?v=1756807771"
+    ],
+    "description": "Brutal Legion Tee - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Premium",
+      "Teeshirt"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159157383424,
+    "name": "Hunter Cap",
+    "handle": "hunter-cap",
+    "category": "Accessories",
+    "price": 699.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.55.49_AM_46b23441-d456-4004-9338-074c1bada81c.jpeg?v=1756807861",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.55.48_AM_1_b339d583-947e-4fb5-9275-2445ab9e877f.jpeg?v=1756807861"
+    ],
+    "description": "Hunter Cap - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Hats",
+      "Limited",
+      "OG",
+      "Premium"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159154958592,
+    "name": "Shadow Beast Wallet",
+    "handle": "shadow-beast-wallet",
+    "category": "Accessories",
+    "price": 1499.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.55.48_AM_c69e8001-d229-4e6a-8ebe-9272a718b480.jpeg?v=1756807747"
+    ],
+    "description": "Shadow Beast Wallet - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Premium",
+      "Wallet"
+    ],
+    "vendor": "DVV Entertainment"
+  },
+  {
+    "id": 9159157121280,
+    "name": "Warrior Sandals",
+    "handle": "warrior-sandals",
+    "category": "Accessories",
+    "price": 999.0,
+    "originalPrice": null,
+    "badges": [
+      "REBEL DROP",
+      "FAN ARSENAL"
+    ],
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.55.46_AM_1_7cb99f11-3566-4918-85ab-591c39b12db6.jpeg?v=1756807854",
+      "https://cdn.shopify.com/s/files/1/0780/0484/6848/files/WhatsApp_Image_2025-08-31_at_8.55.47_AM_2_4f9cfda3-1f79-473f-93db-1252769ed06e.jpeg?v=1756807854"
+    ],
+    "description": "Warrior Sandals - Premium OG merchandise for true fans. Crafted with precision and designed for warriors.Every product is a weapon. Every fan is a soldier.",
+    "tags": [
+      "Fan Arsenal",
+      "Limited",
+      "OG",
+      "Premium",
+      "Slippers"
+    ],
+    "vendor": "DVV Entertainment"
+  }
+]
   {
     "id": "tee-consolidated-02",
     "name": "[ARMORY // REBEL TEE] \u2014 ABSTRACT GEOMETRY",
