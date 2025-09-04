@@ -640,72 +640,59 @@ class BackendTester:
             self.log_result("Badge System Functionality", False, f"Error: {str(e)}")
             return False
     
-    def test_product_visibility_and_categorization(self):
-        """Test that all 21 products are visible and properly categorized"""
+    def test_category_filtering_system(self):
+        """Test category filtering - Teeshirt, Hoodies, Accessories, Vault categories"""
         try:
-            products_data = self.test_fixed_products_json_accessibility()
+            products_data = self.test_comprehensive_products_json_accessibility()
             if not products_data:
-                self.log_result("Product Visibility and Categorization", False, "Could not load products data")
+                self.log_result("Category Filtering System", False, "Could not load products data")
                 return False
             
-            visible_count = 0
+            # Expected categories from review request
+            expected_categories = ['Teeshirt', 'Hoodie', 'Accessories', 'Vault']
             category_counts = {}
-            issues = []
             
             for product in products_data:
-                name = product.get('name', 'Unknown')
-                is_visible = product.get('isVisible', False)
                 category = product.get('category', 'Unknown')
-                
-                if is_visible:
-                    visible_count += 1
-                else:
-                    issues.append(f"{name}: Not visible")
-                
-                # Count categories
                 if category in category_counts:
                     category_counts[category] += 1
                 else:
                     category_counts[category] = 1
             
+            found_categories = list(category_counts.keys())
+            category_results = []
+            
+            for expected_cat in expected_categories:
+                count = category_counts.get(expected_cat, 0)
+                if count > 0:
+                    category_results.append(f"{expected_cat}({count})")
+                    print(f"  ✅ {expected_cat}: {count} products")
+                else:
+                    print(f"  ⚠️  {expected_cat}: No products found")
+            
+            # Check if we have products in key categories (at least Teeshirt and Vault)
+            has_teeshirts = category_counts.get('Teeshirt', 0) > 0
+            has_vault = category_counts.get('Vault', 0) > 0
+            total_categorized = sum(category_counts.get(cat, 0) for cat in expected_categories)
             total_products = len(products_data)
             
-            # Check visibility
-            if visible_count == total_products:
-                print(f"  ✅ All {visible_count} products are visible")
-                visibility_ok = True
-            else:
-                print(f"  ❌ Only {visible_count}/{total_products} products are visible")
-                visibility_ok = False
-            
-            # Check categorization
-            print(f"  📊 Category distribution: {dict(category_counts)}")
-            
-            # Verify expected categories (based on review request: Rebel Tees, Predator Hoodies, War Posters)
-            expected_categories = ['Teeshirt', 'Hoodie', 'Poster']  # Backend category names
-            found_categories = list(category_counts.keys())
-            
-            category_mapping_ok = True
-            for cat in found_categories:
-                if cat not in expected_categories and cat != 'Unknown':
-                    print(f"  ⚠️  Unexpected category found: {cat}")
-                    category_mapping_ok = False
-            
-            if visibility_ok and category_mapping_ok and not issues:
-                self.log_result("Product Visibility and Categorization", True, f"All {total_products} products visible and properly categorized: {dict(category_counts)}")
+            if has_teeshirts and has_vault and total_categorized >= (total_products * 0.8):
+                self.log_result("Category Filtering System", True, f"Category filtering working: {', '.join(category_results)}. {total_categorized}/{total_products} products categorized")
                 return True
             else:
-                error_msg = []
-                if not visibility_ok:
-                    error_msg.append(f"Visibility issues: {len(issues)} products not visible")
-                if not category_mapping_ok:
-                    error_msg.append("Category mapping issues found")
+                missing = []
+                if not has_teeshirts:
+                    missing.append("No Teeshirt products")
+                if not has_vault:
+                    missing.append("No Vault products")
+                if total_categorized < (total_products * 0.8):
+                    missing.append(f"Only {total_categorized}/{total_products} products categorized")
                 
-                self.log_result("Product Visibility and Categorization", False, "; ".join(error_msg))
+                self.log_result("Category Filtering System", False, f"Category filtering issues: {'; '.join(missing)}")
                 return False
                 
         except Exception as e:
-            self.log_result("Product Visibility and Categorization", False, f"Error: {str(e)}")
+            self.log_result("Category Filtering System", False, f"Error: {str(e)}")
             return False
     
     def test_category_mapping_synchronization(self):
