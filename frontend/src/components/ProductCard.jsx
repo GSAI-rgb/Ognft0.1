@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import { formatPrice } from '../lib/price';
 import OptimizedImage from './OptimizedImage';
+import VaultModal from './VaultModal';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [isHovered, setIsHovered] = useState(false);
