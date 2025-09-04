@@ -7,35 +7,6 @@ import Rail from '../components/Rail';
 
 const Home = () => {
   const { products, loading, error } = useProducts();
-  const [communityModalOpen, setCommunityModalOpen] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
-
-  // Check if user is returning member
-  useEffect(() => {
-    const savedProfile = localStorage.getItem('pspk_fan_profile');
-    if (savedProfile) {
-      setUserProfile(JSON.parse(savedProfile));
-    } else {
-      // Show community modal for new visitors after 3 seconds
-      const timer = setTimeout(() => {
-        setCommunityModalOpen(true);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleCommunityConsent = (profileData) => {
-    localStorage.setItem('pspk_fan_profile', JSON.stringify(profileData));
-    setUserProfile(profileData);
-    
-    // Track community join
-    if (window.gtag) {
-      window.gtag('event', 'join_community', {
-        event_category: 'engagement',
-        fan_level: profileData.fanLevel
-      });
-    }
-  };
 
   if (loading) {
     return (
