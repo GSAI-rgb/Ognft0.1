@@ -192,9 +192,9 @@ frontend:
 backend:
   - task: "Maintain existing Shopify integration"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "medium"
     needs_retesting: false
     status_history:
