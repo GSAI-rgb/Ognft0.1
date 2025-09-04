@@ -4,6 +4,7 @@ import { filterByPriceRange } from '../lib/price';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Rail from '../components/Rail';
+import PSPKCommunityModal from '../components/PSPKCommunityModal';
 
 const Home = () => {
   const { products, loading, error } = useProducts();
