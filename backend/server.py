@@ -1,75 +1,121 @@
-from fastapi import FastAPI, APIRouter
-from dotenv import load_dotenv
-from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-import logging
-from pathlib import Path
-from pydantic import BaseModel, Field
-from typing import List
-import uuid
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 from datetime import datetime
+import os
+from typing import Optional, List
+import pymongo
+from pymongo import MongoClient
+import uvicorn
 
+# Import webhook handlers
+from webhook_handlers import router as webhook_router
 
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+app = FastAPI(title="OG Armory Backend", version="1.0.0")
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Create the main app without a prefix
-app = FastAPI()
-
-# Create a router with the /api prefix
-api_router = APIRouter(prefix="/api")
-
-
-# Define Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# Add your routes to the router instead of directly to app
-@api_router.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
-
-# Include the router in the main app
-app.include_router(api_router)
-
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+# MongoDB connection
+try:
+    MONGO_URL = os.getenv('MONGO_URL', 'mongodb://localhost:27017/')
+    client = MongoClient(MONGO_URL)
+    db = client.og_armory
+    collection = db.status
+    print(f"✅ Connected to MongoDB: {MONGO_URL}")
+except Exception as e:
+    print(f"❌ MongoDB connection failed: {str(e)}")
+    db = None
+    collection = None
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+# Include webhook routes
+app.include_router(webhook_router, prefix="/api")
+
+# Health check endpoint
+@app.get("/api/")
+async def root():
+    return {
+        "message": "OG Armory Backend API",
+        "version": "1.0.0",
+        "status": "running",
+        "timestamp": datetime.now().isoformat(),
+        "shopify_webhooks": "configured"
+    }
+
+@app.get("/api/status")
+async def get_status():
+    """Get system status"""
+    try:
+        if collection:
+            count = collection.count_documents({})
+            latest = collection.find().sort("timestamp", -1).limit(1)
+            latest_doc = list(latest)
+            
+            return {
+                "status": "healthy", 
+                "mongodb": "connected",
+                "documents_count": count,
+                "latest": latest_doc[0] if latest_doc else None,
+                "shopify_integration": "active",
+                "webhooks": "configured"
+            }
+        else:
+            return {"status": "degraded", "mongodb": "disconnected"}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@app.post("/api/status")
+async def create_status(request: Request):
+    """Create status entry"""
+    try:
+        data = await request.json()
+        if collection:
+            data["timestamp"] = datetime.now()
+            result = collection.insert_one(data)
+            return {
+                "message": "Status created", 
+                "id": str(result.inserted_id),
+                "timestamp": data["timestamp"].isoformat()
+            }
+        else:
+            return {"error": "MongoDB not connected"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Product sync endpoint
+@app.post("/api/sync-products")
+async def sync_products():
+    """Trigger product sync from Shopify"""
+    try:
+        # Import and run sync
+        import sys
+        sys.path.append('/app')
+        from shopify_webhook_integration import ShopifyIntegration
+        
+        integration = ShopifyIntegration()
+        products = integration.sync_products_to_json()
+        
+        return {
+            "status": "success",
+            "message": f"Synced {len(products)} products",
+            "count": len(products),
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Sync failed: {str(e)}")
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "server:app",
+        host="0.0.0.0",
+        port=8001,
+        reload=True,
+        log_level="info"
+    )
