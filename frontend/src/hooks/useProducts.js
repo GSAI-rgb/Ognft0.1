@@ -93,16 +93,16 @@ export const useProduct = (productId) => {
       try {
         setLoading(true);
         
-        // First try to get from real_products.json, then fallback to products.json
+        // First try to get from comprehensive_products.json, then fallback to products.json
         let productData = null;
         try {
-          const response = await fetch('/real_products.json');
+          const response = await fetch('/comprehensive_products.json');
           if (response.ok) {
-            const realProducts = await response.json();
-            productData = realProducts.find(p => p.id === parseInt(productId));
+            const comprehensiveProducts = await response.json();
+            productData = comprehensiveProducts.find(p => p.id === parseInt(productId));
           }
-        } catch (realProductsError) {
-          console.warn('Real products not found:', realProductsError.message);
+        } catch (comprehensiveProductsError) {
+          console.warn('Comprehensive products not found:', comprehensiveProductsError.message);
           
           // Fallback to Shopify products
           try {
