@@ -1,69 +1,119 @@
 <analysis>
-The AI engineer successfully transitioned the application from an AXM homepage clone to a full e-commerce platform, integrating a Make It OG cinematic theme with specific content, performance targets, and Shopify Storefront API capabilities. Key achievements include a comprehensive homepage re-skin, fixing a critical mobile product detail page layout issue, and resolving an infinite loop bug in the search functionality using . The project then pivoted to full Shopify integration, including automated product and collection creation using Admin API scripts, handling complex product image structures. The current challenge revolves around correctly generating premium product names, ensuring all images (front/back, color variants) are uploaded, and making newly created products consistently visible across both the local frontend and the Shopify storefront, addressing a recent domain change and the need for a robust product creation logic.
+The previous AI engineer successfully initiated a transformation from an AXM clone to an OG-themed e-commerce platform. Initial tasks involved setting up a React/FastAPI/MongoDB stack, integrating with Shopify, and implementing basic e-commerce functionalities like product display and cart. The development trajectory was highly iterative, characterized by repeated bug reports from the user regarding UI inconsistencies, product visibility, navigation issues, and image display. A significant pivot occurred with the user requesting a Next.js migration for scalability, which was acknowledged but then immediately superseded by urgent bug fixes. The AI engineer attempted a mood-based system and a PSPK fan experience, but these led to more issues, necessitating a rollback to simpler functionality. The user's feedback became increasingly critical, emphasizing the need for robust image handling, accurate navigation, and proper Shopify integration. The work culminated in specific UI/UX bugs being reported, indicating persistent issues despite multiple fixes. The AI engineer is now tasked with resolving these precise UI flaws.
 </analysis>
 
 <product_requirements>
-The user initially requested a pixel-perfect clone of an AXM website, expanding into a multi-page e-commerce site with standard pages (product, cart, profile, etc.). This evolved into a Make It OG mandate: re-skinning the AXM layout with a specific OG film theme (colors, typography, motion via tokens), achieving performance budgets (LCP < 2.5s, CLS < 0.05, TTI < 3.0s), and implementing full Shopify Storefront GraphQL integration (products, collections, cart, metafields). India-first UX (UPI/COD, EN/TE toggle, Lite Mode) and fan-first features (rank-based drops, countdowns, Fan Army Wall) were specified. Specific page transformations included the homepage (Hero, Rebel Drops, Fan Arsenal, Choose Your Arsenal, Fan Army Wall, From the Firestorm), Collections page (OG ranks), All Products page (Armory), and Product Detail Page (OG titles, Telugu accents, Add to Arsenal CTA). A bug in product detail page mobile layout was reported, and a struggling and glitching search feature needed fixing. Finally, the user requested full Shopify configuration and automated product upload with premium names and proper image handling.
+The core product is an OG-themed e-commerce platform with a React frontend, FastAPI backend, and MongoDB. Initially, the goal was a pixel-perfect AXM website clone, then re-skinned as Make It OG with brutal typography, motion, and performance targets (LCP < 2.5s, CLS < 0.05, TTI < 3.0s). Key features include Shopify Storefront/Admin API integration for products, collections, cart, and metafields; India-first UX (UPI/COD, EN/TE toggle); and fan-first features (rank-based drops, countdowns). Specific page redesigns were for homepage, collections, shop (Armory), and product detail pages (PDPs).
+
+Subsequent requirements included: automated Shopify product upload (with premium, real product names and complex image handling for front/back, variants); ensuring product visibility; fixing mobile PDP layout, search, and product not found errors; implementing scroll-to-top and a unified cart UI (sidebar); addressing an Out of Memory error; and a future Next.js migration for billion-user scalability, with advanced security, performance, mobile-first design, latest Shopify Webhook/Storefront API integration, and a new, luxurious UI.
+
+The latest, most critical demands from the user involve fixing under999 badge display, removing unwanted view button on hover, ensuring back image as default and front image on hover, fixing non-working Armory menu links, missing gear products, Product Not Found errors, collections being empty, and proper integration with Shopify CMS.
 </product_requirements>
 
 <key_technical_concepts>
--   **React.js**: Frontend UI development.
--   **FastAPI**: Python backend services.
--   **MongoDB**: Database.
--   **Tailwind CSS & Shadcn UI**: Styling and component library.
--   **React Router DOM**: Client-side routing.
--   **Shopify Storefront GraphQL API**: Primary e-commerce data source.
--   **Shopify Admin API**: For automated product/collection management.
--   **React Context API**: Global state management.
--   **Performance Optimizations**: Lazy loading, client-side transitions.
--   **Internationalization (i18n)**: EN/TE language support.
+- React.js: Frontend UI development.
+- FastAPI: Python backend for API services.
+- MongoDB: Database.
+- Tailwind CSS & Shadcn UI: Styling and component library.
+- Shopify Storefront & Admin GraphQL API: E-commerce data and management.
+- React Context API: Global state management.
+- Performance Optimizations: Memoization, lazy loading, error boundaries.
+- Environment Variables: For sensitive configurations like API URLs.
+- Next.js (Planned): For future scalability and performance.
 </key_technical_concepts>
 
 <code_architecture>
-
-
--   : Main entry, theme switching logic removed, now permanently OG.
--   : Updated with new product data properties, and modified filters in  to avoid crashing on mock data without a  property.
--   : Orchestrates homepage layout, now uses new OG components (, , , , , ). Removed  checks.
--   : Updated with OG-themed titles, descriptions, and rank-based sections.
--   : Transformed into ARMORY with re-themed category navigation.
--   : Layout adjusted for mobile to show images first; updated with OG titles, Telugu accent lines, new CTA, and product details.
--   : Fixed  dependency array to prevent infinite re-renders for search.
--   : New components (, , , , , ) created or updated to implement the OG theme on the homepage, including copy, styling, and basic logic.  updated for brutal typography.
--   : Modified to include DVV Entertainment branding and tagline, checking for OG theme (though now permanent).
--   : Updated logo styling to red, removed  component.
--   : Modified to display OG-themed badges (Rebel Drop, Blood Price, Fan Arsenal) with corrected positioning.
--   : Added  to  and  functions to prevent re-creation on every render, resolving the search infinite loop.
--   : Theme switching functionality removed,  is now the default and only theme. Related  calls were removed to fix a console error.
--   : Updated to use actual Shopify credentials from  and modified GraphQL queries to support OG metafields and shop-level metafields.
--   : Utility for handling Shopify metafields for OG features like rank, drop end, and limited edition.
--   , : Updated with extensive OG-themed copy, headlines, rails, badges, and microcopy, including Telugu accent lines.
--   : Updated to include new brutal fonts (Inter Tight/Oswald Bold, Inter).
--   : Added Google Fonts import for custom typography.
--   : Python script for bulk creating Shopify products, collections, and updating store settings using the Admin API. Automatically generates titles, descriptions, and assigns OG tags.
--   : Helper script for bulk uploading product images to Shopify.
--   : Orchestrates the running of  and  for a one-click setup.
--   : Script to publish existing products to the storefront.
--   : A new script initiated to fix the product creation logic based on user feedback.
+/app
+├── backend/
+│   ├── .env
+│   ├── requirements.txt
+│   └── server.py (FastAPI application, handles product fetching, potentially via Shopify or local JSON)
+├── frontend/
+│   ├── public/
+│   │   ├── images/ (Symbolic link to /app/PRODUCTS for image serving)
+│   │   └── products.json (Initial Shopify product data)
+│   ├── src/
+│   │   ├── App.js (Main entry, handles routing, global contexts, error boundary, Shopify tracking)
+│   │   ├── index.css (Global styles)
+│   │   ├── components/
+│   │   │   ├── ui/ (Shadcn UI components)
+│   │   │   ├── OG/ (Themed components: OGHeroSection.jsx, RebelDrops.jsx, FeaturedTees.jsx etc.)
+│   │   │   ├── Rail.jsx (NEWLY CREATED: Displays product rails, heavily modified to handle mood/collection logic)
+│   │   │   ├── ProductCard.jsx (Displays individual products, modified for hover effects, badges, navigation)
+│   │   │   ├── SizeChips.jsx (NEWLY CREATED: For product size selection)
+│   │   │   ├── Scarcity.jsx (NEWLY CREATED: Displays stock scarcity)
+│   │   │   ├── TrustChips.jsx (NEWLY CREATED: Displays trust badges)
+│   │   │   ├── MoodChips.jsx (NEWLY CREATED: For mood-based filtering, later de-emphasized)
+│   │   │   ├── Header.jsx (Navigation, updated for new categories, cart sidebar toggle)
+│   │   │   ├── Footer.jsx (Updated with DVV Entertainment branding and fixed navigation links)
+│   │   │   ├── CartSidebar.jsx (NEWLY CREATED/MODIFIED: Unified cart UI)
+│   │   │   ├── OptimizedImage.jsx (NEWLY CREATED: For lazy loading and image optimization)
+│   │   │   ├── ErrorBoundary.jsx (NEWLY CREATED: Global error handler)
+│   │   │   ├── WaitlistModal.jsx (NEWLY CREATED: For out-of-stock items)
+│   │   │   ├── HelpButton.jsx (NEWLY CREATED: Persistent support button)
+│   │   │   └── PSPKCommunityModal.jsx (NEWLY CREATED: For fan community consent, later simplified)
+│   │   ├── context/
+│   │   │   └── CartContext.jsx (Manages cart state, modified for local storage and memory optimization)
+│   │   ├── data/
+│   │   │   └── mock.js (Fallback product data, updated for OG theme)
+│   │   ├── hooks/
+│   │   │   └── useProducts.js (Central product fetching logic, modified to read local JSON files first, then Shopify, optimized for performance, extensively debugged for product visibility)
+│   │   │   └── useSearch.js (Search functionality, improved with useCallback)
+│   │   ├── lib/
+│   │   │   ├── shopify.js (Shopify API integration, metafields corrected)
+│   │   │   ├── price.js (NEWLY CREATED: Price formatting utility)
+│   │   │   ├── upi.js (NEWLY CREATED: UPI deep link generation, uses env variables)
+│   │   │   ├── wa.js (NEWLY CREATED: WhatsApp order text generation, uses env variables)
+│   │   │   └── shopifyTracking.js (NEWLY CREATED: Google Analytics/Facebook Pixel/Custom PSPK event tracking)
+│   │   ├── pages/
+│   │   │   ├── Home.jsx (Homepage, extensively modified to use Rails system and dynamic content)
+│   │   │   ├── Shop.jsx (Product listing page, ARMORY, updated categories and filtering)
+│   │   │   ├── ProductDetail.jsx (PDP, revamped for layout, image gallery, size chips, scarcity, bundle, trust chips, UPI/WA checkout)
+│   │   │   ├── Collections.jsx (Collections page, updated to display actual product collections)
+│   │   │   └── (Other pages like About, Cart, Contact, Journal, Profile, SearchResults)
+│   │   ├── content/ (en.json, te.json for i18n, updated with OG copy)
+│   │   └── .env (Frontend environment variables, including REACT_APP_BACKEND_URL, VITE_UPI_VPA, VITE_SUPPORT_PHONE)
+├── PRODUCTS/ (Directory containing raw product images organized by category/product/color/front-back)
+│   ├── teeshirt/
+│   ├── hoodies/
+│   ├── posters/
+│   └── ...
+├── shopify_automation.py (Initial Shopify automation script)
+├── analyze_and_cleanup_products.py (NEWLY CREATED: Script to analyze image assets for duplicates, variants, etc.)
+├── create_real_products.py (NEWLY CREATED: Script to create product JSON from assets)
+├── create_simple_working_products.py (NEWLY CREATED: Simplified product creation script)
+├── create_all_products_comprehensive.py (NEWLY CREATED: Comprehensive script to process all product assets)
+├── comprehensive_products.json (NEWLY CREATED: JSON file containing the consolidated product catalog)
+└── (Other utility scripts like upload_images.py, quick_setup.py, publish_products.py, correct_product_creator.py, og_product_creator.py, debug_storefront.py, shopify_direct_integration.py)
 </code_architecture>
 
 <pending_tasks>
--   Generate **premium and descriptive product names** dynamically for existing image files.
--   **Properly handle complex product image structures** (e.g.,  images, color variant subfolders) during Shopify product creation and upload.
--   Ensure all created products with correct images and names are **visible in both the local frontend application and the Shopify store**.
--   Complete full Shopify Storefront API integration (metafields for countdowns, vault lock, rank badges and product variants).
--   Implement India-First UX features (UPI/COD rules, Lite Mode, Under-₹{ceiling} rail, WhatsApp/Email restock notify).
--   Implement remaining Fan-First Features (Fan Battle Drops, Drops as Time-Bombs, OG Tribe ID, Scene Codes, Restock Vote).
--   Implement client-side Personalization heuristics.
--   Set up Playwright pixel-diff visual regression tests and Lighthouse CI performance tests.
+- Complete full Shopify Storefront API integration (metafields for countdowns, vault lock, rank badges, product variants).
+- Implement India-First UX features (UPI/COD rules, Lite Mode, Under-₹{ceiling} rail, WhatsApp/Email restock notify).
+- Implement remaining Fan-First Features (Fan Battle Drops, Drops as Time-Bombs, OG Tribe ID, Scene Codes, Restock Vote).
+- Implement client-side Personalization heuristics.
+- Set up Playwright pixel-diff visual regression tests and Lighthouse CI performance tests.
+- Address persistent Shopify collection creation issues.
+- Implement the new big drop UI design (luxury, minimal, horizontal scrolling).
+- Implement creative countdown timers for exclusive drops.
+- Ensure united strategy throughout the site for conversions, specifically tracked and controlled by Shopify.
+- Perform the Next.js migration for billion-user scalability with advanced security and latest Shopify APIs.
 </pending_tasks>
 
 <current_work>
-The AI engineer is currently addressing critical issues related to Shopify product creation and visibility. Previously, an automated script () successfully created 78 products on a newly configured Shopify store () using Admin API credentials. However, the user reported that the auto-generated product names (e.g., Ocean Waves, Product 1) were trash and not premium. More importantly, the image upload process did not correctly handle complex folder structures for variants (e.g.,  for colors) or multiple views (e.g.,  images), leading to incomplete or incorrect image displays. Products were also not consistently visible on the Storefront API, although the backend confirmed their creation via the Admin API.
+Immediately prior to this summary, the AI engineer was caught in a cycle of bug fixes stemming from the user's explicit complaints. The user reported:
+1.  **UI/UX Issues**: under999 badge not looking good, view button on hover being present, incorrect image display (must show back image on default, front on hover, not a button or text).
+2.  **Functionality Issues**: moods not working appropriately, armory menu links not working, gear products are missing, product/collection clicks not directing to the product page but showing Product Not Found.
+3.  **General Dissatisfaction**: User expressed extreme frustration (ur fired from my company. u r not cool. probve ,e if u r valuable doing everythgin and cosnumn lessotkens effecirntly. but fix everythign) and emphasized the need for all issues to be fixed for deployment, along with proper Shopify webhook and storefront API integration.
 
-The AI engineer has re-analyzed the user's  directory structure, confirming the presence of both front/back and color variant image organizations. Acknowledging previous errors, the current work involves stopping the old, incorrect product creation, and initiating the development of a  script. This new script aims to correctly interpret the folder structure, generate *premium, real product names*, and accurately upload all relevant images to create proper product variants, ensuring they are fully visible and correctly displayed in both the local application and the Shopify storefront. The engineer has confirmed products currently exist in the Shopify store but still needs to rectify their names and image associations.
+The AI engineer's most recent actions were a direct response to these complaints, attempting to:
+- Simplify the product loading and display logic, moving away from the mood system.
+- Fix navigation and product page routing.
+- Ensure all products from the  directory are visible.
+- Consolidate product variants and prioritize back images.
+The AI engineer's immediate plan is to efficiently fix the ugly badges, and correctly implement the back/front image hover functionality, while also re-verifying Shopify integration.
 </current_work>
 
 <optional_next_step>
-Develop and execute  to delete wrongly named products and re-create them with premium names and correct image variants.
+Fix the under999 badge display and implement the correct back/front image hover functionality on product cards.
 </optional_next_step>

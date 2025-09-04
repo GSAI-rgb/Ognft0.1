@@ -98,7 +98,7 @@
     {
       "test": "Back Image Priority",
       "success": false,
-      "message": "Only 12/21 products (57.1%) have back images prioritized. Issues: Shadow Beast Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Shadow_Beast_Hoodie/back/main.jpg); Predator Elite Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Predator_Elite_Hoodie/back/main.jpg); Storm Warrior Hoodie: Primary image is not back image (https://storefront-migrate.preview.emergentagent.com/products/hoodies/Storm_Warrior_Hoodie/back/main.jpg)",
+      "message": "Only 12/21 products (57.1%) have back images prioritized. Issues: Shadow Beast Hoodie: Primary image is not back image (https://shopify-debugger.preview.emergentagent.com/products/hoodies/Shadow_Beast_Hoodie/back/main.jpg); Predator Elite Hoodie: Primary image is not back image (https://shopify-debugger.preview.emergentagent.com/products/hoodies/Predator_Elite_Hoodie/back/main.jpg); Storm Warrior Hoodie: Primary image is not back image (https://shopify-debugger.preview.emergentagent.com/products/hoodies/Storm_Warrior_Hoodie/back/main.jpg)",
       "timestamp": "2025-09-04T08:43:15.021692"
     },
     {

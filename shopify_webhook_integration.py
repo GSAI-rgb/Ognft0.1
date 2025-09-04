@@ -37,35 +37,35 @@ class ShopifyIntegration:
             {
                 "webhook": {
                     "topic": "products/create",
-                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://storefront-migrate.preview.emergentagent.com')}/api/webhooks/products/create",
+                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://shopify-debugger.preview.emergentagent.com')}/api/webhooks/products/create",
                     "format": "json"
                 }
             },
             {
                 "webhook": {
                     "topic": "products/update",
-                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://storefront-migrate.preview.emergentagent.com')}/api/webhooks/products/update",
+                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://shopify-debugger.preview.emergentagent.com')}/api/webhooks/products/update",
                     "format": "json"
                 }
             },
             {
                 "webhook": {
                     "topic": "products/delete",
-                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://storefront-migrate.preview.emergentagent.com')}/api/webhooks/products/delete",
+                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://shopify-debugger.preview.emergentagent.com')}/api/webhooks/products/delete",
                     "format": "json"
                 }
             },
             {
                 "webhook": {
                     "topic": "orders/create",
-                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://storefront-migrate.preview.emergentagent.com')}/api/webhooks/orders/create",
+                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://shopify-debugger.preview.emergentagent.com')}/api/webhooks/orders/create",
                     "format": "json"
                 }
             },
             {
                 "webhook": {
                     "topic": "inventory_levels/update",
-                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://storefront-migrate.preview.emergentagent.com')}/api/webhooks/inventory/update",
+                    "address": f"{os.getenv('REACT_APP_BACKEND_URL', 'https://shopify-debugger.preview.emergentagent.com')}/api/webhooks/inventory/update",
                     "format": "json"
                 }
             }
