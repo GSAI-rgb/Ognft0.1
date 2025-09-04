@@ -43,14 +43,34 @@ const ProductCard = ({ product, className = "", priority = false }) => {
           priority={priority}
         />
         
-        {/* Only essential badges */}
-        {product.badges?.includes('LIMITED') && (
-          <div className="absolute top-4 left-4">
+        {/* Essential badges - shorter versions */}
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+          {product.badges?.includes('VAULT') && (
+            <span className="px-2 py-1 text-xs font-black tracking-wider uppercase bg-gradient-to-r from-[var(--color-gold)] to-yellow-600 text-black">
+              VAULT
+            </span>
+          )}
+          {product.badges?.includes('LIMITED') && (
             <span className="px-2 py-1 text-xs font-black tracking-wider uppercase bg-[var(--color-red)] text-white">
               LIMITED
             </span>
-          </div>
-        )}
+          )}
+          {product.badges?.includes('REBEL DROP') && (
+            <span className="px-2 py-1 text-xs font-black tracking-wider uppercase bg-black text-[var(--color-red)] border border-[var(--color-red)]">
+              REBEL
+            </span>
+          )}
+          {product.badges?.includes('PREMIUM') && (
+            <span className="px-2 py-1 text-xs font-black tracking-wider uppercase bg-gray-800 text-[var(--color-gold)]">
+              PREMIUM
+            </span>
+          )}
+          {product.price && product.price < 999 && (
+            <span className="px-2 py-1 text-xs font-black tracking-wider uppercase bg-green-700 text-white">
+              &lt;₹999
+            </span>
+          )}
+        </div>
 
         {/* Color swatches for multi-color products */}
         {product.colors && product.colors.length > 1 && (
