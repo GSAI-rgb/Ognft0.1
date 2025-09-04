@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { filterByPriceRange } from '../lib/price';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Rail from '../components/Rail';
 import MoodChips from '../components/MoodChips';
+import ExclusiveCountdown from '../components/ExclusiveCountdown';
+import PSPKCommunityModal from '../components/PSPKCommunityModal';
 
 const Home = () => {
   const { products, loading, error } = useProducts();
