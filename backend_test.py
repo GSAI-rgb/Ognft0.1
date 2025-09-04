@@ -498,7 +498,7 @@ class BackendTester:
         """Test that fixed_products.json is accessible and properly structured"""
         try:
             # Test direct access to fixed_products.json via frontend URL
-            frontend_url = os.getenv('REACT_APP_BACKEND_URL', BACKEND_URL.replace('/api', ''))
+            frontend_url = "http://localhost:3000"  # Frontend runs on port 3000
             products_url = f"{frontend_url}/fixed_products.json"
             
             response = requests.get(products_url, timeout=10)
