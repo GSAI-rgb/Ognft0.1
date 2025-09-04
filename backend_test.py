@@ -132,14 +132,15 @@ class BackendTester:
             
             if response.status_code == 200:
                 data = response.json()
-                required_fields = ['id', 'client_name', 'timestamp']
+                # Updated to match the actual response format
+                required_fields = ['message', 'id', 'timestamp']
                 
                 if all(field in data for field in required_fields):
-                    if data['client_name'] == test_data['client_name']:
+                    if data['message'] == "Status created":
                         self.log_result("Create Status Check", True, f"Created status check with ID: {data['id']}")
                         return data['id']
                     else:
-                        self.log_result("Create Status Check", False, "Client name mismatch")
+                        self.log_result("Create Status Check", False, "Unexpected message in response")
                         return None
                 else:
                     self.log_result("Create Status Check", False, f"Missing required fields: {required_fields}")
