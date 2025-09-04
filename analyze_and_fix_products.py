@@ -161,7 +161,7 @@ def analyze_uploaded_assets():
         products.append(product)
         product_id += 1
     
-    # HOODIES - Premium items with back/front priority
+    # HOODIES - Premium items with back/front priority - CATEGORY: "Hoodies" (matches shop tabs)
     hoodie_designs = [
         {"name": "Shadow Beast Hoodie", "price": 2499, "mood": "SHADOW"},
         {"name": "Predator Elite Hoodie", "price": 2799, "mood": "SHADOW"},
@@ -171,23 +171,24 @@ def analyze_uploaded_assets():
     ]
     
     for hoodie in hoodie_designs:
-        images = [
-            f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/back/main.jpg",
-            f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/front/main.jpg",
-            f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/side/main.jpg"
-        ]
+        # ENSURE BACK IMAGE IS ALWAYS PRIMARY
+        back_image = f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/back/main.jpg"
+        front_image = f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/front/main.jpg"
+        side_image = f"https://storefront-migrate.preview.emergentagent.com/products/hoodies/{hoodie['name'].replace(' ', '_')}/side/main.jpg"
+        
+        images = [back_image, front_image, side_image]  # BACK IMAGE FIRST ALWAYS
         
         products.append({
             "id": product_id,
             "name": hoodie["name"],
             "title": f"[ARMORY // {hoodie['name'].upper()}] — PREMIUM",
-            "category": "Hoodies",
+            "category": "Hoodies",  # CORRECT CATEGORY NAME TO MATCH SHOP TABS
             "price": hoodie["price"],
             "originalPrice": hoodie["price"] + 500,
             "mood_code": hoodie["mood"],
             "images": images,
-            "primaryImage": images[0],  # Back image first
-            "hoverImage": images[1],    # Front on hover
+            "primaryImage": back_image,  # EXPLICITLY SET BACK IMAGE AS PRIMARY
+            "hoverImage": front_image,   # FRONT ON HOVER
             "badges": ["PREDATOR DROP", "PREMIUM"] if hoodie["price"] > 2400 else ["BEAST DROP"],
             "description": f"{hoodie['name']} - Premium hoodie forged in {hoodie['mood'].lower()} mode. Back design prioritized.",
             "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
@@ -197,37 +198,31 @@ def analyze_uploaded_assets():
         })
         product_id += 1
     
-    # ACCESSORIES - Visible and properly categorized
-    accessories = [
-        {"name": "Rebel Cap", "price": 799, "category": "Accessories"},
-        {"name": "Battle Wallet", "price": 899, "category": "Accessories"},
-        {"name": "Warrior Slides", "price": 699, "category": "Accessories"},
-        {"name": "Steel Wristband", "price": 499, "category": "Accessories"}
+    # POSTERS - War Posters - CATEGORY: "Posters" (matches shop tabs)
+    poster_designs = [
+        {"name": "Storm Battlefield Poster", "price": 599, "mood": "STORM"},
+        {"name": "Shadow War Poster", "price": 699, "mood": "SHADOW"},
+        {"name": "Ember Battle Poster", "price": 599, "mood": "EMBER"},
+        {"name": "Ghost Operation Poster", "price": 649, "mood": "GHOST"}
     ]
     
-    for acc in accessories:
-        images = [
-            f"https://storefront-migrate.preview.emergentagent.com/products/accessories/{acc['name'].replace(' ', '_')}/main.jpg"
-        ]
-        
-        badges = ["ARSENAL"]
-        if acc["price"] <= 999:
-            badges.append("UNDER ₹999")
+    for poster in poster_designs:
+        poster_image = f"https://storefront-migrate.preview.emergentagent.com/products/posters/{poster['name'].replace(' ', '_')}/main.jpg"
         
         products.append({
             "id": product_id,
-            "name": acc["name"],
-            "title": f"[ARMORY // {acc['name'].upper()}] — GEAR",
-            "category": acc["category"],
-            "price": acc["price"],
-            "originalPrice": acc["price"] + 200,
-            "mood_code": "EMBER",
-            "images": images,
-            "primaryImage": images[0],
-            "badges": badges,
-            "description": f"{acc['name']} - Essential gear for every rebel warrior.",
-            "sizes": ["ONE SIZE"],
-            "stock": {"ONE_SIZE": 30},
+            "name": poster["name"],
+            "title": f"[ARMORY // {poster['name'].upper()}] — A2",
+            "category": "Posters",  # CORRECT CATEGORY NAME TO MATCH SHOP TABS
+            "price": poster["price"],
+            "originalPrice": poster["price"] + 200,
+            "mood_code": poster["mood"],
+            "images": [poster_image],
+            "primaryImage": poster_image,
+            "badges": ["WAR POSTER", "UNDER ₹999"],
+            "description": f"{poster['name']} - A2 battlefield visual. Premium print ready for combat.",
+            "sizes": ["A2"],
+            "stock": {"A2": 25},
             "vendor": "DVV Entertainment",
             "isVisible": True
         })
