@@ -35,8 +35,12 @@ const ProductCard = ({ product, className = "", priority = false }) => {
   }, [isReducedMotion]);
 
   const handleClick = useCallback(() => {
-    navigate(`/product/${product.id}`);
-  }, [navigate, product.id]);
+    if (isOutOfStock) {
+      setWaitlistOpen(true);
+    } else {
+      navigate(`/product/${product.id}`);
+    }
+  }, [navigate, product.id, isOutOfStock]);
 
   return (
     <div className={`group cursor-pointer will-change-transform ${className}`} onClick={handleClick}>
