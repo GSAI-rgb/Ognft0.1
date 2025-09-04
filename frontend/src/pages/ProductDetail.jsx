@@ -14,9 +14,12 @@ import TrustChips from '../components/TrustChips';
 import CartSidebar from '../components/CartSidebar';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { id, handle } = useParams(); // Handle both /product/:id and /products/:handle
   const navigate = useNavigate();
-  const { product, loading: productLoading } = useProduct(id);
+  
+  // Use ID or handle to find product
+  const productIdentifier = id || handle;
+  const { product, loading: productLoading } = useProduct(productIdentifier);
   const { addToCart, loading: cartLoading } = useCart();
   
   const [selectedImage, setSelectedImage] = useState(0);
