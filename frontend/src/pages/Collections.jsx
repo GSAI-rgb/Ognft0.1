@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
@@ -7,43 +7,57 @@ import Footer from '../components/Footer';
 
 const Collections = () => {
   const { t } = useI18n();
+  const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // OG Collections - Shopify integrated with metafields
-  const collections = [
-    {
-      handle: 'rebellion-core',
-      title: 'Rebellion Core',
-      description: 'Rebellion Core — essentials for every soldier.',
-      image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg',
-      productCount: 12,
-      rank: 'Common'
-    },
-    {
-      handle: 'vault-exclusive',
-      title: 'Vault Exclusive',
-      description: 'Vault Exclusive — only for collectors, only for legends.',
-      image: 'https://framerusercontent.com/images/Bqu1YbtLNP6KpNMpw9Wnp1oQOJA.jpg',
-      productCount: 6,
-      rank: 'Vault',
-      isLocked: true
-    },
-    {
-      handle: 'captain-series',
-      title: 'Captain Series',
-      description: 'Captain Series — lead from the front (ముందుండి నడిపించు).',
-      image: 'https://framerusercontent.com/images/aHmupIkpNbiTWcrio0jHVxTg4OU.png',
-      productCount: 8,
-      rank: 'Captain'
-    },
-    {
-      handle: 'first-day-first-show',
-      title: 'First Day First Show',
-      description: 'First Day First Show — theater-grade merch for opening day warriors.',
-      image: 'https://framerusercontent.com/images/QnjPU1zOWtNjPZtBPpgHzKv8E.jpg',
-      productCount: 15,
-      rank: 'Rebel'
-    }
-  ];
+  useEffect(() => {
+    // Load collections from working collections JSON
+    fetch('/simple_collections.json')
+      .then(response => response.json())
+      .then(data => {
+        setCollections(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading collections:', error);
+        // Fallback to static collections
+        setCollections([
+          {
+            id: 1,
+            handle: 'rebellion-core',
+            title: 'Rebellion Core',
+            description: 'Essential gear for every rebel soldier. Core items that define the OG tribe.',
+            product_count: 10,
+            image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'
+          },
+          {
+            id: 2,
+            handle: 'under-999',
+            title: 'Under ₹999',
+            description: 'Premium OG gear accessible to every rebel. No soldier left behind.',
+            product_count: 9,
+            image: 'https://framerusercontent.com/images/Bqu1YbtLNP6KpNMpw9Wnp1oQOJA.jpg'
+          },
+          {
+            id: 3,
+            handle: 'multi-color',
+            title: 'Multi-Color Arsenal',
+            description: 'Products available in multiple color variants for customization.',
+            product_count: 2,
+            image: 'https://framerusercontent.com/images/aHmupIkpNbiTWcrio0jHVxTg4OU.png'
+          },
+          {
+            id: 4,
+            handle: 'arsenal-gear',
+            title: 'Arsenal Gear',
+            description: 'Essential accessories and gear for every rebel warrior.',
+            product_count: 7,
+            image: 'https://framerusercontent.com/images/QnjPU1zOWtNjPZtBPpgHzKv8E.jpg'
+          }
+        ]);
+        setLoading(false);
+      });
+  }, []);
 
   const getRankBadgeColor = (rank) => {
     switch (rank) {
