@@ -39,7 +39,7 @@ export function sendOrderToWhatsApp({
   customerInfo,
   orderId,
   paymentMethod = 'COD',
-  storeWhatsApp = '+919876543210' // Replace with actual store number
+  storeWhatsApp = process.env.REACT_APP_SUPPORT_WHATSAPP || '+919876543210'
 }) {
   const orderText = waOrderText({
     items,
