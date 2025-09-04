@@ -55,72 +55,27 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Rails System - CONVERSION OPTIMIZED */}
-      <div id="rebellion-core">
-        <Rail 
-          title="Under ₹999 — No Fan Left Behind" 
-          products={affordableProducts}
-          showViewAll={true}
-          viewAllLink="/shop?filter=under-999"
-        />
-      </div>
+      {/* Rails System - SIMPLE */}
+      <Rail 
+        title="Under ₹999 — For Every Rebel" 
+        products={affordableProducts}
+        showViewAll={true}
+        viewAllLink="/shop?filter=under-999"
+      />
       
       <Rail 
-        title="Rebellion Core — For True PSPK Fans" 
+        title="Rebellion Core — Essential Gear" 
         products={rebelCore.length > 0 ? rebelCore : products.slice(0, 8)}
         showViewAll={true}
         viewAllLink="/shop?filter=rebellion-core"
       />
       
-      {exclusiveProducts.length > 0 && (
-        <Rail 
-          title="Elite Access — Unlock Your Status" 
-          products={exclusiveProducts}
-          showViewAll={true}
-          viewAllLink="/shop?filter=exclusive"
-        />
-      )}
-      
-      {/* Collections Section - CLEAR & SIMPLE */}
-      <section className="py-16 bg-black text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-wider font-headline mb-4">
-              Shop Collections
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Organized collections for easy shopping
-            </p>
-            <div className="w-20 h-1 bg-[var(--color-red)] mx-auto mt-6"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <a 
-              href="/shop?filter=teeshirts" 
-              className="group bg-gray-900 hover:bg-red-900 transition-all p-6 text-center"
-            >
-              <h3 className="text-2xl font-bold mb-2">REBEL TEES</h3>
-              <p className="text-gray-400">T-shirts for rebels</p>
-            </a>
-            
-            <a 
-              href="/shop?filter=hoodies" 
-              className="group bg-gray-900 hover:bg-red-900 transition-all p-6 text-center"
-            >
-              <h3 className="text-2xl font-bold mb-2">HOODIES</h3>
-              <p className="text-gray-400">Premium hoodies</p>
-            </a>
-            
-            <a 
-              href="/shop?filter=accessories" 
-              className="group bg-gray-900 hover:bg-red-900 transition-all p-6 text-center"
-            >
-              <h3 className="text-2xl font-bold mb-2">ACCESSORIES</h3>
-              <p className="text-gray-400">Caps, slides, gear</p>
-            </a>
-          </div>
-        </div>
-      </section>
+      <Rail 
+        title="Premium Collection" 
+        products={vaultProducts.length > 0 ? vaultProducts : products.filter(p => p.price >= 2000)}
+        showViewAll={true}
+        viewAllLink="/shop?filter=premium"
+      />
 
       {/* Community Modal */}
       <PSPKCommunityModal
