@@ -58,7 +58,7 @@ const Shop = () => {
     if (activeTab === 'posters') return 'Posters';
     if (activeTab === 'sweatshirts') return 'Sweatshirts';
     if (activeTab === 'shirts') return 'Full Shirts';
-    if (activeTab === 'accessories') return 'accessories';
+    if (activeTab === 'accessories') return 'Accessories';  // This should show ALL accessories including gear
     return null;
   };
 
