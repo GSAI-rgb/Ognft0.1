@@ -32,18 +32,16 @@ const ProductCard = ({ product, className = "", priority = false, showCountdown 
     return product.featured_image || product.images?.[0] || 'https://via.placeholder.com/400x500?text=No+Image';
   };
 
-  // Handle click - navigate to product page
+  // Handle click - navigate to product page using simple ID
   const handleClick = useCallback((e) => {
     e.preventDefault();
     if (isOutOfStock) {
       setWaitlistOpen(true);
-    } else if (isLocked) {
-      // Show unlock message or navigate to product page
-      navigate(`/product/${product.id}`);
     } else {
+      // Use product ID for navigation
       navigate(`/product/${product.id}`);
     }
-  }, [navigate, product.id, isOutOfStock, isLocked]);
+  }, [navigate, product.id, isOutOfStock]);
 
   // Countdown timer for exclusive drops
   const getCountdownDisplay = () => {
