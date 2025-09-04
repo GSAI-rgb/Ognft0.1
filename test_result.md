@@ -273,6 +273,7 @@ test_plan:
   test_all: false
   test_priority: "high_first"
 
+frontend:
   - task: "Transform ALL e-commerce pages to OG cinematic brutality theme"
     implemented: true
     working: true
