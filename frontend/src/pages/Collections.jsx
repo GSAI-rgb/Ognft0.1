@@ -98,7 +98,7 @@ const Collections = () => {
           {collections.map((collection) => (
             <Link
               key={collection.handle}
-              to={`/shop?collection=${collection.handle}`}
+              to={`/shop?filter=${collection.handle}`}
               className="group relative overflow-hidden bg-[var(--color-steel)] hover:bg-opacity-80 transition-all duration-300"
             >
               {/* Collection Image */}
