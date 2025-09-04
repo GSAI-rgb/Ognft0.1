@@ -997,34 +997,34 @@ class BackendTester:
         self.test_backend_shopify_integration_health()
         print()
         
-        # OG ARMORY SYSTEM SPECIFIC TESTS
+        # OG ARMORY SYSTEM SPECIFIC TESTS WITH VAULT INTEGRATION
         print("=" * 60)
-        print("🎯 OG ARMORY SYSTEM SPECIFIC TESTS")
+        print("🎯 OG ARMORY SYSTEM + VAULT INTEGRATION TESTS")
         print("=" * 60)
         
-        # Test 12: Fixed Products JSON Accessibility
-        print("12. Testing Fixed Products JSON Accessibility...")
-        self.test_fixed_products_json_accessibility()
+        # Test 12: Comprehensive Products JSON Accessibility
+        print("12. Testing Comprehensive Products JSON Accessibility...")
+        self.test_comprehensive_products_json_accessibility()
         print()
         
-        # Test 13: Color Variant Consolidation
-        print("13. Testing Color Variant Consolidation...")
-        self.test_color_variant_consolidation()
+        # Test 13: VAULT Product Integration
+        print("13. Testing VAULT Product Integration...")
+        self.test_vault_product_integration()
         print()
         
-        # Test 14: Back Image Priority
-        print("14. Testing Back Image Priority...")
-        self.test_back_image_priority()
+        # Test 14: Badge System Functionality
+        print("14. Testing Badge System Functionality...")
+        self.test_badge_system_functionality()
         print()
         
-        # Test 15: Product Visibility and Categorization
-        print("15. Testing Product Visibility and Categorization...")
-        self.test_product_visibility_and_categorization()
+        # Test 15: Category Filtering System
+        print("15. Testing Category Filtering System...")
+        self.test_category_filtering_system()
         print()
         
-        # Test 16: Category Mapping Synchronization
-        print("16. Testing Category Mapping Synchronization...")
-        self.test_category_mapping_synchronization()
+        # Test 16: Image Path Resolution
+        print("16. Testing Image Path Resolution...")
+        self.test_image_path_resolution()
         print()
         
         # Test 17: Product Image Asset Integration
