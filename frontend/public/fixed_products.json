@@ -875,104 +875,104 @@
   },
   {
     "id": 2017,
-    "name": "Rebel Cap",
-    "title": "[ARMORY // REBEL CAP] \u2014 GEAR",
-    "category": "Accessories",
-    "price": 799,
-    "originalPrice": 999,
-    "mood_code": "EMBER",
+    "name": "Storm Battlefield Poster",
+    "title": "[ARMORY // STORM BATTLEFIELD POSTER] \u2014 A2",
+    "category": "Posters",
+    "price": 599,
+    "originalPrice": 799,
+    "mood_code": "STORM",
     "images": [
-      "https://storefront-migrate.preview.emergentagent.com/products/accessories/Rebel_Cap/main.jpg"
+      "https://storefront-migrate.preview.emergentagent.com/products/posters/Storm_Battlefield_Poster/main.jpg"
     ],
-    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/accessories/Rebel_Cap/main.jpg",
+    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/posters/Storm_Battlefield_Poster/main.jpg",
     "badges": [
-      "ARSENAL",
+      "WAR POSTER",
       "UNDER \u20b9999"
     ],
-    "description": "Rebel Cap - Essential gear for every rebel warrior.",
+    "description": "Storm Battlefield Poster - A2 battlefield visual. Premium print ready for combat.",
     "sizes": [
-      "ONE SIZE"
+      "A2"
     ],
     "stock": {
-      "ONE_SIZE": 30
+      "A2": 25
     },
     "vendor": "DVV Entertainment",
     "isVisible": true
   },
   {
     "id": 2018,
-    "name": "Battle Wallet",
-    "title": "[ARMORY // BATTLE WALLET] \u2014 GEAR",
-    "category": "Accessories",
-    "price": 899,
-    "originalPrice": 1099,
-    "mood_code": "EMBER",
+    "name": "Shadow War Poster",
+    "title": "[ARMORY // SHADOW WAR POSTER] \u2014 A2",
+    "category": "Posters",
+    "price": 699,
+    "originalPrice": 899,
+    "mood_code": "SHADOW",
     "images": [
-      "https://storefront-migrate.preview.emergentagent.com/products/accessories/Battle_Wallet/main.jpg"
+      "https://storefront-migrate.preview.emergentagent.com/products/posters/Shadow_War_Poster/main.jpg"
     ],
-    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/accessories/Battle_Wallet/main.jpg",
+    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/posters/Shadow_War_Poster/main.jpg",
     "badges": [
-      "ARSENAL",
+      "WAR POSTER",
       "UNDER \u20b9999"
     ],
-    "description": "Battle Wallet - Essential gear for every rebel warrior.",
+    "description": "Shadow War Poster - A2 battlefield visual. Premium print ready for combat.",
     "sizes": [
-      "ONE SIZE"
+      "A2"
     ],
     "stock": {
-      "ONE_SIZE": 30
+      "A2": 25
     },
     "vendor": "DVV Entertainment",
     "isVisible": true
   },
   {
     "id": 2019,
-    "name": "Warrior Slides",
-    "title": "[ARMORY // WARRIOR SLIDES] \u2014 GEAR",
-    "category": "Accessories",
-    "price": 699,
-    "originalPrice": 899,
+    "name": "Ember Battle Poster",
+    "title": "[ARMORY // EMBER BATTLE POSTER] \u2014 A2",
+    "category": "Posters",
+    "price": 599,
+    "originalPrice": 799,
     "mood_code": "EMBER",
     "images": [
-      "https://storefront-migrate.preview.emergentagent.com/products/accessories/Warrior_Slides/main.jpg"
+      "https://storefront-migrate.preview.emergentagent.com/products/posters/Ember_Battle_Poster/main.jpg"
     ],
-    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/accessories/Warrior_Slides/main.jpg",
+    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/posters/Ember_Battle_Poster/main.jpg",
     "badges": [
-      "ARSENAL",
+      "WAR POSTER",
       "UNDER \u20b9999"
     ],
-    "description": "Warrior Slides - Essential gear for every rebel warrior.",
+    "description": "Ember Battle Poster - A2 battlefield visual. Premium print ready for combat.",
     "sizes": [
-      "ONE SIZE"
+      "A2"
     ],
     "stock": {
-      "ONE_SIZE": 30
+      "A2": 25
     },
     "vendor": "DVV Entertainment",
     "isVisible": true
   },
   {
     "id": 2020,
-    "name": "Steel Wristband",
-    "title": "[ARMORY // STEEL WRISTBAND] \u2014 GEAR",
-    "category": "Accessories",
-    "price": 499,
-    "originalPrice": 699,
-    "mood_code": "EMBER",
+    "name": "Ghost Operation Poster",
+    "title": "[ARMORY // GHOST OPERATION POSTER] \u2014 A2",
+    "category": "Posters",
+    "price": 649,
+    "originalPrice": 849,
+    "mood_code": "GHOST",
     "images": [
-      "https://storefront-migrate.preview.emergentagent.com/products/accessories/Steel_Wristband/main.jpg"
+      "https://storefront-migrate.preview.emergentagent.com/products/posters/Ghost_Operation_Poster/main.jpg"
     ],
-    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/accessories/Steel_Wristband/main.jpg",
+    "primaryImage": "https://storefront-migrate.preview.emergentagent.com/products/posters/Ghost_Operation_Poster/main.jpg",
     "badges": [
-      "ARSENAL",
+      "WAR POSTER",
       "UNDER \u20b9999"
     ],
-    "description": "Steel Wristband - Essential gear for every rebel warrior.",
+    "description": "Ghost Operation Poster - A2 battlefield visual. Premium print ready for combat.",
     "sizes": [
-      "ONE SIZE"
+      "A2"
     ],
     "stock": {
-      "ONE_SIZE": 30
+      "A2": 25
     },
     "vendor": "DVV Entertainment",
     "isVisible": true
