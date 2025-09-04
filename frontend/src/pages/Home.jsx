@@ -8,6 +8,15 @@ import PSPKCommunityModal from '../components/PSPKCommunityModal';
 
 const Home = () => {
   const { products, loading, error } = useProducts();
+  const [communityModalOpen, setCommunityModalOpen] = useState(false);
+
+  const handleCommunityConsent = (consented) => {
+    if (consented) {
+      // Handle community consent logic here
+      console.log('User consented to community');
+    }
+    setCommunityModalOpen(false);
+  };
 
   if (loading) {
     return (
