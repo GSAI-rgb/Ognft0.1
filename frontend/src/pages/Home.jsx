@@ -30,33 +30,10 @@ const Home = () => {
     );
   }
 
-  // Filter products for different rails - CONVERSION FOCUSED
+  // Filter products for different rails - SIMPLE
   const affordableProducts = filterByPriceRange(products, 999);
-  const exclusiveProducts = products.filter(p => p.badges && (p.badges.includes('PREDATOR DROP') || p.badges.includes('VAULT')));
   const rebelCore = products.filter(p => p.badges && (p.badges.includes('REBEL DROP') || p.badges.includes('FAN ARSENAL')));
   const vaultProducts = products.filter(p => p.badges && p.badges.includes('PREMIUM'));
-
-  // Personalized greeting based on user profile
-  const getPersonalizedGreeting = () => {
-    if (!userProfile) return "EVERY FAN IS A SOLDIER.";
-    
-    switch (userProfile.fanLevel) {
-      case 'tribal':
-        return `WELCOME BACK, TRIBAL WARRIOR ${userProfile.name?.toUpperCase() || 'SOLDIER'}!`;
-      case 'superfan':
-        return `${userProfile.name?.toUpperCase() || 'SUPER FAN'}, YOUR ARSENAL AWAITS!`;
-      case 'dedicated':
-        return `READY FOR BATTLE, ${userProfile.name?.toUpperCase() || 'DEDICATED FAN'}?`;
-      default:
-        return `ARM UP, ${userProfile.name?.toUpperCase() || 'REBEL'}!`;
-    }
-  };
-
-  const getPersonalizedSubtext = () => {
-    if (!userProfile) return "Armory zero-scene edition. Premium drops before the trailer. Built for rebels.";
-    
-    return `Your personalized PSPK experience. ${userProfile.interests?.length || 0} interests tracked. Elite access activated.`;
-  };
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
