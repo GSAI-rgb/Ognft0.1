@@ -1,159 +1,159 @@
 {
-  "timestamp": "2025-09-04T12:36:53.514019",
+  "timestamp": "2025-09-04T12:38:06.859680",
   "backend_url": "https://shopify-debugger.preview.emergentagent.com/api",
-  "passed_tests": 21,
-  "failed_tests": 4,
-  "overall_success": false,
+  "passed_tests": 25,
+  "failed_tests": 0,
+  "overall_success": true,
   "test_results": [
     {
       "test": "Server Health Check",
       "success": true,
       "message": "OG Armory Backend API responding correctly",
-      "timestamp": "2025-09-04T12:36:50.289867"
+      "timestamp": "2025-09-04T12:38:04.822315"
     },
     {
       "test": "Environment Variables",
       "success": true,
       "message": "Backend accessible, env vars loaded",
-      "timestamp": "2025-09-04T12:36:50.343747"
+      "timestamp": "2025-09-04T12:38:04.875206"
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers found: access-control-allow-origin: *, access-control-allow-credentials: true",
-      "timestamp": "2025-09-04T12:36:50.394824"
+      "timestamp": "2025-09-04T12:38:04.936342"
     },
     {
       "test": "API Routes Accessibility",
       "success": true,
       "message": "All defined routes tested",
-      "timestamp": "2025-09-04T12:36:50.569603"
+      "timestamp": "2025-09-04T12:38:05.098306"
     },
     {
       "test": "Create Status Check",
-      "success": false,
-      "message": "Missing required fields: ['id', 'client_name', 'timestamp']",
-      "timestamp": "2025-09-04T12:36:50.624215"
+      "success": true,
+      "message": "Created status check with ID: 68b9882d47f529608a30d591",
+      "timestamp": "2025-09-04T12:38:05.158153"
     },
     {
       "test": "Get Status Checks",
-      "success": false,
-      "message": "HTTP 500: Internal Server Error",
-      "timestamp": "2025-09-04T12:36:50.677609"
+      "success": true,
+      "message": "Status endpoint working: healthy, MongoDB: connected, Documents: 7",
+      "timestamp": "2025-09-04T12:38:05.217107"
     },
     {
       "test": "MongoDB Integration",
-      "success": false,
-      "message": "Failed to retrieve records",
-      "timestamp": "2025-09-04T12:36:50.782402"
+      "success": true,
+      "message": "Successfully created and verified record in MongoDB. Documents: 8",
+      "timestamp": "2025-09-04T12:38:05.328230"
     },
     {
       "test": "Shopify Environment Variables",
       "success": true,
       "message": "All Shopify vars configured: SHOPIFY_STORE_DOMAIN=40fg1q-ju.myshopify.com, SHOPIFY_STOREFRONT_API_TOKEN=bab636f9...5e21, SHOPIFY_STOREFRONT_API_VERSION=2024-01, SHOPIFY_ADMIN_API_KEY=shpat_b2...a192, SHOPIFY_ADMIN_API_SECRET=61c8a6e5...55b2",
-      "timestamp": "2025-09-04T12:36:50.785958"
+      "timestamp": "2025-09-04T12:38:05.332261"
     },
     {
       "test": "Shopify Storefront API Connectivity",
       "success": true,
       "message": "Successfully connected to 'OG Store' store via Storefront API",
-      "timestamp": "2025-09-04T12:36:50.951029"
+      "timestamp": "2025-09-04T12:38:05.504340"
     },
     {
       "test": "OG Products Availability",
       "success": true,
       "message": "Found 131 OG products out of 131 total (131 active). Samples: Black Phoenix Tee, Black Storm Hoodie, Blood Moon Poster, Blood Moon Rebel Tee, Blood Wolf Hoodie",
-      "timestamp": "2025-09-04T12:36:51.190261"
+      "timestamp": "2025-09-04T12:38:05.719831"
     },
     {
       "test": "Backend Shopify Integration Health",
-      "success": false,
-      "message": "Backend issues detected with Shopify integration",
-      "timestamp": "2025-09-04T12:36:51.348889"
+      "success": true,
+      "message": "Backend stable with Shopify integration",
+      "timestamp": "2025-09-04T12:38:05.880870"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.370043"
+      "timestamp": "2025-09-04T12:38:05.905597"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.376347"
+      "timestamp": "2025-09-04T12:38:05.912118"
     },
     {
       "test": "VAULT Product Integration",
       "success": true,
       "message": "All 3 VAULT products properly configured: [VAULT // LOCKED EXCLUSIVE] \u2014 OG ALPHA TALISMAN: vault_locked=True; [VAULT // LOCKED EXCLUSIVE] \u2014 OG ALPHA TALISMAN: unlock_requirement present; [VAULT // LOCKED EXCLUSIVE] \u2014 OG ALPHA TALISMAN: Proper VAULT badges",
-      "timestamp": "2025-09-04T12:36:51.376509"
+      "timestamp": "2025-09-04T12:38:05.912244"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.380594"
+      "timestamp": "2025-09-04T12:38:05.916742"
     },
     {
       "test": "Badge System Functionality",
       "success": true,
       "message": "Badge system working: VAULT(3), LOCKED EXCLUSIVE(3), LIMITED(2), PREMIUM(1), REBEL DROP(12). Coverage: 100.0% (15/15 products)",
-      "timestamp": "2025-09-04T12:36:51.380767"
+      "timestamp": "2025-09-04T12:38:05.916923"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.384555"
+      "timestamp": "2025-09-04T12:38:05.920987"
     },
     {
       "test": "Category Filtering System",
       "success": true,
       "message": "Category filtering working: Teeshirt(12), Vault(3). 15/15 products categorized",
-      "timestamp": "2025-09-04T12:36:51.384684"
+      "timestamp": "2025-09-04T12:38:05.921125"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.388520"
+      "timestamp": "2025-09-04T12:38:05.925136"
     },
     {
       "test": "Image Path Resolution",
       "success": true,
       "message": "Image resolution working: 3/5 images accessible (60.0%), VAULT: 100.0%, Back image priority: 100.0%",
-      "timestamp": "2025-09-04T12:36:51.724249"
+      "timestamp": "2025-09-04T12:38:06.312990"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:51.731109"
+      "timestamp": "2025-09-04T12:38:06.319466"
     },
     {
       "test": "Product Image Asset Integration",
       "success": true,
       "message": "4/5 images accessible (80.0%)",
-      "timestamp": "2025-09-04T12:36:52.109753"
+      "timestamp": "2025-09-04T12:38:06.687843"
     },
     {
       "test": "API Performance with OG System",
       "success": true,
-      "message": "Good performance: 465ms average response time",
-      "timestamp": "2025-09-04T12:36:53.507001"
+      "message": "Excellent performance: 54ms average response time",
+      "timestamp": "2025-09-04T12:38:06.852447"
     },
     {
       "test": "Comprehensive Products JSON Accessibility",
       "success": true,
       "message": "Successfully loaded 15 products including 3 VAULT exclusives from comprehensive_products.json",
-      "timestamp": "2025-09-04T12:36:53.513733"
+      "timestamp": "2025-09-04T12:38:06.859377"
     },
     {
       "test": "Navigation Sync Backend Support",
       "success": true,
       "message": "Backend supports navigation with proper badges: VAULT(3), LOCKED EXCLUSIVE(3), LIMITED(2), PREMIUM(1), REBEL DROP(12)",
-      "timestamp": "2025-09-04T12:36:53.513869"
+      "timestamp": "2025-09-04T12:38:06.859511"
     }
   ]
 }
