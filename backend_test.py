@@ -536,56 +536,61 @@ class BackendTester:
             self.log_result("Comprehensive Products JSON Accessibility", False, f"Error: {str(e)}")
             return None
     
-    def test_color_variant_consolidation(self):
-        """Test that color variants are properly consolidated (Ocean Waves: 3 colors, Abstract Geometry: 2 colors)"""
+    def test_vault_product_integration(self):
+        """Test VAULT product integration and exclusive features"""
         try:
-            products_data = self.test_fixed_products_json_accessibility()
+            products_data = self.test_comprehensive_products_json_accessibility()
             if not products_data:
-                self.log_result("Color Variant Consolidation", False, "Could not load products data")
+                self.log_result("VAULT Product Integration", False, "Could not load products data")
                 return False
             
-            # Find Ocean Waves and Abstract Geometry products
-            ocean_waves = None
-            abstract_geometry = None
+            # Find VAULT products
+            vault_products = [p for p in products_data if p.get('category') == 'Vault']
             
-            for product in products_data:
-                name = product.get('name', '').lower()
-                if 'ocean waves' in name:
-                    ocean_waves = product
-                elif 'abstract geometry' in name:
-                    abstract_geometry = product
+            if len(vault_products) < 3:
+                self.log_result("VAULT Product Integration", False, f"Expected ≥3 VAULT products, found {len(vault_products)}")
+                return False
             
+            vault_features_verified = []
             issues = []
             
-            # Test Ocean Waves (should have 3 colors)
-            if ocean_waves:
-                colors = ocean_waves.get('colors', [])
-                if len(colors) == 3:
-                    print(f"  ✅ Ocean Waves has {len(colors)} colors: {', '.join(colors)}")
+            for vault_product in vault_products:
+                name = vault_product.get('name', 'Unknown')
+                
+                # Check VAULT-specific features
+                if vault_product.get('vault_locked') == True:
+                    vault_features_verified.append(f"{name}: vault_locked=True")
                 else:
-                    issues.append(f"Ocean Waves has {len(colors)} colors (expected 3): {', '.join(colors)}")
-            else:
-                issues.append("Ocean Waves product not found")
-            
-            # Test Abstract Geometry (should have 2 colors)
-            if abstract_geometry:
-                colors = abstract_geometry.get('colors', [])
-                if len(colors) == 2:
-                    print(f"  ✅ Abstract Geometry has {len(colors)} colors: {', '.join(colors)}")
+                    issues.append(f"{name}: Missing vault_locked flag")
+                
+                if vault_product.get('unlock_requirement'):
+                    vault_features_verified.append(f"{name}: unlock_requirement present")
                 else:
-                    issues.append(f"Abstract Geometry has {len(colors)} colors (expected 2): {', '.join(colors)}")
-            else:
-                issues.append("Abstract Geometry product not found")
+                    issues.append(f"{name}: Missing unlock_requirement")
+                
+                # Check VAULT badges
+                badges = vault_product.get('badges', [])
+                if 'VAULT' in badges and 'LOCKED EXCLUSIVE' in badges:
+                    vault_features_verified.append(f"{name}: Proper VAULT badges")
+                else:
+                    issues.append(f"{name}: Missing VAULT/LOCKED EXCLUSIVE badges")
+                
+                # Check premium pricing (VAULT products should be expensive)
+                price = vault_product.get('price', 0)
+                if price >= 2999:  # VAULT products should be premium priced
+                    vault_features_verified.append(f"{name}: Premium pricing (₹{price})")
+                else:
+                    issues.append(f"{name}: Low pricing for VAULT product (₹{price})")
             
-            if not issues:
-                self.log_result("Color Variant Consolidation", True, "Ocean Waves (3 colors) and Abstract Geometry (2 colors) properly consolidated")
+            if len(issues) == 0:
+                self.log_result("VAULT Product Integration", True, f"All {len(vault_products)} VAULT products properly configured: {'; '.join(vault_features_verified[:3])}")
                 return True
             else:
-                self.log_result("Color Variant Consolidation", False, f"Issues found: {'; '.join(issues)}")
+                self.log_result("VAULT Product Integration", False, f"VAULT integration issues: {'; '.join(issues[:3])}")
                 return False
                 
         except Exception as e:
-            self.log_result("Color Variant Consolidation", False, f"Error: {str(e)}")
+            self.log_result("VAULT Product Integration", False, f"Error: {str(e)}")
             return False
     
     def test_back_image_priority(self):
