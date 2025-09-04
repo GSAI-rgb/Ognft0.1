@@ -11,37 +11,44 @@ const Collections = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load collections from comprehensive collections JSON
-    fetch('/comprehensive_collections.json')
-      .then(response => response.json())
-      .then(data => {
-        setCollections(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error loading collections:', error);
-        // Fallback to simple collections
-        fetch('/simple_collections.json')
-          .then(response => response.json())
-          .then(data => {
-            setCollections(data);
-            setLoading(false);
-          })
-          .catch(() => {
-            // Ultimate fallback
-            setCollections([
-              {
-                id: 1,
-                handle: 'rebellion-core',
-                title: 'Rebellion Core',
-                description: 'Essential gear for every rebel soldier.',
-                product_count: 13,
-                image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'
-              }
-            ]);
-            setLoading(false);
-          });
-      });
+    // Simple static collections that work
+    const staticCollections = [
+      {
+        id: 1,
+        handle: 'rebellion-core',
+        title: 'Rebellion Core',
+        description: 'Essential gear for every rebel soldier.',
+        product_count: 13,
+        image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'
+      },
+      {
+        id: 2,
+        handle: 'under-999',
+        title: 'Under ₹999',
+        description: 'Premium gear accessible to every rebel.',
+        product_count: 18,
+        image: 'https://framerusercontent.com/images/Bqu1YbtLNP6KpNMpw9Wnp1oQOJA.jpg'
+      },
+      {
+        id: 3,
+        handle: 'hoodies',
+        title: 'Beast Hoodies',
+        description: 'Premium hoodies for elite warriors.',
+        product_count: 21,
+        image: 'https://framerusercontent.com/images/aHmupIkpNbiTWcrio0jHVxTg4OU.png'
+      },
+      {
+        id: 4,
+        handle: 'accessories',
+        title: 'Arsenal Gear',
+        description: 'Essential accessories and gear.',
+        product_count: 7,
+        image: 'https://framerusercontent.com/images/QnjPU1zOWtNjPZtBPpgHzKv8E.jpg'
+      }
+    ];
+    
+    setCollections(staticCollections);
+    setLoading(false);
   }, []);
 
   const getRankBadgeColor = (collection) => {
