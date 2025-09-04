@@ -110,15 +110,35 @@ const ProductCard = ({ product, className = "", priority = false }) => {
         </h3>
         <div className="flex items-center space-x-2">
           <span className="text-lg font-semibold">
-            ${product.price}
+            {formatPrice(product.price)}
           </span>
           {product.originalPrice && (
             <span className="text-sm text-gray-400 line-through">
-              ${product.originalPrice}
+              {formatPrice(product.originalPrice)}
             </span>
           )}
         </div>
+        
+        {/* Stock indicator */}
+        {isLowStock && !isOutOfStock && (
+          <p className="text-xs text-[var(--color-gold)] font-medium mt-1">
+            Only {totalStock} left
+          </p>
+        )}
+        
+        {isOutOfStock && (
+          <p className="text-xs text-red-400 font-medium mt-1">
+            Out of Stock
+          </p>
+        )}
       </div>
+
+      {/* Waitlist Modal */}
+      <WaitlistModal 
+        isOpen={waitlistOpen}
+        onClose={() => setWaitlistOpen(false)}
+        productName={product.name}
+      />
     </div>
   );
 };
