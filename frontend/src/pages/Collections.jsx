@@ -11,8 +11,8 @@ const Collections = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load collections from working collections JSON
-    fetch('/simple_collections.json')
+    // Load collections from comprehensive collections JSON
+    fetch('/comprehensive_collections.json')
       .then(response => response.json())
       .then(data => {
         setCollections(data);
@@ -20,42 +20,27 @@ const Collections = () => {
       })
       .catch(error => {
         console.error('Error loading collections:', error);
-        // Fallback to static collections
-        setCollections([
-          {
-            id: 1,
-            handle: 'rebellion-core',
-            title: 'Rebellion Core',
-            description: 'Essential gear for every rebel soldier. Core items that define the OG tribe.',
-            product_count: 10,
-            image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'
-          },
-          {
-            id: 2,
-            handle: 'under-999',
-            title: 'Under ₹999',
-            description: 'Premium OG gear accessible to every rebel. No soldier left behind.',
-            product_count: 9,
-            image: 'https://framerusercontent.com/images/Bqu1YbtLNP6KpNMpw9Wnp1oQOJA.jpg'
-          },
-          {
-            id: 3,
-            handle: 'multi-color',
-            title: 'Multi-Color Arsenal',
-            description: 'Products available in multiple color variants for customization.',
-            product_count: 2,
-            image: 'https://framerusercontent.com/images/aHmupIkpNbiTWcrio0jHVxTg4OU.png'
-          },
-          {
-            id: 4,
-            handle: 'arsenal-gear',
-            title: 'Arsenal Gear',
-            description: 'Essential accessories and gear for every rebel warrior.',
-            product_count: 7,
-            image: 'https://framerusercontent.com/images/QnjPU1zOWtNjPZtBPpgHzKv8E.jpg'
-          }
-        ]);
-        setLoading(false);
+        // Fallback to simple collections
+        fetch('/simple_collections.json')
+          .then(response => response.json())
+          .then(data => {
+            setCollections(data);
+            setLoading(false);
+          })
+          .catch(() => {
+            // Ultimate fallback
+            setCollections([
+              {
+                id: 1,
+                handle: 'rebellion-core',
+                title: 'Rebellion Core',
+                description: 'Essential gear for every rebel soldier.',
+                product_count: 13,
+                image: 'https://framerusercontent.com/images/8gqTSINX7hptd4ZpZhFcjP9JvhE.jpg'
+              }
+            ]);
+            setLoading(false);
+          });
       });
   }, []);
 
