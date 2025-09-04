@@ -26,21 +26,21 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Try simple products first (real working images), then fixed, then real, then Shopify, then mock
+      // Try comprehensive products first (ALL products from directory), then fallbacks
       try {
-        const response = await fetch('/simple_products.json');
+        const response = await fetch('/comprehensive_products.json');
         if (response.ok) {
-          const simpleProducts = await response.json();
-          if (simpleProducts && simpleProducts.length > 0) {
-            cachedProducts = simpleProducts;
+          const comprehensiveProducts = await response.json();
+          if (comprehensiveProducts && comprehensiveProducts.length > 0) {
+            cachedProducts = comprehensiveProducts;
             lastFetchTime = now;
-            setProducts(simpleProducts);
+            setProducts(comprehensiveProducts);
             setError(null);
             return;
           }
         }
-      } catch (simpleError) {
-        console.warn('Simple products not found:', simpleError.message);
+      } catch (comprehensiveError) {
+        console.warn('Comprehensive products not found:', comprehensiveError.message);
         
         // Fallback to Shopify products
         try {
