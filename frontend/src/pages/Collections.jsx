@@ -59,18 +59,32 @@ const Collections = () => {
       });
   }, []);
 
-  const getRankBadgeColor = (rank) => {
-    switch (rank) {
-      case 'Vault':
-        return 'bg-[var(--color-gold)] text-black';
-      case 'Captain':
-        return 'bg-[var(--color-red)] text-white';
-      case 'Rebel':
-        return 'bg-white text-black';
-      default:
-        return 'bg-gray-600 text-white';
+  const getRankBadgeColor = (collection) => {
+    if (collection.handle === 'under-999') {
+      return 'bg-green-600 text-white';
+    } else if (collection.handle === 'multi-color') {
+      return 'bg-purple-600 text-white';
+    } else if (collection.handle === 'arsenal-gear') {
+      return 'bg-[var(--color-gold)] text-black';
+    } else {
+      return 'bg-[var(--color-red)] text-white';
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="animate-spin w-8 h-8 border-2 border-[var(--color-red)] border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-lg font-bold uppercase tracking-wider">Loading Collections...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
