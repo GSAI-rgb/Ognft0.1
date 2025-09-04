@@ -26,7 +26,9 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Try Shopify products first (working images), then comprehensive products as fallback
+      let allProducts = [];
+      
+      // Load Shopify products first (working images)
       try {
         const response = await fetch('/products.json');
         if (response.ok) {
@@ -44,32 +46,37 @@ export const useProducts = () => {
               ].filter(Boolean)
             }));
             
-            cachedProducts = productsWithBadges;
-            lastFetchTime = now;
-            setProducts(productsWithBadges);
-            setError(null);
-            return;
+            allProducts = [...productsWithBadges];
           }
         }
       } catch (shopifyError) {
         console.warn('Shopify products not found:', shopifyError.message);
-        
-        // Fallback to comprehensive products
-        try {
-          const response = await fetch('/comprehensive_products.json');
-          if (response.ok) {
-            const comprehensiveProducts = await response.json();
-            if (comprehensiveProducts && comprehensiveProducts.length > 0) {
-              cachedProducts = comprehensiveProducts;
-              lastFetchTime = now;
-              setProducts(comprehensiveProducts);
-              setError(null);
-              return;
-            }
+      }
+      
+      // Also load VAULT products from comprehensive_products.json
+      try {
+        const response = await fetch('/comprehensive_products.json');
+        if (response.ok) {
+          const comprehensiveProducts = await response.json();
+          if (comprehensiveProducts && comprehensiveProducts.length > 0) {
+            // Only add VAULT products that aren't already in Shopify products
+            const vaultProducts = comprehensiveProducts.filter(p => 
+              p.category === 'Vault' || p.badges?.includes('VAULT')
+            );
+            allProducts = [...allProducts, ...vaultProducts];
           }
-        } catch (comprehensiveError) {
-          console.warn('Comprehensive products not found:', comprehensiveError.message);
         }
+      } catch (comprehensiveError) {
+        console.warn('Comprehensive products not found:', comprehensiveError.message);
+      }
+      
+      // If we have products, use them
+      if (allProducts.length > 0) {
+        cachedProducts = allProducts;
+        lastFetchTime = now;
+        setProducts(allProducts);
+        setError(null);
+        return;
       }
       
       // Fallback to mock data
