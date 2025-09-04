@@ -26,9 +26,9 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Try direct JSON first (fastest)
+      // Try real products first (your actual assets), then fallback to Shopify, then mock
       try {
-        const response = await fetch('/products.json');
+        const response = await fetch('/real_products.json');
         if (response.ok) {
           const directProducts = await response.json();
           if (directProducts && directProducts.length > 0) {
@@ -39,8 +39,25 @@ export const useProducts = () => {
             return;
           }
         }
-      } catch (directError) {
-        console.warn('Direct integration failed:', directError.message);
+      } catch (realProductsError) {
+        console.warn('Real products not found:', realProductsError.message);
+        
+        // Fallback to Shopify products
+        try {
+          const response = await fetch('/products.json');
+          if (response.ok) {
+            const shopifyProducts = await response.json();
+            if (shopifyProducts && shopifyProducts.length > 0) {
+              cachedProducts = shopifyProducts;
+              lastFetchTime = now;
+              setProducts(shopifyProducts);
+              setError(null);
+              return;
+            }
+          }
+        } catch (shopifyError) {
+          console.warn('Shopify products not found:', shopifyError.message);
+        }
       }
       
       // Fallback to mock data
