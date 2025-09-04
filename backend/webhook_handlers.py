@@ -8,6 +8,7 @@ from fastapi import APIRouter, Request, HTTPException, Header
 import json
 import hashlib
 import hmac
+import base64
 import os
 from typing import Optional
 
