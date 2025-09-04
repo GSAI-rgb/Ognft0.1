@@ -1,6 +1,6 @@
 {
   "timestamp": "2025-09-02T11:13:09.612653",
-  "backend_url": "https://shopify-og-sync.preview.emergentagent.com/api",
+  "backend_url": "https://storefront-migrate.preview.emergentagent.com/api",
   "passed_tests": 11,
   "failed_tests": 0,
   "overall_success": true,
