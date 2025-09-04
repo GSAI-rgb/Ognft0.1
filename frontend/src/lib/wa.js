@@ -114,7 +114,7 @@ export function openCustomerSupport(issue, orderId, storeWhatsApp = process.env.
 }
 
 // Quick action buttons
-export function createWAFloatingButton(storeWhatsApp = '+919876543210') {
+export function createWAFloatingButton(storeWhatsApp = process.env.REACT_APP_SUPPORT_WHATSAPP || '+919876543210') {
   const button = document.createElement('div');
   button.className = 'fixed bottom-6 right-6 z-50';
   button.innerHTML = `
