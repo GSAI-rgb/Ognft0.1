@@ -105,26 +105,26 @@ export const useProduct = (productId) => {
       try {
         setLoading(true);
         
-        // First try to get from comprehensive_products.json, then fallback to products.json
+        // First try to get from products.json, then fallback to comprehensive_products.json
         let productData = null;
         try {
-          const response = await fetch('/comprehensive_products.json');
+          const response = await fetch('/products.json');
           if (response.ok) {
-            const comprehensiveProducts = await response.json();
-            productData = comprehensiveProducts.find(p => p.id === parseInt(productId));
+            const shopifyProducts = await response.json();
+            productData = shopifyProducts.find(p => p.id === parseInt(productId));
           }
-        } catch (comprehensiveProductsError) {
-          console.warn('Comprehensive products not found:', comprehensiveProductsError.message);
+        } catch (shopifyProductsError) {
+          console.warn('Shopify products not found:', shopifyProductsError.message);
           
-          // Fallback to Shopify products
+          // Fallback to comprehensive products
           try {
-            const response = await fetch('/products.json');
+            const response = await fetch('/comprehensive_products.json');
             if (response.ok) {
-              const shopifyProducts = await response.json();
-              productData = shopifyProducts.find(p => p.id === parseInt(productId));
+              const comprehensiveProducts = await response.json();
+              productData = comprehensiveProducts.find(p => p.id === parseInt(productId) || p.id === productId);
             }
-          } catch (shopifyError) {
-            console.warn('Shopify products not found:', shopifyError.message);
+          } catch (comprehensiveProductsError) {
+            console.warn('Comprehensive products not found:', comprehensiveProductsError.message);
           }
         }
 
