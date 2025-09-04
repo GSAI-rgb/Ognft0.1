@@ -8,8 +8,18 @@ import WaitlistModal from './WaitlistModal';
 
 const ProductCard = ({ product, className = "", priority = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   const navigate = useNavigate();
   const { isReducedMotion } = useTheme();
+
+  // Mock check for out of stock (in real app, this would come from product data)
+  const isOutOfStock = false; // Set to true to test waitlist functionality
+
+  const totalStock = typeof product.stock === 'object' 
+    ? Object.values(product.stock || {}).reduce((sum, qty) => sum + (qty || 0), 0)
+    : product.stock || 0;
+  
+  const isLowStock = totalStock <= 12;
 
   const handleMouseEnter = useCallback(() => {
     if (product.images && product.images.length > 1 && !isReducedMotion) {
