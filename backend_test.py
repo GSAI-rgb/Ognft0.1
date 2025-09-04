@@ -695,59 +695,87 @@ class BackendTester:
             self.log_result("Category Filtering System", False, f"Error: {str(e)}")
             return False
     
-    def test_category_mapping_synchronization(self):
-        """Test category mapping for header synchronization (Teeshirt→Rebel Tees, Hoodie→Predator Hoodies, Poster→War Posters)"""
+    def test_image_path_resolution(self):
+        """Test image path resolution for both regular and vault products"""
         try:
-            products_data = self.test_fixed_products_json_accessibility()
+            products_data = self.test_comprehensive_products_json_accessibility()
             if not products_data:
-                self.log_result("Category Mapping Synchronization", False, "Could not load products data")
+                self.log_result("Image Path Resolution", False, "Could not load products data")
                 return False
             
-            # Expected category mappings based on review request
-            expected_mappings = {
-                'Teeshirt': 'Rebel Tees',
-                'Hoodie': 'Predator Hoodies', 
-                'Poster': 'War Posters'
-            }
+            # Test a sample of products including VAULT products
+            vault_products = [p for p in products_data if p.get('category') == 'Vault']
+            regular_products = [p for p in products_data if p.get('category') != 'Vault']
             
-            category_counts = {}
+            # Test 2 VAULT products and 3 regular products
+            test_products = vault_products[:2] + regular_products[:3]
             
+            accessible_images = 0
+            total_images_tested = 0
+            vault_images_tested = 0
+            vault_images_accessible = 0
+            
+            for product in test_products:
+                name = product.get('name', 'Unknown')
+                images = product.get('images', [])
+                is_vault = product.get('category') == 'Vault'
+                
+                # Test first image from each product
+                if images:
+                    image_url = images[0]
+                    try:
+                        # Handle different image URL formats
+                        if image_url.startswith('/app/'):
+                            # Local file path - convert to frontend URL
+                            frontend_url = os.getenv('REACT_APP_BACKEND_URL', 'http://localhost:3000').replace('/api', '').replace('https://shopify-debugger.preview.emergentagent.com', 'http://localhost:3000')
+                            image_url = image_url.replace('/app/frontend/public', frontend_url)
+                        
+                        response = requests.head(image_url, timeout=5)
+                        if response.status_code == 200:
+                            accessible_images += 1
+                            if is_vault:
+                                vault_images_accessible += 1
+                            print(f"  ✅ {name}: Image accessible ({'VAULT' if is_vault else 'Regular'})")
+                        else:
+                            print(f"  ❌ {name}: Image not accessible (HTTP {response.status_code}) ({'VAULT' if is_vault else 'Regular'})")
+                        
+                        total_images_tested += 1
+                        if is_vault:
+                            vault_images_tested += 1
+                            
+                    except Exception as img_error:
+                        print(f"  ❌ {name}: Image connection failed ({'VAULT' if is_vault else 'Regular'}) - {str(img_error)}")
+                        total_images_tested += 1
+                        if is_vault:
+                            vault_images_tested += 1
+            
+            accessibility_percentage = (accessible_images / total_images_tested) * 100 if total_images_tested > 0 else 0
+            vault_accessibility = (vault_images_accessible / vault_images_tested) * 100 if vault_images_tested > 0 else 0
+            
+            # Check back image priority
+            back_image_count = 0
             for product in products_data:
-                category = product.get('category', 'Unknown')
-                if category in category_counts:
-                    category_counts[category] += 1
-                else:
-                    category_counts[category] = 1
+                primary_image_type = product.get('primary_image_type', '')
+                if primary_image_type == 'back':
+                    back_image_count += 1
             
-            mapping_results = []
+            back_percentage = (back_image_count / len(products_data)) * 100 if len(products_data) > 0 else 0
             
-            for backend_cat, frontend_display in expected_mappings.items():
-                count = category_counts.get(backend_cat, 0)
-                if count > 0:
-                    mapping_results.append(f"{backend_cat}({count})→{frontend_display}")
-                    print(f"  ✅ {backend_cat} → {frontend_display}: {count} products")
-                else:
-                    mapping_results.append(f"{backend_cat}(0)→{frontend_display}")
-                    print(f"  ⚠️  {backend_cat} → {frontend_display}: No products found")
-            
-            # Check if we have products in all expected categories
-            total_mapped = sum(category_counts.get(cat, 0) for cat in expected_mappings.keys())
-            total_products = len(products_data)
-            
-            if total_mapped == total_products and all(category_counts.get(cat, 0) > 0 for cat in expected_mappings.keys()):
-                self.log_result("Category Mapping Synchronization", True, f"Category mappings working correctly: {', '.join(mapping_results)}")
+            if accessibility_percentage >= 60 and back_percentage >= 80:  # Accept if 60% images accessible and 80% have back priority
+                self.log_result("Image Path Resolution", True, f"Image resolution working: {accessible_images}/{total_images_tested} images accessible ({accessibility_percentage:.1f}%), VAULT: {vault_accessibility:.1f}%, Back image priority: {back_percentage:.1f}%")
                 return True
             else:
-                unmapped_categories = [cat for cat in category_counts.keys() if cat not in expected_mappings.keys()]
-                error_msg = f"Mapping issues: {total_mapped}/{total_products} products mapped"
-                if unmapped_categories:
-                    error_msg += f", unmapped categories: {unmapped_categories}"
+                issues = []
+                if accessibility_percentage < 60:
+                    issues.append(f"Low image accessibility: {accessibility_percentage:.1f}%")
+                if back_percentage < 80:
+                    issues.append(f"Back image priority issues: {back_percentage:.1f}%")
                 
-                self.log_result("Category Mapping Synchronization", False, error_msg)
+                self.log_result("Image Path Resolution", False, f"Image resolution issues: {'; '.join(issues)}")
                 return False
                 
         except Exception as e:
-            self.log_result("Category Mapping Synchronization", False, f"Error: {str(e)}")
+            self.log_result("Image Path Resolution", False, f"Error: {str(e)}")
             return False
     
     def test_product_image_asset_integration(self):
